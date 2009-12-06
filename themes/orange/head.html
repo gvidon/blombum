@@ -1,5 +1,5 @@
-		<h1 class="b-site-title">{{ site.name }}</h1>
-		<strong class="b-site-description">{{ settings.TAGLINE }}</strong>
+		<h1><a href="{% url post_list %}">{{ site.name }}</a></h1>
+		<em>{{ settings.TAGLINE }}</em>
 
 		<ul class="b-static-links">
 			{% for page in settings.STATIC_PAGES %}

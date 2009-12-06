@@ -1,0 +1,17 @@
+#comment-form-itself {
+}
+
+#comment-form .form-comment-name  label,
+#comment-form .form-comment-email label,
+#comment-form .form-comment-site  label,
+#comment-form .form-comment-body  label {
+	display: block;
+	font-weight: bold;
+}
+
+input[type='button'],
+input[type='submit'] {
+	padding: 2px;
+	border: 1px solid #666666;
+	background-color: white;
+}

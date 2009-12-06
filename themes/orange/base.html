@@ -7,51 +7,49 @@
 <!-- this template was designed by http://www.tristarwebdesign.co.uk - please visit for more templates & information - thank you. -->
 
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>{{ site.name }}: {% block title %}{{ settings.TAGLINE }}{% endblock %}</title>
-    <meta name="description" content="{% block description %}{{ settings.TAGLINE }}{% endblock %}" />
-    <meta name="generator" content="Byteflow" />
-    <meta name="author" content="{{ site.name }}" />
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{{ site.name }}: {% block title %}{{ settings.TAGLINE }}{% endblock %}</title>
+	<meta name="description" content="{% block description %}{{ settings.TAGLINE }}{% endblock %}" />
+	<meta name="generator" content="Byteflow" />
+	<meta name="author" content="{{ site.name }}" />
 
 	<link rel="stylesheet" type="text/css" href="{{ THEME_STATIC_URL }}css/style.css" />
-    <link rel="shortcut icon" type="image/x-icon" href="{{ THEME_STATIC_URL }}img/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ THEME_STATIC_URL }}img/favicon.ico" />
 
-    <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "blog entries feed" %}" href="{% url feed "blog" %}" />
-    <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "comments feed" %}" href="{% url feed "comments" %}" />
+	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "blog entries feed" %}" href="{% url feed "blog" %}" />
+	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "comments feed" %}" href="{% url feed "comments" %}" />
 
-    <link rel="openid2.provider" href="{% absolute_url openid_endpoint %}" />
-    <link rel="openid.server" href="{% absolute_url openid_endpoint %}" />
+	<link rel="openid2.provider" href="{% absolute_url openid_endpoint %}" />
+	<link rel="openid.server" href="{% absolute_url openid_endpoint %}" />
 
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-    {% theme_js "login-shortcuts" %}
-    <script type="text/javascript" src="{% url processed_js %}"></script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	{% theme_js "login-shortcuts" %}
+	<script type="text/javascript" src="{% url processed_js %}"></script>
 
-    {% block extrahead %}{% endblock %}
+	{% block extrahead %}{% endblock %}
 </head>
 
 <body>
+	<div class="l-wrap">
+		<div class="l-header">
+			{% include "head.html" %}
+		</div>
+		
+		<div class="l-content">
+			{% site_messages %}
+			{% block content %}{% endblock %}
+		</div>
 
-<div class="l-wrap">
-	<div class="l-header">
-		{% include "head.html" %}
-	</div>
-	
-	<div class="l-content">
-		{% site_messages %}
-		{% block content %}{% endblock %}
-	</div>
+		<div class="l-sidebar">
+			{% block sidebar %}
+				{% sidebar %}
+			{% endblock %}
+		</div>
 
-	<div class="l-sidebar">
-		{% block sidebar %}
-			{% sidebar %}
-		{% endblock %}
+		<div class="l-footer">
+			{% include "footer.html" %}
+		</div>
 	</div>
-
-	<div class="l-footer">
-		{% include "footer.html" %}
-	</div>
-</div>
-
 </body>
 
 </html>

@@ -1,35 +1,39 @@
 html { font: normal normal 62.5%/2em Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif; }
-body { font-size: 1.2em; }
+body {
+	font-size: 1.2em;
+	color: #666666;
+}
 
-.l-content p {
-	margin: 0 15px 15px;
+a {
+	color: #666666;
+	text-decoration: none;
+}
+
+.l-sidebar .title,
+h1,
+h2,
+h3,
+h1 a,
+h2 a,
+h3 a {
+	color: #ff9900;
 }
 
 .l-content h1,
 .l-content h2,
 .l-content h3,
-.l-content h1 a,
-.l-content h2 a,
-.l-content h3 a {
-	color: #ff9900;
-	text-decoration: none;	
-}
-
-.l-sidebar .b-title,
-.l-content h1,
-.l-content h2,
-.l-content h3 {
-	margin-bottom: 15px;
+.l-sidebar .title {
+	margin: 0 0 15px -15px;
 	padding: 5px 15px;
 	font-size: 1.2em;
 	border-bottom: 1px solid #e5e5e5;
 }
 
-.l-sidebar .b-title a {
+.l-sidebar .title a {
 	display: inline-block;
 	line-height: 1em;
 }
 
-.l-sidebar .b-title a img {
+.l-sidebar .title a img {
 	vertical-align: bottom;
 }

@@ -1,0 +1,48 @@
+{% load i18n %}
+
+<div id="comment-form">
+	<h2>{% blocktrans %}Comment form for &laquo;{{ object }}&raquo;{% endblocktrans %}</h2>
+	
+	<form id="comment-form-itself" action="." method="post">
+		<div class="b-info">You can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> here.</div>
+
+		<div class="form-comment-name">
+			<span class="form-err"></span>
+			<label for="name">Имя:</label>
+			<input id="id_name" type="text" name="name" maxlength="30" />
+		</div>
+	
+		<div class="form-comment-email">
+			<span class="form-err"></span>
+			<label for="email">Email:</label>
+			<input id="id_email" type="text" name="email" maxlength="75" />
+
+		</div>
+	
+		<div class="form-comment-site">
+			<span class="form-err"></span>
+			<label for="site">Site:</label>
+			<input id="id_site" type="text" name="site" maxlength="200" />
+		</div>
+
+		<div class="form-comment-body">
+			<span class="form-err"></span>
+			<label for="body">Сообщение:</label>
+			<textarea id="id_body" rows="10" cols="40" name="body"></textarea>
+		</div>
+
+		<div class="form-comment-subscribe">
+			<span class="form-err"></span>
+			<label for="subscribe">Подписаться на комментарии:</label>
+			<input checked="checked" type="checkbox" name="subscribe" id="id_subscribe" />
+		</div>
+	
+		<input type="hidden" name="reply_to" id="id_reply_to" />
+
+		<div id="comment-preview"></div>
+
+		<input class="form-button form-submit" type="submit" value="{% trans "Comment" %}" />
+		<input class="form-button" type="button" value="{% trans "Preview" %}" onclick="return preview_comment('{% url comment_preview %}');" />
+		<input class="form-button" type="button" value="{% trans "Cancel" %}" onclick="return cancel_comment();" />
+	</form>
+</div>
