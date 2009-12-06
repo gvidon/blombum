@@ -1,0 +1,35 @@
+html { font: normal normal 62.5%/2em Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif; }
+body { font-size: 1.2em; }
+
+.l-content p {
+	margin: 0 15px 15px;
+}
+
+.l-content h1,
+.l-content h2,
+.l-content h3,
+.l-content h1 a,
+.l-content h2 a,
+.l-content h3 a {
+	color: #ff9900;
+	text-decoration: none;	
+}
+
+.l-sidebar .b-title,
+.l-content h1,
+.l-content h2,
+.l-content h3 {
+	margin-bottom: 15px;
+	padding: 5px 15px;
+	font-size: 1.2em;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+.l-sidebar .b-title a {
+	display: inline-block;
+	line-height: 1em;
+}
+
+.l-sidebar .b-title a img {
+	vertical-align: bottom;
+}

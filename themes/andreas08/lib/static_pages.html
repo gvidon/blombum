@@ -1,0 +1,10 @@
+{% load bfmarkup %}
+{% if pages %}
+<ul>
+  {% for name, url, title in pages %}
+    {% if name %}
+      <li{% if page_url|startswith:url %} class="selected"{% endif %}><a href="{{ url }}" title="{{ title }}">{{ name }}</a></li>
+    {% endif %}
+  {% endfor %}
+</ul>
+{% endif %}

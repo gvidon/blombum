@@ -1,0 +1,14 @@
+{% load i18n %}
+<p>&copy; {% now "Y" %} {{ site.name }} |
+  {% trans "Powered by " %} <a href="http://byteflow.su">Byteflow</a>
+| {% trans "Original design by " %} <a href="http://andreasviklund.com/">Andreas Viklund</a></p>
+
+{% if settings.GA_ACC %}
+<!-- Google analitics counter -->
+<script type="text/javascript" src="https://ssl.google-analytics.com/ga.js"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("{{ settings.GA_ACC }}");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+{% endif %}

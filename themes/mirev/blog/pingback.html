@@ -1,0 +1,16 @@
+{% load bfmarkup %}
+  <div
+     class="pingback {% cycle odd,even %}"
+     id="p{{ pingback.id }}">
+    <span class="pingback-title">
+      <a class="pingback-url" href="{{ pingback.url }}" rel="external nofollow">{{ pingback.title }}</a>
+    </span>
+    <div class="text">{{ pingback.content|typogrify }}</div>
+    <span class="comment-meta">
+      <span class="pingback-location">{{ pingback.get_host }},</span>
+      {% relative_datetime object.date pingback.date %}
+    </span>
+    <div class="comment-links">
+      <a class="anchor-link" href="#p{{ comment.id }}">#</a>
+    </div>
+  </div>

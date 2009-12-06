@@ -1,0 +1,8 @@
+		<h1 class="b-site-title">{{ site.name }}</h1>
+		<strong class="b-site-description">{{ settings.TAGLINE }}</strong>
+
+		<ul class="b-static-links">
+			{% for page in settings.STATIC_PAGES %}
+				<li><a title="{{ page.2 }}" href="{{ page.1 }}">{{ page.0 }}</a></li>
+			{% endfor %}
+		</ul>

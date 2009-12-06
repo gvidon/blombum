@@ -1,0 +1,41 @@
+{% spaceless %}
+{% load i18n %}
+{% load pytils_dt %}
+{% load pytils_numeral %}
+{% load bookmarks %}
+{% load tagging_tags %}
+{% load authorlink %}
+{% load bfmarkup %}
+{% endspaceless %}
+
+<div id="post-{{ object.id }}" class="post">
+    {{ post_detail|cond_display:"<h2>,<h1>" }}
+        <a href="{{ object.get_absolute_url }}">{{ object.name|title_tracking|typogrify }}</a>
+    {{ post_detail|cond_display:"</h2>,</h1>" }}
+    <div class="metadata">
+      <h3>{{ object.date|datelinks }}</h3>
+
+      <h3 class="tags"><a href="{% url blog_tags %}">Tags</a>:{% render_tag_string object.get_tags %}</h3>
+    </div>
+    <div class="text">
+    {% if not post_detail %}
+      {% if object.shortable %}
+      {{ object.html_short|safe }}
+      <span class="read-more"><a href="{{ object.get_absolute_url }}">
+          {% trans "continue&nbsp;reading" %} ({{ object.approved_comments_count }}
+          {{ object.approved_comments_count|choose_plural:_("comment, comments, comments") }})
+          &raquo;
+      </a></span>
+      {% else %}
+      {{ object.html|safe }}
+      <span class="read-more"><a href="{{ object.get_absolute_url }}#comments">
+          {{ object.approved_comments_count }}
+          {{ object.approved_comments_count|choose_plural:_("comment, comments, comments") }}
+          &raquo;
+      </a></span>
+      {% endif %}
+    {% else %}
+      {{ object.html|safe }}
+    {% endif %}
+    </div>
+</div>

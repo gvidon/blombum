@@ -1,0 +1,20 @@
+{% load i18n bfmarkup %}
+<div id="footer">
+  <div class="right">
+    {{ settings.FOOTER|safe }}<br />
+    {% trans "Powered by" %} <a href="http://byteflow.su">Byteflow</a>
+  </div>
+  <div>
+    <a href="{% url feed "blog" %}" class="feed">Posts feed</a><br />
+    <a href="{% url feed "comments" %}" class="feed">Comments feed</a><br />
+  </div>
+</div>
+
+{% if settings.GA_ACC and not user.is_staff %}
+<!-- Google analitics counter -->
+<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
+<script type="text/javascript">try {
+var pageTracker = _gat._getTracker("{{ settings.GA_ACC|get_key:site.domain }}");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+{% endif %}

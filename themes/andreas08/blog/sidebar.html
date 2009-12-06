@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load tagging_tags %}
+
+
+<div class="block">
+
+  <div class="block-rsstitle">
+    <div class="rss-icon"><a href="{% url feed "comments" %}"><img alt="Last comments feed" src="{{ STATIC_URL }}img/feed-icon-14x14.png"/></a></div>
+    <div class="block-title">{% trans "Last comments" %}</div>
+  </div>
+
+  {% if comments %}
+  <ul class="last-comments">
+    {% for comment in comments %}
+    <li>
+      <div class="comment-post"><a href="{{ comment.get_absolute_url }}">{{ comment.object.name }}</a></div>
+      <div class="comment-author">{% link comment.user %}</div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div>{% trans "No comments on blog" %}</div>
+  {% endif %}
+</div>
+
+<div class="block">
+  <div class="block-rsstitle">
+    <div class="rss-icon"><a href="{% url feed "blog" %}"><img alt="Last comments feed" src="{{ STATIC_URL }}img/feed-icon-14x14.png"/></a></div>
+    <div class="block-title">{% trans "Last posts" %}</div>
+  </div>
+
+  {% if last_posts %}
+  <ul class="last-posts">
+    {% for post in last_posts %}
+    <li>{% link post %}</li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <div>{% trans "No posts on blog" %}</div>
+  {% endif %}
+</div>
+
+
+<div class="block">
+  <div class="block-title">{% trans "Tags" %}</div>
+  <div class="tag-cloud">
+    {% tag_cloud_for_model blog.post as tags %}
+    {% render_tag_cloud tags %}
+  </div>
+</div>

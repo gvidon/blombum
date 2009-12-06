@@ -1,0 +1,56 @@
+{% load i18n %}
+<div id="header">
+  <div class="first">
+    <h1><a href="{% url post_list %}">{{ site.name }}</a></h1>
+    <h2>{{ settings.TAGLINE }}</h2>
+  </div>
+  <div class="last">
+    {% if not user.is_authenticated %}
+    <form id="login-form" action="{% url login %}" method="post">
+      <div>
+        <label for="email">E-Mail</label>:
+        <input type="text" id="email" name="email" />
+      </div>
+      <div>
+        <label for="password">{% trans "Password" %}</label>:
+        <input type="password" id="password" name="password" />
+      </div>
+      <div>
+        <a href="{% url password_reset %}">forgot it?</a>
+        <input type="submit" value="Login" />
+      </div>
+    </form>
+
+    <form id="openid-form" action="{% url openid_signin %}" method="post">
+      <div>
+        <label for="openid_url">OpenID</label>:
+        <input type="text" id="openid_url" name="openid_url" />
+      </div>
+      <div>
+        <input type="submit" value="Login" />
+      </div>
+    </form>
+    {% endif %}
+  </div>
+</div>
+
+<div id="navigation">
+  <div style="float: left;">
+    {% static_pages settings.STATIC_PAGES %}
+  </div>
+  <div style="float: right">
+    <ul id="login-shortcuts">
+      {% if not user.is_authenticated %}
+      <li class="first"><span>{% trans "Login" %}:</span></li>
+      <li><a href="#" onclick="return show_login();">{% trans "password" %}</a></li>
+      <li class="last"><a href="#" onclick="return show_openid();">{% trans "OpenID" %}</a></li>
+      {% else %}
+      <li><a href="{% url profile_edit %}">{% trans "Profile" %}</a></li>
+      {% if user.is_staff %}
+      <li><a href="{% url admin "." %}">{% trans "Admin" %}</a></li>
+      {% endif %}
+      <li class="last"><a href="{% url logout %}">{% trans "Logout" %} ({{ user.username }})</a></li>
+      {% endif %}
+    </ul>
+  </div>
+</div>

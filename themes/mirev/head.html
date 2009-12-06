@@ -1,0 +1,70 @@
+{% load i18n %}
+
+<div id="header">
+  <div id="headright">
+    {% if not user.is_authenticated %}
+    <form id="login-form" action="{% url login %}" method="post" style="display: none;">
+      <table>
+        <tr>
+          <td></td>
+          <td><label for="email">E-Mail:</label></td>
+          <td><input type="text" id="email" name="email" tabindex="1" /></td>
+        </tr>
+        <tr>
+          <td class="first"><a href="{% url password_reset %}">{% trans "forgot it?" %}</a></td>
+          <td><label for="password">{% trans "Password" %}:</label></td>
+          <td><input type="password" id="password" name="password" tabindex="2" /></td>
+        </tr>
+        <tr>
+          <td></td><td></td>
+          <td><input type="submit" value="{% trans "Login" %}" tabindex="3" /></td>
+        </tr>
+      </table>
+    </form>
+
+    <form id="openid-form" action="{% url openid_signin %}" method="post" style="display: none;">
+      <table>
+        <tr><td class="first"></td></tr>
+        <tr>
+          <td><label for="openid_url">OpenID:</label></td>
+          <td><input type="text" id="openid_url" name="openid_url" /></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><input type="submit" value="{% trans "Login" %}" /></td>
+        </tr>
+      </table>
+    </form>
+  {% endif %}
+  </div>
+
+  <div id="logo"><a href="{% url post_list %}"><img src="{{ MEDIA_URL }}logo/{{ site.domain }}.png" alt="{{ site.name }}" /></a></div>
+
+  <span id="login-shortcuts">
+  {% if not user.is_authenticated %}
+    {% trans "Login with" %}
+    <a href="#" id="show-pass">{% trans "password" %}</a> {% trans "or" %}
+    <a href="#" id="show-openid">{% trans "OpenID" %}</a>
+  {% else %}
+    {% if user.is_staff %}<a href="{% url admin "." %}">{% trans "Admin" %}</a>{% endif %}
+    {% trans "Hello," %} <a href="{% url profile_edit %}">{{ user.name }}</a>
+    (<a href="{% url logout %}">{% trans "logout" %}</a>)
+  {% endif %}
+  </span>
+
+</div>
+
+{% comment %}
+<div id="bar">
+  {% static_pages settings.STATIC_PAGES %}
+  {% if user.is_authenticated %}
+  <span id="bar-left">
+    {% if user.is_staff %}<a href="{% url admin "." %}">{% trans "Admin" %}</a>{% endif %}
+    <a href="{% url profile_edit %}">{% trans "Profile" %}</a>
+    <a href="{% url logout %}">{% trans "Logout" %}</a>
+  </span>
+  {% endif %}
+  {% block bar %}{% endblock %}
+</div>
+
+{% endcomment %}

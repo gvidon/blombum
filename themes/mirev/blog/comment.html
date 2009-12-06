@@ -1,0 +1,50 @@
+{% load i18n bfmarkup pytils_numeral %}
+<div
+   style="margin-left:{% widthratio comment.level 35 100 %}%"
+   class="blogcomment {% cycle odd,even %}{% ifequal object.author comment.user %} creator{% endifequal %}"
+   id="c{{ comment.id }}">
+
+  <div class="corner"></div>
+
+  <div class="text">{{ comment.body_html|safe }}</div>
+
+  <span class="comment-meta">
+    {% link comment.user %}<span class="spaceless">,</span>
+    {% relative_datetime object.date comment.pub_date %}
+  </span>
+
+  <div class="comment-links">
+    <a class="anchor-link" href="#c{{ comment.id }}">#</a>
+    {% if object.comments_open %}
+    <a class="reply-link"
+       id="reply-link-{{ comment.id }}"
+       onclick="return replyto({{ comment.id }})"
+       href="?reply_to={{ comment.id }}">{% trans "reply" %}</a>
+    {% endif %}
+
+    {% ifequal user comment.user %}
+    <a class="edit-comment"
+       style="display: none;"
+       id="edit-comment-{{ comment.id }}"
+       onclick="return edit_comment({{ comment.id }}, '{% url comment_edit comment.id %}');"
+       href="#">{% trans "edit" %}</a>
+    <input type="submit" value="{% trans "cancel" %}" class="cancel-edit" style="display: none;"
+           id="cancel-edit-{{ comment.id }}"
+           onclick="return cancel_edit({{ comment.id }});">
+    <input type="submit" value="{% trans "submit" %}" class="edit-submit" style="display: none;"
+           id="edit-submit-{{ comment.id }}"
+           onclick="return submit_edit({{ comment.id }}, '{% url comment_edit comment.id %}');" />
+    {% endifequal %}
+
+    {% if user.is_staff %}
+    <a class="delete-comment"
+       id="delete-comment-{{ comment.id }}"
+       onclick="return delete_comment({{ comment.id }}, '{% url comment_delete comment.id %}');"
+       href="#">{% trans "delete" %}</a>
+    {% endif %}
+  </div>
+
+  {% if object.comments_open %}{% ifequal reply_to comment.id %}
+  {% include "blog/comment_form.html" %}
+  {% endifequal %}{% endif %}
+</div>

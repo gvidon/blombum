@@ -1,0 +1,18 @@
+{% load i18n %}
+{% load theme %}
+
+<div class="header"><span>
+{% trans "Blogroll" %}
+    <a href="{% url friends_opml %}"><img src="{{ STATIC_URL }}/img/opml-icon-16x16.png" alt="opml" /></a>
+    <a href="{% url feed "friends" %}"><img src="{{ STATIC_URL }}/img/feed-icon-16x16.png" alt="feed" /></a>
+</span></div>
+
+    {% if friends %}
+    <ul class="blogroll">
+    {% for friend in friends %}
+        <li><a href="{{ friend.link }}"{% if friend.relations %} rel="{{ friend.relations }}"{% endif %}>{{ friend.name }}</a></li>
+    {% endfor %}
+    </ul>
+    {% else %}
+    <p>{% trans "Have no friends yet" %}</p>
+    {% endif %}
