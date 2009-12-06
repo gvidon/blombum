@@ -25,7 +25,7 @@
     {% if not post_detail and object.shortable %}
     {{ object.html_short|safe }}&nbsp;<span class="read-more"><a href="{{ object.get_absolute_url }}">{% trans "continue&nbsp;reading" %}</a></span>
     {% else %}
-      {{ object.html|safe|truncatewords:24 }}
+      {{ object.html|safe }}
     {% endif %}
     </div>
     {% if post_detail %}
