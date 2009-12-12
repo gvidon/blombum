@@ -1,12 +1,29 @@
 #comment-form-itself {
 }
 
+#comment-form .form-comment-name,
+#comment-form .form-comment-email,
+#comment-form .form-comment-site,
+#comment-form .form-comment-body {
+	margin: 0 7px 7px 0;
+}
+
 #comment-form .form-comment-name  label,
 #comment-form .form-comment-email label,
 #comment-form .form-comment-site  label,
 #comment-form .form-comment-body  label {
-	display: block;
 	font-weight: bold;
+	width: 50px;
+}
+
+#comment-form .form-comment-name  label,
+#comment-form .form-comment-email label,
+#comment-form .form-comment-site  label {
+	display: inline-block;
+}
+
+#comment-form .form-comment-body  label {
+	display: block;
 }
 
 input[type='button'],
@@ -14,4 +31,8 @@ input[type='submit'] {
 	padding: 2px;
 	border: 1px solid #666666;
 	background-color: white;
+}
+
+input[type='checkbox'] {
+	vertical-align: middle;
 }

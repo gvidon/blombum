@@ -1,7 +1,6 @@
 @import url(reset.css);
 @import url(typo.css);
 @import url(forms.css);
-@import url(post.css);
 
 body {
 	background: #ffffff;
@@ -116,13 +115,24 @@ body {
 
 .b-meta li {
 	display: inline;
-	padding-left: .5ex;
-	margin-left: .5ex;
 }
 
-.b-meta li {border-left: 1px solid;}
-.b-meta li.first { border-left: none; margin: 0; padding: 0; }
+
+.b-meta li:before {content: ' | '}
+.b-meta li:first-child:before {content: ''}
+
+/*
+альтернативный вариант.
+.b-meta li {padding-left: .5ex;
+			border-left: 1px solid;
+			margin-left: .5ex;}
+.b-meta li:first-child { border-left: none; margin: 0; padding: 0; }
+*/
 
 .b-post {
 	margin-bottom: 15px;
+}
+
+
+.comment-form {
 }

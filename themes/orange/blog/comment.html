@@ -17,7 +17,6 @@
 		{% ifequal user comment.user %}
 		<li>
 			<a class="edit-comment"
-			   style="display: none;"
 			   id="edit-comment-{{ comment.id }}"
 			   onclick="return edit_comment({{ comment.id }}, '{% url comment_edit comment.id %}');"
 			   href="#">{% trans "edit" %}</a>

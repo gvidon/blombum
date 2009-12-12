@@ -37,3 +37,12 @@ h3 a {
 .l-sidebar .title a img {
 	vertical-align: bottom;
 }
+
+.bookmarks a {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.bookmarks a img {
+	vertical-align: middle;
+}
