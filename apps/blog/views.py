@@ -35,7 +35,11 @@ def _get_reply_to(request):
 
 def post_list(request, *args, **kwargs):
     """Post listing. Only shows posts that are older than now()"""
-    kwargs['queryset'] = Post.objects.exclude(date__gt=dt.now())
+    
+    # FIXED 12.12.09 by nide
+    # kwargs['queryset'] = Post.objects.exclude(date__gt=dt.now())
+    kwargs['queryset'] = Post.objects.all()
+    
     return object_list(request, *args, **kwargs)
 
 
