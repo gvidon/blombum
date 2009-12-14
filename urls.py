@@ -72,6 +72,7 @@ if settings.DEBUG:
             {'document_root': settings.MEDIA_ROOT}),
         url(r'^static/(.*)$', 'django.views.static.serve',
             {'document_root': settings.STATIC_ROOT}),
+            
         url(r'^admin-media/(.*)$', 'django.views.static.serve',
             {'document_root': join(dirname(admin.__file__), 'media')}),
         )

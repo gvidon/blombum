@@ -26,3 +26,8 @@ def commit():
 def deploy_dev():
 	run('cd '+REMOTE_PROJECT_ROOT+'; git pull origin master')
 
+#RESTART APACHE ON REMOTE HOST
+@restart_apache
+def restart_remote_apache():
+	return 1
+

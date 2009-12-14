@@ -24,7 +24,7 @@ class PostAdmin(libadmin.BFAdmin):
         if settings.WYSIWYG_ENABLE:
             js = (
                 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
-                settings.STATIC_URL + 'js/wymeditor/jquery.wymeditor.pack.js',
+                settings.STATIC_URL + 'js/wymeditor/jquery.wymeditor.js',
                 '/' + settings.BLOG_URLCONF_ROOT + 'wysiwyg_js/',
                 )
         elif settings.RENDER_METHOD in ('html', 'markdown', 'rst'):
