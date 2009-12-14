@@ -24,6 +24,11 @@ class PostAdmin(libadmin.BFAdmin):
         if settings.WYSIWYG_ENABLE:
             js = (
                 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
+                settings.STATIC_URL + 'js/lib/jquery.ui.js',
+                settings.STATIC_URL + 'js/lib/jquery.ui.draggable.js',
+                settings.STATIC_URL + 'js/lib/jquery.ui.resizable.js',
+                settings.STATIC_URL + 'js/lib/jquery.ui.sortable.js',
+                
                 settings.STATIC_URL + 'js/wymeditor/jquery.wymeditor.js',
                 '/' + settings.BLOG_URLCONF_ROOT + 'wysiwyg_js/',
                 )
