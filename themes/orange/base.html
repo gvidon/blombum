@@ -4,8 +4,6 @@
 {% load sidebar %}
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 
-<!-- this template was designed by http://www.tristarwebdesign.co.uk - please visit for more templates & information - thank you. -->
-
 <head>
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>{{ site.name }}: {% block title %}{{ settings.TAGLINE }}{% endblock %}</title>
@@ -14,6 +12,7 @@
 	<meta name="author" content="{{ site.name }}" />
 
 	{% theme_css "style" %}
+	<!--[if IE 6]>{% theme_css "ie6" %}<![endif]-->
 	<link rel="shortcut icon" type="image/x-icon" href="{{ THEME_STATIC_URL }}img/favicon.ico" />
 
 	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "blog entries feed" %}" href="{% url feed "blog" %}" />
@@ -23,12 +22,8 @@
 	<link rel="openid.server" href="{% absolute_url openid_endpoint %}" />
 
 	<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script-->
-	<!--
-	{{ settings.THEME }}
-	{{ settings.THEME_STATIC_ROOT }}
-	{{ settings.THEME_STATIC_URL }}
-	-->
-	<script type="text/javascript" src="{{ THEME_STATIC_URL }}js/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="{{ THEME_STATIC_URL }}js/jquery.min.js"></script>
+	
 	{% theme_js "login-shortcuts" %}
 	<script type="text/javascript" src="{% url processed_js %}"></script>
 
@@ -41,7 +36,7 @@
 			{% include "head.html" %}
 		</div>
 		
-		<div class="l-content">
+		<div id="content" class="l-content">
 			{% site_messages %}
 			{% block content %}{% endblock %}
 		</div>
@@ -53,9 +48,9 @@
 		</div>
 
 		<div class="l-footer">
-			{% include "footer.html" %}
+{% include "footer.html" %}
 		</div>
 	</div>
+	{% include closure.html %}
 </body>
-
 </html>

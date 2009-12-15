@@ -1,8 +1,14 @@
+{% load i18n %}
 		<h1><a href="{% url post_list %}">{{ site.name }}</a></h1>
 		<em>{{ settings.TAGLINE }}</em>
 
+		<!-- moar accessability -->
+		<a class="b-skip" href="#content">{% trans "Skip to main content" %}</a>
+
+		<h2>{% trans "Navigation" %}</h2>
 		<ul class="b-static-links">
-			{% for page in settings.STATIC_PAGES %}
-				<li><a title="{{ page.2 }}" href="{{ page.1 }}">{{ page.0 }}</a></li>
-			{% endfor %}
+		{% for page in settings.STATIC_PAGES %}
+			<li><a title="{{ page.2 }}" href="{{ page.1 }}">{{ page.0 }}</a></li>
+		{% endfor %}
+			<li><a onclick="$('body').toggleClass('swap');">Swap</a></li>
 		</ul>

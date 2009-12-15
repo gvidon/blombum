@@ -9,9 +9,7 @@
 {% endspaceless %}
 
 <div class="b-post" id="post-{{ object.id }}">
-    {{ post_detail|cond_display:"<h2>,<h1>" }}
-        <a href="{{ object.get_absolute_url }}">{{ object.name|typogrify }}</a>
-    {{ post_detail|cond_display:"</h2>,</h1>" }}
+    <h2><a href="{{ object.get_absolute_url }}">{{ object.name|typogrify }}</a></h2>
 
 	{% spaceless %}
 	{# Нефиг тут спейсы развешивать! #}
