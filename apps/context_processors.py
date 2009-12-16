@@ -1,10 +1,11 @@
 import os.path
 
-from django.views.debug import get_safe_settings
+from django.views.debug          import get_safe_settings
 from django.contrib.sites.models import Site
-from blog.models import Post
+from blog.models                 import Post
 
-from lib import appcheck
+from lib                         import appcheck
+from settingsDB.utils            import SettingsCached
 
 class SafeSettings:
     def __init__(self):
@@ -28,9 +29,9 @@ settings = SafeSettings()
 
 def settings_vars(request):
     return {
-        'STATIC_URL': settings.STATIC_URL,
-        'THEME_STATIC_URL': settings.THEME_STATIC_URL,
-        'settings': settings,
-        'appcheck': appcheck,
-        'site': Site.objects.get_current(),
-        }
+        'STATIC_URL'      : SettingsCached.param.STATIC_URL,
+        'THEME_STATIC_URL': SettingsCached.param.THEME_STATIC_URL,
+        'settings'        : SettingsCached.param,
+        'appcheck'        : appcheck,
+        'site'            : Site.objects.get_current(),
+    }

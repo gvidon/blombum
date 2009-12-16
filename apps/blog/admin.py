@@ -4,7 +4,7 @@ from django.contrib             import admin
 from django.contrib.auth.models import User
 from lib                        import libadmin
 from blog.models                import Post
-from apps.settingsDB.utils      import SettingsCached       
+from settingsDB.utils           import SettingsCached       
 
 class PostAdmin(libadmin.BFAdmin):
     prepopulated_fields = {'slug': ('name', )}

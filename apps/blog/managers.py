@@ -1,9 +1,9 @@
 # -*- mode: python; coding: utf-8; -*-
 
-from django.db import models
+from django.db                   import models
 from django.contrib.sites.models import Site
 
-from lib import appcheck
+from lib                         import appcheck
 
 
 SELECT_SQL = {

@@ -1,23 +1,24 @@
 # -*- mode: python; coding: utf-8; -*-
 
-from datetime import datetime, timedelta
+from datetime                    import datetime, timedelta
 
-from django.db import models
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
+from django.db                   import models
+from django.contrib.auth.models  import User
+from django.utils.translation    import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 
-from lib import appcheck
-from lib.helpers import reverse, signals
-from render import render, RENDER_METHODS
-from blog.managers import PostManager, SitePostManager, PublicPostManager
-from discussion.models import CommentNode
-from tagging.fields import TagField
-from tagging.utils import parse_tag_input
-from pingback import Pingback, create_ping_func
-from pingback import ping_external_links, ping_directories
+from lib                         import appcheck
+from lib.helpers                 import reverse, signals
+from render                      import render, RENDER_METHODS
+from blog.managers               import PostManager, SitePostManager, PublicPostManager
+from discussion.models           import CommentNode
+from tagging.fields              import TagField
+from tagging.utils               import parse_tag_input
+from pingback                    import Pingback, create_ping_func
+from pingback                    import ping_external_links, ping_directories
+from settingsDB.utils            import SettingsCached
+
 import xmlrpc
 
 
@@ -28,13 +29,13 @@ models.signals.post_delete.connect(Site, lambda **kw: Site.objects.clear_cache()
 class Post(models.Model):
     site = models.ForeignKey(Site, related_name='posts')
     author = models.ForeignKey(User, related_name='posts')
-    name = models.CharField(_(u'Name'), max_length=settings.NAME_LENGTH)
-    slug = models.SlugField(_(u'Slug'), max_length=settings.NAME_LENGTH,
+    name = models.CharField(_(u'Name'), max_length=SettingsCached.param.NAME_LENGTH)
+    slug = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH,
                             blank=True, unique_for_date="date")
     text = models.TextField(_(u'Text'),
         help_text=u'Use &lt;!--more--&gt; to separate heading with body')
     render_method = models.CharField(_(u'Render method'), max_length=15,
-        choices=RENDER_METHODS, default=settings.RENDER_METHOD)
+        choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
     html = models.TextField(_(u'HTML'), editable=False, blank=True)
     date = models.DateTimeField(_(u'Date'), default=datetime.now)
     upd_date = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
@@ -66,7 +67,7 @@ class Post(models.Model):
                        slug=self.slug)
 
     def get_absolute_uri(self):
-        return '%s://%s%s' % (settings.SITE_PROTOCOL,
+        return '%s://%s%s' % (SettingsCached.param.SITE_PROTOCOL,
                                self.site.domain,
                                self.get_absolute_url())
 
@@ -79,8 +80,8 @@ class Post(models.Model):
         super(Post, self).save(*args, **kwargs)
 
     def comments_open(self):
-        if settings.COMMENTS_EXPIRE_DAYS:
-            return self.enable_comments and (datetime.today() - timedelta(settings.COMMENTS_EXPIRE_DAYS)) <= self.date
+        if SettingsCached.param.COMMENTS_EXPIRE_DAYS:
+            return self.enable_comments and (datetime.today() - timedelta(SettingsCached.param.COMMENTS_EXPIRE_DAYS)) <= self.date
         else:
             return self.enable_comments
     comments_open.boolean = True
@@ -104,7 +105,7 @@ class Post(models.Model):
 
     def view_link(self):
         return u'<a href="%s://%s%s">%s</a>' % (
-            settings.SITE_PROTOCOL, self.site.domain,
+            SettingsCached.param.SITE_PROTOCOL, self.site.domain,
             self.get_absolute_url(), _('view'))
     view_link.allow_tags = True
 

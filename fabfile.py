@@ -10,7 +10,12 @@ GITHUB_REPO_URL     = 'git://github.com/gvidon/blombum.git'
 def restart_apache(operation):
 	def decorate():
 		operation()
-		sudo('/etc/init.d/apache2 restart')
+		sudo('/etc/init.d/apache2 stop')
+		
+		# to prevent cached settings.py bugs
+		sudo('/etc/init.d/memcached restart')
+		
+		sudo('/etc/init.d/apache2 start')
 	
 	return decorate
 
