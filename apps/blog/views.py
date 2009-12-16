@@ -1,30 +1,30 @@
 # -*- mode: python; coding: utf-8; -*-
 
-from datetime import datetime as dt
+from datetime                         import datetime as dt
 
 from django.views.generic.list_detail import object_list
-from django.views.generic import date_based
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect, Http404, HttpResponse
-from django.contrib.sites.models import Site
-from django.conf import settings
-from django.utils.translation import ugettext as _
-from django.template import RequestContext, loader
-from django.contrib.auth.models import User
-from django.views.decorators.cache import cache_page
+from django.views.generic             import date_based
+from django.shortcuts                 import get_object_or_404
+from django.http                      import HttpResponseRedirect, Http404, HttpResponse
+from django.contrib.sites.models      import Site
+from django.utils.translation         import ugettext as _
+from django.template                  import RequestContext, loader
+from django.contrib.auth.models       import User
+from django.views.decorators.cache    import cache_page
 
-from lib.forms import build_form
-from lib.exceptions import RedirectException
-from lib.decorators import render_to, ajax_request
-from lib.helpers import get_object_or_404_ajax
+from lib.forms                        import build_form
+from lib.exceptions                   import RedirectException
+from lib.decorators                   import render_to, ajax_request
+from lib.helpers                      import get_object_or_404_ajax
 
-from accounts.models import ActionRecord
-from accounts.views import _login
-from discussion.forms import CommentForm, AnonymousCommentForm
-from discussion.models import CommentNode
-from blog.models import Post
-from tagging.views import tagged_object_list
-from render import render
+from accounts.models                  import ActionRecord
+from accounts.views                   import _login
+from discussion.forms                 import CommentForm, AnonymousCommentForm
+from discussion.models                import CommentNode
+from blog.models                      import Post
+from tagging.views                    import tagged_object_list
+from render                           import render
+from settingsDB.utils                 import SettingsCached
 
 def _get_reply_to(request):
     try:
@@ -39,7 +39,6 @@ def post_list(request, *args, **kwargs):
     # FIXED 12.12.09 by nide
     # kwargs['queryset'] = Post.objects.exclude(date__gt=dt.now())
     kwargs['queryset'] = Post.objects.all()
-    
     return object_list(request, *args, **kwargs)
 
 
@@ -175,11 +174,11 @@ def comment_delete(request, object_id):
 
 @ajax_request
 def preview(request):
-    return {'body_preview': render(request.POST['body'], settings.RENDER_METHOD)}
+    return {'body_preview': render(request.POST['body'], SettingsCached.param.RENDER_METHOD)}
 
 
 def process_root_request(request):
-    return HttpResponseRedirect('/%s' % settings.BLOG_URLCONF_ROOT)
+    return HttpResponseRedirect('/%s' % SettingsCached.param.BLOG_URLCONF_ROOT)
 
 
 @cache_page(60*60*24*30)

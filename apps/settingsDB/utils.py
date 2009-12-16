@@ -1,4 +1,6 @@
 from django.core.cache import cache
+from django.conf       import settings
+
 from models            import Settings
 
 #PROXY CLASS FOR CACHING SETTINGS.PY PARAMS
@@ -10,10 +12,16 @@ class SettingsCached(object):
 			return self
 			
 		def __getattribute__(self, name):
-			print cache.get(name, 'asd')
-			return cache.get(name, 'asd')
-	
+			try:
+				if not cache.get(name):
+					cache.set(name, Settings.objects.get(is_enabled=True).values(name))
+				
+			except Settings.DoesNotExist:
+				cache.set(name, getattr(settings, name))
+				
+			return cache.get(name)
+			
 	param = Param()
 
 # USAGE
-# print SettingsCached.param.PAGINATE_BY
+#print SettingsCached.param.PAGINATE_BY

@@ -35,3 +35,9 @@ class Settings(models.Model):
 		('simple'   , 'Simple'),
 		('recaptcha', 'Recaptcha'),
 	), max_length='9', blank=True, default='')
+		
+	#META
+	class Meta:
+		db_table            = 'settings'
+		verbose_name        = u'Settings'
+		verbose_name_plural = u'Settings'
