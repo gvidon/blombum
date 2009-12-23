@@ -1,15 +1,11 @@
 # -*- mode: python; coding: utf-8; -*-
 
 from django.conf.urls.defaults import *
-from django.conf import settings
+from settingsDB.utils          import SettingsCached
+from blog.models               import Post
+from blog                      import views
 
-from blog import views
-from blog.models import Post
-
-info = {
-    'paginate_by': settings.PAGINATE_BY,
-    }
-
+info = {'paginate_by': SettingsCached.param.PAGINATE_BY}
 
 urlpatterns = patterns(
     '',

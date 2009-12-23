@@ -1,7 +1,7 @@
 # -*- coding: utf-8
 
-from django import template
-from textblocks.models import TextBlock
+from django                 import template
+from textblocks.models      import TextBlock
 from django.core.exceptions import ObjectDoesNotExist
 
 register = template.Library()

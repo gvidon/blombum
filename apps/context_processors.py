@@ -25,7 +25,8 @@ class SafeSettings:
             # an AttributeError exception.
             raise AttributeError
 
-settings = SafeSettings()
+#FIXED 17.12.2009
+#settings = SafeSettings()
 
 def settings_vars(request):
     return {

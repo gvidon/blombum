@@ -7,8 +7,6 @@
 
 		<h2>{% trans "Navigation" %}</h2>
 		<ul class="b-static-links">
-		{% for page in settings.STATIC_PAGES %}
-			<li><a title="{{ page.2 }}" href="{{ page.1 }}">{{ page.0 }}</a></li>
-		{% endfor %}
+			{% flat_pages %}
 			<li><a onclick="$('body').toggleClass('swap');">Swap</a></li>
 		</ul>

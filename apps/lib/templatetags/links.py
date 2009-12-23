@@ -1,10 +1,10 @@
 # -*- mode: python; coding: utf-8; -*-
 
-from django.template import Library, Node, TemplateSyntaxError
+from django.template             import Library, Node, TemplateSyntaxError
 from django.template.defaulttags import url
-from django.contrib.auth.models import User
+from django.contrib.auth.models  import User
 
-from lib.helpers import absolutize_uri
+from lib.helpers                 import absolutize_uri
 
 register = Library()
 

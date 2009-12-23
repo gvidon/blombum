@@ -37,7 +37,9 @@ class RecaptchaWidget(forms.Widget):
     def render(self, name, value, attrs=None):
         try:
             pubkey = settings.RECAPTCHA[Site.objects.get_current().domain]['public']
-        except IndexError:
+        #FIXED 23.13.2009
+        #except IndexError:
+        except (IndexError, KeyError):
             return mark_safe(u'<p>Recaptcha is not configured properly.</p>')
         html = librecaptcha.displayhtml(pubkey,
                                         theme=RECAPTCHA_THEME,

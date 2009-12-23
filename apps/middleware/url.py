@@ -112,6 +112,14 @@ class UrlMiddleware(object):
         except Http404:
             # check for flatpages
             if "django.contrib.flatpages.middleware.FlatpageFallbackMiddleware" in settings.MIDDLEWARE_CLASSES:
-                from django.contrib.flatpages.models import FlatPage
-                return FlatPage.objects.filter(url=path, sites__id=settings.SITE_ID).count() == 1
+                #FIXED 21.12.2009
+                #from django.contrib.flatpages.models import FlatPage
+                #return FlatPage.objects.filter(url=path, sites__id=settings.SITE_ID).count() == 1
+                
+                #FIXED 23.12.2009
+                #from flatpages.models import FlatPage
+                #return FlatPage.objects.filter(url=path).count() == 1
+                
+                from staticpages.models import StaticPage
+                return StaticPage.objects.filter(url=path).count() == 1
 

@@ -136,6 +136,7 @@ def post_detail(request, year, month, day, slug):
             raise RedirectException(c.get_absolute_url(), notice_message=message)
     else:
         form = None
+    
     return {
             'object': post,
             'form': form,
