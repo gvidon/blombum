@@ -1,0 +1,35 @@
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/488/trunk/filebrowser/media/filebrowser/uploadify/com/adobe/fileformats/vcard
+END
+VCard.as
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/488/trunk/filebrowser/media/filebrowser/uploadify/com/adobe/fileformats/vcard/VCard.as
+END
+Address.as
+K 25
+svn:wc:ra_dav:version-url
+V 102
+/svn/!svn/ver/488/trunk/filebrowser/media/filebrowser/uploadify/com/adobe/fileformats/vcard/Address.as
+END
+Email.as
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/488/trunk/filebrowser/media/filebrowser/uploadify/com/adobe/fileformats/vcard/Email.as
+END
+Phone.as
+K 25
+svn:wc:ra_dav:version-url
+V 100
+/svn/!svn/ver/488/trunk/filebrowser/media/filebrowser/uploadify/com/adobe/fileformats/vcard/Phone.as
+END
+VCardParser.as
+K 25
+svn:wc:ra_dav:version-url
+V 106
+/svn/!svn/ver/488/trunk/filebrowser/media/filebrowser/uploadify/com/adobe/fileformats/vcard/VCardParser.as
+END
