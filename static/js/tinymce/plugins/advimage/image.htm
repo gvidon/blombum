@@ -8,7 +8,9 @@
 	<script type="text/javascript" src="../../utils/validate.js"></script>
 	<script type="text/javascript" src="../../utils/editable_selects.js"></script>
 	<script type="text/javascript" src="js/image.js"></script>
-	<link href="css/advimage.css" rel="stylesheet" type="text/css" />
+	
+	<link rel="stylesheet" href="{{ STATIC_URL }}/js/tinymce/themes/advanced/skins/default/dialog.css" type="text/css" charset="utf-8" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}/js/tinymce/plugins/advimage/css/advimage.css" type="text/css" charset="utf-8" />
 </head>
 <body id="advimage" style="display: none">
     <form onsubmit="ImageDialog.insert();return false;" action="#"> 

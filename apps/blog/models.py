@@ -30,12 +30,9 @@ class Post(models.Model):
     site = models.ForeignKey(Site, related_name='posts')
     author = models.ForeignKey(User, related_name='posts')
     name = models.CharField(_(u'Name'), max_length=SettingsCached.param.NAME_LENGTH)
-    slug = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH,
-                            blank=True, unique_for_date="date")
-    text = models.TextField(_(u'Text'),
-        help_text=u'Use &lt;!--more--&gt; to separate heading with body')
-    render_method = models.CharField(_(u'Render method'), max_length=15,
-        choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
+    slug = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH, blank=True, unique_for_date="date")
+    text = models.TextField(_(u'Text'), help_text=u'Use &lt;!--more--&gt; to separate heading with body')
+    render_method = models.CharField(_(u'Render method'), max_length=15, choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
     html = models.TextField(_(u'HTML'), editable=False, blank=True)
     date = models.DateTimeField(_(u'Date'), default=datetime.now)
     upd_date = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)

@@ -23,10 +23,18 @@ class PostAdmin(libadmin.BFAdmin):
             js = (
                 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
                 
-                SettingsCached.param.STATIC_URL + 'js/tinymce/tiny_mce.js',
-                SettingsCached.param.STATIC_URL + 'js/tinymce/jquery.tinymce.js',
-                SettingsCached.param.STATIC_URL + 'js/tinymce/init.js',
-                )
+                '/tinymce/tiny_mce.js',
+                #'/tinymce/jquery.tinymce.js',
+                SettingsCached.param.STATIC_URL+'filebrowser/js/TinyMCEAdmin.js',
+                #'/tinymce/init.js',
+            )
+            
+            css = {'all': (
+                SettingsCached.param.STATIC_URL+'js/tinymce/themes/simple/skins/default/ui.css',
+                SettingsCached.param.STATIC_URL+'js/tinymce/themes/advanced/skins/default/ui.css',
+                SettingsCached.param.STATIC_URL+'js/tinymce/themes/advanced/skins/o2k7/ui.css',
+            )}
+            
         elif SettingsCached.param.RENDER_METHOD in ('html', 'markdown', 'rst'):
             js = (SettingsCached.param.STATIC_URL + 'js/postimage.js', )
 

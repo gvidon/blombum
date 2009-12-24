@@ -42,7 +42,10 @@ urlpatterns += patterns(
     '',
     url(r''                                , include('revcanonical.urls')),
     url(r'^admin/postimage/'               , include('postimage.urls')),
+    url(r'^admin/filebrowser/'             , include('filebrowser.urls')),
+    
     url(r'^admin/(.*)'                     , admin.site.root, name='admin'),
+    
     url(r'^accounts/'                      , include('accounts.urls')),
     url(r'^openid/'                        , include('openidconsumer.urls')),
     url(r'^openidserver/'                  , include('openidserver.urls')),
@@ -52,7 +55,10 @@ urlpatterns += patterns(
     url(r'^captcha/'                       , include('captcha.urls')),
     url(r'^robots.txt$'                    , include('robots.urls')),
     url(r'^feeds/'                         , include('feed.urls')),
-    )
+    
+    # tinymce and admin page for blog post must on the same domain
+    url(r'^tinymce/'                       , include('tinymce.urls')),
+)
 
 if appcheck.watchlist:
     urlpatterns += patterns('', url(r'^watchlist/', include('watchlist.urls')),)
