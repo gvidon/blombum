@@ -14,8 +14,16 @@ register = Library()
 @register.inclusion_tag('blog/sidebar.html', takes_context=True)
 def sidebar(context):
     all_posts = Post.objects.filter(date__lte=dt.now()).order_by('-date')
-    comments = CommentNode.objects.for_similar_objects(all_posts)
-    comments = comments.select_related().order_by('-pub_date')[:5]
+    
+    #FIXED 24.12.2009
+    try:
+        comments = CommentNode.objects.for_similar_objects(all_posts)
+        comments = comments.select_related().order_by('-pub_date')[:5]
+    
+    #FIXED 24.12.2009
+    except AttributeError:
+        comments = []
+     
     last_posts = all_posts[:5]
     # TODO: return all variables from RequestContext dictionary
     return {
