@@ -13,7 +13,7 @@
 
 	{% theme_css "style" %}
 	<!--[if IE 6]>{% theme_css "ie6" %}<![endif]-->
-	<link rel="shortcut icon" type="image/x-icon" href="{{ settings.THEME_STATIC_URL }}img/favicon.ico" />
+	<link rel="shortcut icon" type="image/x-icon" href="{{ THEME_STATIC_URL }}img/favicon.ico" />
 
 	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "blog entries feed" %}" href="{% url feed "blog" %}" />
 	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "comments feed" %}" href="{% url feed "comments" %}" />
@@ -22,8 +22,8 @@
 	<link rel="openid.server" href="{% absolute_url openid_endpoint %}" />
 
 	<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script-->
-	<script type="text/javascript" src="{{ settings.THEME_STATIC_URL }}js/jquery.min.js"></script>
-	
+	<script type="text/javascript" src="{{ THEME_STATIC_URL }}js/jquery.min.js"></script>
+
 	{% theme_js "login-shortcuts" %}
 	<script type="text/javascript" src="{% url processed_js %}"></script>
 
@@ -35,7 +35,7 @@
 		<div class="l-header">
 			{% include "head.html" %}
 		</div>
-		
+
 		<div id="content" class="l-content">
 			{% site_messages %}
 			{% block content %}{% endblock %}
@@ -48,7 +48,7 @@
 		</div>
 
 		<div class="l-footer">
-{% include "footer.html" %}
+			{% include "footer.html" %}
 		</div>
 	</div>
 	{% include closure.html %}
