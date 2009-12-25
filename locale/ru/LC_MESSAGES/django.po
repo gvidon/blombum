@@ -65,11 +65,11 @@ msgstr "Вы должны ввести один и тот же пароль об
 
 #: apps/accounts/forms.py:102
 msgid "Email address of account to merge"
-msgstr ""
+msgstr "Email учетной записи для слияния"
 
 #: apps/accounts/forms.py:112
 msgid "Specified user not found"
-msgstr ""
+msgstr "Указанный пользователь не найден"
 
 #: apps/accounts/views.py:45
 msgid "Email or password was not supplied"
@@ -125,7 +125,7 @@ msgstr "Содержимое"
 
 #: apps/blog/models.py:31 apps/textblocks/models.py:15
 msgid "Render method"
-msgstr "Метод рендеринга"
+msgstr "Метод отображения"
 
 #: apps/blog/models.py:32 apps/textblocks/models.py:17
 msgid "HTML"
@@ -141,7 +141,7 @@ msgstr "Черновик"
 
 #: apps/blog/models.py:102
 msgid "view"
-msgstr "Смотреть"
+msgstr "Просмотр"
 
 #: apps/blog/views.py:111
 msgid "Please look in your mailbox for info about your account."
@@ -331,7 +331,7 @@ msgstr "Сообщение (HTML)"
 
 #: apps/livejournal/models.py:10
 msgid "All"
-msgstr "Ото всех"
+msgstr "От всех"
 
 #: apps/livejournal/models.py:11
 msgid "Anonymous only"
@@ -368,7 +368,7 @@ msgstr "i-name'ы не поддерживаются"
 #: apps/openidconsumer/forms.py:32
 #, python-format
 msgid "next url \"%s\" is invalid"
-msgstr "следующий адрес - \"%s\" - неправильный"
+msgstr "такой адрес - \"%s\" - неправильный"
 
 #: apps/openidconsumer/forms.py:54
 msgid "This email is already in database. Please choose another."
@@ -383,7 +383,7 @@ msgid ""
 "Please enter a correct email and password. Note that both fields are case-"
 "sensitive."
 msgstr ""
-"Пожалуйста, введите корректные email и пароль. Оба поля чувствительны к "
+"Пожалуйста, введите правильные email и пароль. Оба поля чувствительны к "
 "регистру."
 
 #: apps/openidconsumer/forms.py:89
@@ -400,7 +400,7 @@ msgstr "Запрос был отменён"
 
 #: apps/openidconsumer/views.py:279
 msgid "Invalid POST data"
-msgstr "Ваши POST данные полный отстой"
+msgstr "Неправильные данные POST"
 
 #: apps/openidconsumer/views.py:281
 msgid "You must have at least one OpenID if you don't have email!"
@@ -456,14 +456,14 @@ msgstr "Проверочный параметр неверен"
 
 #: apps/recaptcha/recaptcha_newforms.py:26
 msgid "The CAPTCHA solution was incorrect."
-msgstr "Неверная CAPTCHA"
+msgstr "Неверное значение CAPTCHA"
 
 #: apps/recaptcha/recaptcha_newforms.py:27
 msgid ""
 "The parameters to /verify were incorrect, make sure you are passing all the "
 "required parameters.  Please try again later."
 msgstr ""
-"Параметры для /verify неверны, проверьте, что вы передаете все необходимые "
+"Параметры для проверки неверны, проверьте, что вы передаете все необходимые "
 "параметры. Попробуйте еще раз позже."
 
 #: apps/recaptcha/recaptcha_newforms.py:28
@@ -485,11 +485,11 @@ msgstr "Ошибка доступа к сервису reCAPTCHA. Попробу�
 
 #: apps/recaptcha/recaptcha_newforms.py:72
 msgid "Please enter the CAPTCHA solution."
-msgstr "Введите "
+msgstr "Введите значение CAPTCHA"
 
 #: apps/robots/admin.py:10
 msgid "URL patterns"
-msgstr "URL шаблон"
+msgstr "шаблоны URL"
 
 #: apps/robots/admin.py:11
 msgid "Advanced options"
@@ -602,7 +602,7 @@ msgstr "Теги"
 
 #: apps/tagging/models.py:39
 msgid "content type"
-msgstr "Тип контента"
+msgstr "Тип содержимого"
 
 #: apps/tagging/models.py:40
 msgid "object id"
@@ -733,7 +733,7 @@ msgstr "Ключевой атрибут"
 
 #: apps/textblocks/models.py:12
 msgid "Block name"
-msgstr "Имя"
+msgstr "Имя блока"
 
 #: apps/textblocks/models.py:13
 msgid "The name is renders as h4 (if it is not blank)"
@@ -741,11 +741,11 @@ msgstr "Имя блока (если указано) отображается к�
 
 #: apps/textblocks/models.py:14
 msgid "Block content"
-msgstr "Содержимое"
+msgstr "Содержимое блока"
 
 #: apps/textblocks/models.py:18
 msgid "Comments about block"
-msgstr "Комментарий"
+msgstr "Комментарий блока"
 
 #: apps/textblocks/models.py:19
 msgid "The comment on text block is shown only in admin interface"
@@ -825,11 +825,11 @@ msgstr "Выйти"
 
 #: templates/accounts/login.html:16
 msgid "comment on any post to register"
-msgstr ""
+msgstr "откомментируйте любую публикацию для регистрации"
 
 #: templates/accounts/merge.html:11
 msgid "Merge"
-msgstr ""
+msgstr "Соединить"
 
 #: templates/accounts/profile_edit.html:5
 #: themes/lite/accounts/profile_edit.html:5
@@ -843,7 +843,7 @@ msgstr "Ассоциированные OpenID'ы"
 
 #: templates/accounts/profile_edit.html:9
 msgid "Merge with another account"
-msgstr ""
+msgstr "Соединить с другой учетной записью"
 
 #: templates/accounts/profile_edit.html:10 templates/watchlist/list.html:6
 #: templates/watchlist/list.html.py:9 themes/lite/accounts/profile_edit.html:9
@@ -1197,7 +1197,7 @@ msgstr "Нажмите для фильтрации по %(tag)s"
 
 #: templates/templatetags/authorlink.html:1
 msgid "Click to see all posts by {{ author.name }}"
-msgstr ""
+msgstr "Нажмите, чтобы увидеть все публикации от {{ author.name }}"
 
 #: templates/templatetags/datelinks.html:1
 #: themes/mirev/templatetags/datelinks.html:3
@@ -1255,7 +1255,7 @@ msgstr "Фид комментариев"
 
 #: themes/andreas08/footer.html:4
 msgid "Original design by "
-msgstr ""
+msgstr "Оригинальный дизайн от "
 
 #: themes/andreas08/blog/sidebar.html:9 themes/buriy/blog/sidebar.html:38
 #: themes/lite/blog/sidebar.html:5 themes/web_brains/blog/sidebar.html:5
@@ -1390,9 +1390,11 @@ msgstr "день, дня, дней"
 msgid "Useful information"
 msgstr "Полезная информация"
 
-
 msgid "Current password"
 msgstr "Текущий пароль"
 
 msgid "Wrong password"
 msgstr "Неверный пароль"
+
+msgid "Settings"
+msgstr "Настройки"
