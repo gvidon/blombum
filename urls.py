@@ -44,7 +44,7 @@ urlpatterns += patterns(
     url(r'^admin/postimage/'               , include('postimage.urls')),
     url(r'^admin/filebrowser/'             , include('filebrowser.urls')),
     
-    url(r'^admin/(.*)'                     , admin.site.root, name='admin'),
+    url(r'^admin/?(.*)'                    , admin.site.root, name='admin'),
     
     url(r'^accounts/'                      , include('accounts.urls')),
     url(r'^openid/'                        , include('openidconsumer.urls')),
