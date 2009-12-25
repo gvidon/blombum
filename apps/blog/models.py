@@ -21,7 +21,6 @@ from settingsDB.utils            import SettingsCached
 
 import xmlrpc
 
-
 models.signals.post_save.connect(Site, lambda **kw: Site.objects.clear_cache())
 models.signals.post_delete.connect(Site, lambda **kw: Site.objects.clear_cache())
 

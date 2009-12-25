@@ -24,9 +24,7 @@ class PostAdmin(libadmin.BFAdmin):
                 'http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js',
                 
                 '/tinymce/tiny_mce.js',
-                #'/tinymce/jquery.tinymce.js',
                 SettingsCached.param.STATIC_URL+'filebrowser/js/TinyMCEAdmin.js',
-                #'/tinymce/init.js',
             )
             
             css = {'all': (
