@@ -9,7 +9,7 @@
 {% endspaceless %}
 
 <div class="b-post" id="post-{{ object.id }}">
-    <h2><a href="{{ object.get_absolute_url }}">{{ object.name|typogrify }}</a></h2>
+	<h2><a href="{{ object.get_absolute_url }}">{{ object.name|typogrify }}</a></h2>
 
 	{% spaceless %}
 	{# Нефиг тут спейсы развешивать! #}
@@ -19,9 +19,13 @@
 		<li class="b-comm-count">
 			<a href="{{ object.get_absolute_url }}#comments">{{ object.approved_comments_count }} {{ object.approved_comments_count|choose_plural:_("comment, comments, comments") }}</a>
 		</li>
+		{% ifapp pingback %}
 		<li class="b-ping-count">
-			<a href="{{ object.get_absolute_url }}#pingbacks">{{ object.pingback_count }} {{ object.pingback_count|choose_plural:_("pingback, pingbacks, pingbacks") }}</a>
+			<a href="{{ object.get_absolute_url }}#pingbacks">
+			{{ object.pingback_count }}
+			{{ object.pingback_count|choose_plural:_("pingback, pingbacks, pingbacks") }}</a>
 		</li>
+		{% endif %}
 		{% if object.tags %}<li class="b-tags">{% render_tag_string object.get_tags %}</li>{% endif %}
 	</ul>
 	{% endspaceless %}
