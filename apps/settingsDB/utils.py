@@ -14,7 +14,6 @@ class SettingsCached(object):
 		def clear(self, **kwargs):
 			# http://www.djangosnippets.org/snippets/1080/
 			try:
-				cache.set('THEME', None)
 				cache.flush_all()
 				
 			except AttributeError:
