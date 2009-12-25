@@ -3,7 +3,6 @@ import os
 
 from django.utils.translation import ugettext_lazy as _
 from django.db                import models
-
 from settingsDB.utils         import SettingsCached
 
 #MODEL FOR STORING SETTINGS.PY PARAMS
