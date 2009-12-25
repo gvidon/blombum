@@ -25,7 +25,7 @@
 			{{ object.pingback_count }}
 			{{ object.pingback_count|choose_plural:_("pingback, pingbacks, pingbacks") }}</a>
 		</li>
-		{% endif %}
+		{% endifapp %}
 		{% if object.tags %}<li class="b-tags">{% render_tag_string object.get_tags %}</li>{% endif %}
 	</ul>
 	{% endspaceless %}
