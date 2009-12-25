@@ -7,6 +7,12 @@
 
 		<h2>{% trans "Navigation" %}</h2>
 		<ul class="b-static-links">
-			{% flat_pages %}
-			<li><a onclick="$('body').toggleClass('swap');">Swap</a></li>
+			{% if user.is_authenticated %}
+				{% if user.is_staff %}<li><a href="{% url admin "." %}">{% trans "Admin" %}</a></li>{% endif %}
+				<li><a href="{% url profile_edit %}">{% trans "Profile" %}</a></li>
+				<li><a href="{% url logout %}">{% trans "Logout" %}</a></li>
+			{% endif %}
+			{% for page in settings.STATIC_PAGES %}
+				<li><a title="{{ page.2 }}" href="{{ page.1 }}">{{ page.0 }}</a></li>
+			{% endfor %}
 		</ul>

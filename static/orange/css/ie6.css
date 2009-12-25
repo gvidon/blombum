@@ -1,0 +1,40 @@
+/* Fix double margin */
+.l-header em,
+.l-sidebar,
+.l-content {
+	display: inline;
+}
+
+/* Emulte inline-blocks */
+.b-static-links li {
+	display: inline;
+	zoom: 1;
+}
+
+/* Fix headers */
+.l-content h2,
+.l-content .b-comments h3,
+.l-sidebar h3 {
+	position: relative;
+	zoom: 1;
+}
+
+.l-header {
+	zoom: 1;
+}
+
+.b-static-links {
+	line-height: 4em;
+}
+
+	.b-static-links li {
+		position: relative;
+		top: 1em;
+		line-height: 2em;
+	}
+
+
+.b-meta li {padding-left: .5ex;
+			border-left: 1px solid;
+			margin-left: .5ex;}
+.b-meta li.first { border-left: none; margin: 0; padding: 0; }

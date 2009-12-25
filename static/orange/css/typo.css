@@ -1,42 +1,78 @@
-html { font: normal normal 62.5%/2em Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif; }
+html { font: normal normal 62.5%/1.5 Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif; }
 body {
 	font-size: 1.2em;
 	color: #666666;
 }
 
 a {
-	color: #666666;
+	color: #ff7700;
 	text-decoration: none;
 }
 
-.l-sidebar .title,
-h1,
-h2,
-h3,
-h1 a,
-h2 a,
-h3 a {
-	color: #ff9900;
+a:hover {
+	color: #666666;
+	border-bottom: 1px dotted;
 }
 
-.l-content h1,
+/* Заголовки
+******************************************************************************/
+
+/*
+**	Заголовки для контента	*/
+
+/*
+**	Заголовки для построения иерархии	*/
+
+/*	Заголовки постов и блоков в сайдбаре */
+
 .l-content h2,
-.l-content h3,
-.l-sidebar .title {
-	margin: 0 0 15px -15px;
+.l-content .b-comments h3,
+.l-sidebar h3 {
+	margin: 0 0 7px -15px;
 	padding: 5px 15px;
-	font-size: 1.2em;
-	border-bottom: 1px solid #e5e5e5;
+	border-bottom: 2px solid #e5e5e5;
+
+	font: normal 1.2em/1.5 Arial;
 }
 
-.l-sidebar .title a {
-	display: inline-block;
-	line-height: 1em;
+.l-header h1,
+.l-content h2,
+.l-content .b-comments h3,
+.l-sidebar h3,
+.l-header h1 a,
+.l-content h2 a,
+.l-content .b-comments h3 a,
+.l-sidebar h3 a {
+	color: #ff9900;
+	font-weight: normal;
 }
 
-.l-sidebar .title a img {
-	vertical-align: bottom;
+.l-header h1 {
+	border-bottom: none;
 }
+
+.b-post .b-meta {
+	margin-bottom: 15px;
+}
+
+
+/* Линки rss и Blogroll */
+	.l-sidebar h3 a {
+		line-height: 1;
+	}
+
+		.l-sidebar h3 a img {
+		}
+
+/* Иерархические заголовки для футера и сайдбара */
+.l-header h2,
+.l-sidebar h2,
+.l-footer h2 {
+	display: none;
+}
+
+/*
+******************************************************************************/
 
 .bookmarks a {
 	display: inline-block;
@@ -45,4 +81,93 @@ h3 a {
 
 .bookmarks a img {
 	vertical-align: middle;
+}
+
+/*
+******************************************************************************/
+
+strong {
+	font-weight: bold;
+}
+
+em {
+	font-style: oblique;
+}
+
+blockquote, p, code {
+	margin-bottom: 1em;
+}
+
+code {
+	display: block;
+	color: #333333;
+	padding: 4px;
+	line-height: 1;
+	font-family: 'Courier new', monospace;
+	white-space: pre;
+	border-top: 2px solid #999999;
+	background-color: #eeeeee;
+}
+
+	code:before {
+		display: block;
+		background: #cccccc;
+		color: #333333;
+		font-weight: bold;
+		margin: -4px;
+		padding: 0 4px;
+		line-height: 2;
+		content: 'Code: ';
+	}
+
+blockquote {
+	color: #333333;
+	padding: .5em 1em .5em 2em;
+	border-left: 2px solid #999999;
+	background: #eeeeee;
+}
+
+	blockquote:before,
+	blockquote:after {
+		font: bold 2em/.5 Georgia;
+		vertical-align: top;
+		text-align: center;
+		width: 1em;
+		display: inline-block;
+	}
+
+	blockquote:before {
+		content: '«';
+		margin-left: -1em;
+	}
+
+	blockquote:after {
+		display: inline;
+		content: '\00a0»';
+	}
+
+
+
+q {
+	color: #333333;
+	background: #eeeeee;
+}
+
+	q:before,
+	q:after {
+		width: 1em;
+	}
+
+	q:before	{ content: '«'; }
+	q:after	{ content: '»'; }
+
+
+:-moz-selection {
+	color: #000000;
+	background: #cc9966;
+}
+
+:selection {
+	color: #000000;
+	background: #cc9966;
 }

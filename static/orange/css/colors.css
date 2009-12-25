@@ -1,0 +1,24 @@
+.l-header {
+	border-bottom-color: #ff9900;
+}
+
+.l-footer {
+	border-top-color: #ff9900;
+}
+
+.l-header h1 {
+	color: #ff9900;
+}
+
+	.l-header h1 span {
+		color: #ff9900;
+	}
+
+
+.b-static-links li a.active {
+	color: #ff9900;
+}
+
+.l-footer a:hover {
+	color: #ff9900;
+}

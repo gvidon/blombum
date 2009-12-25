@@ -9,30 +9,34 @@
 {% endspaceless %}
 
 <div class="b-post" id="post-{{ object.id }}">
-    <h2><a href="{{ object.get_absolute_url }}">{{ object.name|typogrify }}</a></h2>
+	<h2><a href="{{ object.get_absolute_url }}">{{ object.name|typogrify }}</a></h2>
 
 	{% spaceless %}
 	{# Нефиг тут спейсы развешивать! #}
-    <ul class="b-meta">
+	<ul class="b-meta">
 		{# <li class="b-author"><!-- Uncomment in case of multiauthor blog --> {{ object.author|authorlink }} </li> #}
-        <li class="b-date first">{{ object.date|datelinks }} {{ object.date|time }}</li>
+		<li class="b-date first">{{ object.date|datelinks }} {{ object.date|time }}</li>
 		<li class="b-comm-count">
 			<a href="{{ object.get_absolute_url }}#comments">{{ object.approved_comments_count }} {{ object.approved_comments_count|choose_plural:_("comment, comments, comments") }}</a>
 		</li>
+		{% ifapp pingback %}
 		<li class="b-ping-count">
-			<a href="{{ object.get_absolute_url }}#pingbacks">{{ object.pingback_count }} {{ object.pingback_count|choose_plural:_("pingback, pingbacks, pingbacks") }}</a>
+			<a href="{{ object.get_absolute_url }}#pingbacks">
+			{{ object.pingback_count }}
+			{{ object.pingback_count|choose_plural:_("pingback, pingbacks, pingbacks") }}</a>
 		</li>
-		<li class="b-tags">{% render_tag_string object.get_tags %}</li>
-    </ul>
+		{% endifapp %}
+		{% if object.tags %}<li class="b-tags">{% render_tag_string object.get_tags %}</li>{% endif %}
+	</ul>
 	{% endspaceless %}
-	
-    <div class="content">
+
+	<div class="content">
 		{% if not post_detail and object.shortable %}
 			{{ object.html_short|safe }}&nbsp;<span class="read-more"><a href="{{ object.get_absolute_url }}">{% trans "continue&nbsp;reading" %}</a></span>
 		{% else %}
 			{{ object.html|safe }}
 		{% endif %}
-    </div>
-	
-    {% if post_detail %} {% bookmarks object %} {% endif %}
+	</div>
+
+	{% if post_detail %} {% bookmarks object %} {% endif %}
 </div>

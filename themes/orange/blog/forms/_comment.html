@@ -1,0 +1,9 @@
+{% load i18n %}
+
+<li class="form-comment-body{% if form.errors.body %} erroneus{% endif %}">
+	<label for="id_body">{{ form.body.label }}</label>
+	{{ form.body }}
+	{{ form.body.help_text }}
+</li>
+
+<input type="hidden" name="reply_to" id="id_reply_to" />

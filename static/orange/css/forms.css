@@ -1,3 +1,39 @@
+/* Общие стили
+******************************************************************************/
+
+input,
+textarea,
+select {
+	font: normal normal 1em/1 Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif;
+	color: #333333;
+	background-color: #eeeeee;
+	border: 1px inset;
+}
+
+
+input[type='button'],
+input[type='submit'] {
+	line-height: 1;
+	padding: 4px;
+	border: 1px outset #666666;
+	background-color: #ffffff;
+	margin-right: 5px;
+}
+
+input[type='button']:focus,
+input[type='submit']:focus {
+	background-color: #f8f8f8;
+}
+
+input[type='checkbox'] {
+	vertical-align: middle;
+	padding: 1px;
+}
+
+
+/* Частные стили
+******************************************************************************/
+
 #comment-form-itself {
 }
 
@@ -24,15 +60,4 @@
 
 #comment-form .form-comment-body  label {
 	display: block;
-}
-
-input[type='button'],
-input[type='submit'] {
-	padding: 2px;
-	border: 1px solid #666666;
-	background-color: white;
-}
-
-input[type='checkbox'] {
-	vertical-align: middle;
 }
