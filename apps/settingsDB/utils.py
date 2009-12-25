@@ -14,7 +14,7 @@ class SettingsCached(object):
 		def clear(self, **kwargs):
 			# http://www.djangosnippets.org/snippets/1080/
 			try:
-				prit 3
+				print '123123'
 				cache.flush_all()
 				
 			except AttributeError:
