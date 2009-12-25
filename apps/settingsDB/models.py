@@ -70,8 +70,8 @@ class Settings(models.Model):
 	#META
 	class Meta:
 		db_table            = 'settings'
-		verbose_name        = u'Settings'
-		verbose_name_plural = u'Settings'
+		verbose_name        = _(u'Settings')
+		verbose_name_plural = _(u'Settings')
 
 models.signals.post_save.connect(SettingsCached.manage.clear, sender=Settings)
 models.signals.post_delete.connect(SettingsCached.manage.clear, sender=Settings)
