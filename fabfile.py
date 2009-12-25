@@ -29,7 +29,7 @@ def commit():
 @restart_apache
 @hosts('174.143.147.61')
 def deploy_dev():
-	run('cd '+REMOTE_PROJECT_ROOT+'; git pull origin master')
+	sudo('cd '+REMOTE_PROJECT_ROOT+'; git pull origin master')
 
 #RESTART APACHE ON REMOTE HOST
 @restart_apache
