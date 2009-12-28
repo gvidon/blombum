@@ -17,6 +17,7 @@ from django.core.urlresolvers import reverse
 from django.core.exceptions import ImproperlyConfigured
 from django.dispatch import Signal
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
+from django.core.servers.basehttp import FileWrapper
 try:
     # django SVN
     from django.views.decorators.csrf import csrf_exempt
@@ -473,4 +474,10 @@ def versions(request):
     }, context_instance=Context(request))
 versions = staff_member_required(never_cache(versions))
 
-
+#RETURN FLASH UPLOADER FROM THE SAME DOMAIN
+def uploader_swf(request, filename):
+    response = HttpResponse(FileWrapper(file(filename)), content_type='application/x-shockwave-flash')
+    response['Content-Length'] = os.path.getsize(filename)
+    
+    return response
+    
