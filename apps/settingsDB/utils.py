@@ -37,7 +37,7 @@ class SettingsCached(object):
 			# и через lambda-функцию, что позволяет получать актульные данные из конфига
 			
 			try:
-				if not cache.get('%s:%s'%(os.getppid(), name)):
+				if not cache.get('%s:%s'%(os.getpid(), name)):
 					cursor    = MySQLdb.connect(
 						user    = settings.DATABASE_USER,
 						passwd  = settings.DATABASE_PASSWORD,
@@ -47,18 +47,18 @@ class SettingsCached(object):
 					
 					cursor.execute('SELECT * FROM settings WHERE is_enabled=1 LIMIT 1')
 					
-					cache.set('%s:%s'%(os.getppid(), name), cursor.fetchall()[0][name])
+					cache.set('%s:%s'%(os.getpid(), name), cursor.fetchall()[0][name])
 					
-					print '%s:%s'%(os.getppid(), name)
-					print cache.get('%s:%s'%(os.getppid(), name))
+					print '%s:%s'%(os.getpid(), name)
+					print cache.get('%s:%s'%(os.getpid(), name))
 					
 			except (IndexError, KeyError):
 				try:
-					cache.set('%s:%s'%(os.getppid(), name), getattr(settings, name))
+					cache.set('%s:%s'%(os.getpid(), name), getattr(settings, name))
 				except TypeError:
-					cache.set('%s:%s'%(os.getppid(), name), getattr(settings, name)())
+					cache.set('%s:%s'%(os.getpid(), name), getattr(settings, name)())
 			
-			return cache.get('%s:%s'%(os.getppid(), name))
+			return cache.get('%s:%s'%(os.getpid(), name))
 	
 	manage = Manage()
 	param  = Param()
