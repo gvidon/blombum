@@ -1,6 +1,6 @@
 html { font: normal normal 62.5%/1.5 Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif; }
 body {
-	font-size: 1.2em;
+	font-size: 1.3em;
 	color: #666666;
 }
 
@@ -17,13 +17,11 @@ a:hover {
 /* Заголовки
 ******************************************************************************/
 
-/*
-**	Заголовки для контента	*/
-
-/*
-**	Заголовки для построения иерархии	*/
-
-/*	Заголовки постов и блоков в сайдбаре */
+.l-header h1 {
+	font-size: 2.5em;
+	font-weight: normal;
+	letter-spacing: -.05em;
+}
 
 .l-content h2,
 .l-content .b-comments h3,
@@ -32,7 +30,8 @@ a:hover {
 	padding: 5px 15px;
 	border-bottom: 2px solid #e5e5e5;
 
-	font: normal 1.2em/1.5 Arial;
+	font-size: 1.4em;
+	font-weight: normal;
 }
 
 .l-header h1,
@@ -95,29 +94,32 @@ em {
 }
 
 blockquote, p, code {
-	margin-bottom: 1em;
+	margin-bottom: 1.4em;
 }
 
-code {
+blockcode {
 	display: block;
-	color: #333333;
-	padding: 4px;
+	white-space: pre;
 	line-height: 1;
 	font-family: 'Courier new', monospace;
-	white-space: pre;
+
+	padding: 4px;				
 	border-top: 2px solid #999999;
+	color: #333333;
 	background-color: #eeeeee;
 }
 
-	code:before {
+	blockcode:before {
+		content: 'Code: ';
 		display: block;
-		background: #cccccc;
-		color: #333333;
-		font-weight: bold;
-		margin: -4px;
+
+		margin: -4px -4px 0 -4px;
 		padding: 0 4px;
 		line-height: 2;
-		content: 'Code: ';
+
+		font-weight: bold;
+		color: #333333;
+		background: #cccccc;
 	}
 
 blockquote {
@@ -146,8 +148,6 @@ blockquote {
 		content: '\00a0»';
 	}
 
-
-
 q {
 	color: #333333;
 	background: #eeeeee;
@@ -159,7 +159,7 @@ q {
 	}
 
 	q:before	{ content: '«'; }
-	q:after	{ content: '»'; }
+	q:after		{ content: '»'; }
 
 
 :-moz-selection {

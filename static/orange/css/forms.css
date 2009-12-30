@@ -14,10 +14,11 @@ select {
 input[type='button'],
 input[type='submit'] {
 	line-height: 1;
-	padding: 4px;
+	padding: 1px;
 	border: 1px outset #666666;
 	background-color: #ffffff;
 	margin-right: 5px;
+	vertical-align: bottom;
 }
 
 input[type='button']:focus,
@@ -60,4 +61,36 @@ input[type='checkbox'] {
 
 #comment-form .form-comment-body  label {
 	display: block;
+}
+
+
+#openid-form,
+#login-form {
+	white-space: nowrap;
+}
+
+#openid-form label,
+#login-form label,
+#openid-form input,
+#login-form input {
+	display: inline;
+}
+
+#openid-form label,
+#login-form label {
+	margin: 0 5px 5px 0;
+}
+
+	#openid-form #openid_url {
+		width: 10em;
+	}
+
+	#login-form #email,
+	#login-form #password {
+		width: 5em;
+	}
+
+#login-close {
+	font-size: 1.1em;
+	line-height: 1em;
 }

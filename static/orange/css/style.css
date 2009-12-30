@@ -69,17 +69,9 @@ html {
 .l-header h1 {
 	float: left;
 	vertical-align: bottom;
-	font-size: 2.2em;
-	font-weight: normal;
-	letter-spacing: -1px;
 
 	color: #ff9900;
 }
-
-	.l-header h1 span {
-		color: #ffc875;
-		line-height: 1;
-	}
 
 .l-header em {
 	clear: left;
@@ -101,6 +93,19 @@ html {
 		line-height: 1;
 		font-weight: normal;
 	}
+
+.l-header .b-login-bar {
+	position: absolute;
+	top: 0;
+}
+
+	.l-header .b-login-bar li {
+		display: inline-block;
+	}
+
+		.l-header .b-login-bar li form {
+			position: absolute;
+		}
 
 /*
 ******************************************************************************/
@@ -171,6 +176,3 @@ html {
 
 .b-meta li:before {content: ' | '}
 .b-meta li:first-child:before {content: ''}
-
-.comment-form {
-}
