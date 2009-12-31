@@ -49,11 +49,9 @@ class SettingsCached(object):
 					
 					cache.set('%s:%s'%(os.getpid(), name), cursor.fetchall()[0][name])
 					
-					sys.stdout.write(settings.DATABASE_NAME+'\n')
-					sys.stdout.write('%s:%s\n'%(os.getpid(), name))
-					
 					sys.stderr.write(settings.DATABASE_NAME+'\n')
 					sys.stderr.write('%s:%s\n'%(os.getpid(), name))
+					sys.stderr.write(cache.get('%s:%s'%(os.getpid(), name))+'\n\n\n\n')
 					
 			except (IndexError, KeyError):
 				try:
