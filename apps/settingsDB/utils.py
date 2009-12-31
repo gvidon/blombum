@@ -30,6 +30,8 @@ class SettingsCached(object):
 		def __getattribute__(self, name):
 			import settings
 			
+			namespace = '%s-%s'%(settings.DATABASE_NAME, settings.SITE_ID)
+			
 			# в конфиге есть параметры, сформированные на основе параметров из того же конфига
 			# например settings_default.THEME упоминается в settings.THEME_STATIC_URL
 			# при обновлении составных частей сложных параметров их тоже надо обновлять
@@ -37,7 +39,7 @@ class SettingsCached(object):
 			# и через lambda-функцию, что позволяет получать актульные данные из конфига
 			
 			try:
-				if not cache.get('%s:%s'%(os.getpid(), name)):
+				if not cache.get('%s:%s'%(namespace, name)):
 					cursor    = MySQLdb.connect(
 						user    = settings.DATABASE_USER,
 						passwd  = settings.DATABASE_PASSWORD,
@@ -47,19 +49,15 @@ class SettingsCached(object):
 					
 					cursor.execute('SELECT * FROM settings WHERE is_enabled=1 LIMIT 1')
 					
-					cache.set('%s:%s'%(os.getpid(), name), cursor.fetchall()[0][name])
-					
-					sys.stderr.write(settings.DATABASE_NAME+'\n')
-					sys.stderr.write('%s:%s\n'%(os.getpid(), name))
-					sys.stderr.write(str(cache.get('%s:%s'%(os.getpid(), name)))+'\n\n\n\n')
+					cache.set('%s:%s'%(namespace, name), cursor.fetchall()[0][name])
 					
 			except (IndexError, KeyError):
 				try:
-					cache.set('%s:%s'%(os.getpid(), name), getattr(settings, name))
+					cache.set('%s:%s'%(namespace, name), getattr(settings, name))
 				except TypeError:
-					cache.set('%s:%s'%(os.getpid(), name), getattr(settings, name)())
+					cache.set('%s:%s'%(namespace, name), getattr(settings, name)())
 			
-			return cache.get('%s:%s'%(os.getpid(), name))
+			return cache.get('%s:%s'%(namespace, name))
 	
 	manage = Manage()
 	param  = Param()
