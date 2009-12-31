@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-import os, memcache, MySQLdb
+import os, memcache, MySQLdb, sys
 
 cache = memcache.Client(['127.0.0.1:11211'], debug=0)
 
@@ -49,8 +49,11 @@ class SettingsCached(object):
 					
 					cache.set('%s:%s'%(os.getpid(), name), cursor.fetchall()[0][name])
 					
-					print '%s:%s'%(os.getpid(), name)
-					print cache.get('%s:%s'%(os.getpid(), name))
+					sys.stdout.write(settings.DATABASE_NAME+'\n')
+					sys.stdout.write('%s:%s\n'%(os.getpid(), name))
+					
+					sys.stderr.write(settings.DATABASE_NAME+'\n')
+					sys.stderr.write('%s:%s\n'%(os.getpid(), name))
 					
 			except (IndexError, KeyError):
 				try:
