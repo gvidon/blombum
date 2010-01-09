@@ -48,10 +48,12 @@ class Post(models.Model):
     plain_manager = models.Manager()
 
     class Meta:
-        db_table = 'blog_post'
-        ordering = ['-date']
-        get_latest_by = 'date'
-        unique_together = ('site', 'slug', 'date')
+        db_table            = 'blog_post'
+        ordering            = ['-date']
+        get_latest_by       = 'date'
+        unique_together     = ('site', 'slug', 'date')
+        verbose_name        = _('Post')
+        verbose_name_plural = _('Posts')
 
     def __unicode__(self):
         return self.name

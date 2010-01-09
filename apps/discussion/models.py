@@ -115,7 +115,9 @@ class CommentNode(models.Model):
     objects = ApprovedCommentNodeManager()
 
     class Meta:
-        db_table = 'comment_nodes'
+        db_table            = 'comment_nodes'
+        verbose_name        = _('Comment')
+        verbose_name_plural = _('Comments')
 
     def __unicode__(self):
         return self.body[:50]

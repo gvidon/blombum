@@ -1,13 +1,13 @@
 """
 Models for generic tagging.
 """
-from django.db import models
-from django.contrib.contenttypes import generic
+from django.db                          import models
+from django.contrib.contenttypes        import generic
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation           import ugettext_lazy as _
 
-from tagging.managers import TagManager, TaggedItemManager
-from lib.helpers import reverse
+from tagging.managers                   import TagManager, TaggedItemManager
+from lib.helpers                        import reverse
 
 
 class Tag(models.Model):

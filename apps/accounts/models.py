@@ -2,9 +2,10 @@
 
 from datetime import datetime, timedelta
 
-from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
+from django.utils.translation   import ugettext_lazy as _
+from django.conf                import settings
+from django.db                  import models
 
 from accounts.managers import RegistrationManager, ResetManager, EmailManager, ApprovalManager
 
@@ -39,7 +40,9 @@ class ActionRecord(models.Model):
     approvals = ApprovalManager()
 
     class Meta:
-        db_table = 'actionrecord'
+        db_table            = 'actionrecord'
+        verbose_name        = _('Action Record')
+        verbose_name_plural = _('Action Records')
 
     def __unicode__(self):
         return u"%s record for %s" % (self.get_type_display(), self.user.email)

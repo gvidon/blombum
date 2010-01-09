@@ -205,6 +205,9 @@ msgstr "Личные отношения"
 msgid "Link"
 msgstr "Ссылка"
 
+msgid "link"
+msgstr "Ссылка"
+
 #: apps/blogroll/models.py:32 themes/buriy/blog/sidebar.html:65
 msgid "Links"
 msgstr "Ссылки"
@@ -1398,3 +1401,34 @@ msgstr "Неверный пароль"
 
 msgid "Settings"
 msgstr "Настройки"
+
+msgid "static page"
+msgstr "Простая страница"
+
+msgid "static pages"
+msgstr "Простые страницы"
+
+msgid "Action Record"
+msgstr "Ключ активации"
+
+msgid "Action Records"
+msgstr "Ключи активации"
+
+msgid "Friend blog"
+msgstr "Френд-блог"
+
+msgid "Friend blogs"
+msgstr "Друзья"
+
+msgid "Trusted root"
+msgstr "Доверенный провайдер"
+
+msgid "Trusted roots"
+msgstr "Доверенные провайдеры"
+
+msgid "User openid association"
+msgstr "Провайдер пользователя"
+
+msgid "User openid associations"
+msgstr "Провайдеры пользователя"
+

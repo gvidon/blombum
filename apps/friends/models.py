@@ -46,6 +46,10 @@ class FriendBlog(AggregatedBlog):
         """
         return {'friend': self}
 
+    class Meta:
+        verbose_name        = _('Friend blog')
+        verbose_name_plural = _('Friend blogs')
+
 class FriendPost(AggregatedPost):
     friend = models.ForeignKey(FriendBlog)
     spoiler = models.TextField()

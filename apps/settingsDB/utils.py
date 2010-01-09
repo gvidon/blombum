@@ -28,7 +28,7 @@ class SettingsCached(object):
 			return self
 			
 		def __getattribute__(self, name):
-			import settings
+			import settings, _mysql_exceptions
 			
 			namespace = '%s-%s'%(settings.DATABASE_NAME, settings.SITE_ID)
 			
@@ -51,7 +51,7 @@ class SettingsCached(object):
 					
 					cache.set('%s:%s'%(namespace, name), cursor.fetchall()[0][name])
 					
-			except (IndexError, KeyError):
+			except (IndexError, KeyError, _mysql_exceptions.ProgrammingError):
 				try:
 					cache.set('%s:%s'%(namespace, name), getattr(settings, name))
 				except TypeError:

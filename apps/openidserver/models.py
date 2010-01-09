@@ -3,10 +3,11 @@
 
 import datetime
 
-from django.db import models
 from django.contrib.auth.models import User
-from django.conf import settings
-from django.core.urlresolvers import reverse as urlreverse
+from django.utils.translation   import ugettext_lazy as _
+from django.core.urlresolvers   import reverse as urlreverse
+from django.conf                import settings
+from django.db                  import models
 
 
 # These are some dumb mappings of the original OpenID store tables as used
@@ -40,6 +41,10 @@ class TrustedRoot(models.Model):
 
     def __str__(self):
         return self.root
+    
+    class Meta:
+        verbose_name        = _('Trusted root')
+        verbose_name_plural = _('Trusted roots')
 
 
 class DjangoidUser(models.Model):
