@@ -32,7 +32,7 @@ class RecaptchaWidget(forms.Widget):
 
     def render(self, name, value, attrs=None):
         try:
-            pubkey = SettingsCached.param.RECAPTCHA[Site.objects.get_current().domain]['public']
+            pubkey = SettingsCached.param.RECAPTCHA_PUBLIC_KEY
         #FIXED 23.13.2009
         #except IndexError:
         except (IndexError, KeyError):
@@ -70,7 +70,7 @@ class RecaptchaField(forms.Field):
             raise forms.ValidationError(_('Please enter the CAPTCHA solution.'))
 
         try:
-            privkey = SettingsCached.param.RECAPTCHA[Site.objects.get_current().domain]['private']
+            privkey = SettingsCached.param.RECAPTCHA_PRIVATE_KEY
         except IndexError:
             # In case of reCaptcha misconfiguration we think that comment is good
             return True
@@ -81,7 +81,4 @@ class RecaptchaField(forms.Field):
 
         # reCAPTCHA validates!
         return True
-
-
-
 
