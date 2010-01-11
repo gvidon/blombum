@@ -1,21 +1,17 @@
 # This code is public domain.
 # Thanks to SmileyChris for the original implementation
 
-from django import forms
-from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
-from django.utils.safestring import mark_safe
-from django.contrib.sites.models import Site
-
 import librecaptcha
 
+from django.contrib.sites.models import Site
+from django.utils.translation    import ugettext_lazy as _
+from django.utils.safestring     import mark_safe
+from django                      import forms
+
+from settingsDB.utils            import SettingsCached
 
 # Do you want to bypass reCAPTCHA validation while in DEBUG mode?
 SKIP_IF_IN_DEBUG_MODE = False
-
-RECAPTCHA_LANG = settings.LANGUAGE_CODE[:2]
-RECAPTCHA_THEME = getattr(settings, 'RECAPTCHA_THEME', 'red')
-
 
 ### ERROR_CODES
 ERROR_CODES = {
@@ -36,14 +32,14 @@ class RecaptchaWidget(forms.Widget):
 
     def render(self, name, value, attrs=None):
         try:
-            pubkey = settings.RECAPTCHA[Site.objects.get_current().domain]['public']
+            pubkey = SettingsCached.param.RECAPTCHA[Site.objects.get_current().domain]['public']
         #FIXED 23.13.2009
         #except IndexError:
         except (IndexError, KeyError):
             return mark_safe(u'<p>Recaptcha is not configured properly.</p>')
         html = librecaptcha.displayhtml(pubkey,
-                                        theme=RECAPTCHA_THEME,
-                                        lang=RECAPTCHA_LANG)
+                                        theme=SettingsCached.param.RECAPTCHA_THEME,
+                                        lang=SettingsCached.param.LANGUAGE_CODE[:2])
         return mark_safe(html)
 
     def value_from_datadict(self, data, files, name):
@@ -63,7 +59,7 @@ class RecaptchaField(forms.Field):
         super(RecaptchaField, self).__init__(*args, **kwargs)
 
     def clean(self, value):
-        if SKIP_IF_IN_DEBUG_MODE and settings.DEBUG:
+        if SKIP_IF_IN_DEBUG_MODE and SettingsCached.param.DEBUG:
             return True
         value = super(RecaptchaField, self).clean(value)
         challenge, response = value
@@ -74,7 +70,7 @@ class RecaptchaField(forms.Field):
             raise forms.ValidationError(_('Please enter the CAPTCHA solution.'))
 
         try:
-            privkey = settings.RECAPTCHA[Site.objects.get_current().domain]['private']
+            privkey = SettingsCached.param.RECAPTCHA[Site.objects.get_current().domain]['private']
         except IndexError:
             # In case of reCaptcha misconfiguration we think that comment is good
             return True

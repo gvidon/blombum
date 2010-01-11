@@ -2,17 +2,16 @@
 
 import uuid
 
-from django import forms
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models         import User
+from django.utils.translation           import ugettext_lazy as _
+from django                             import forms
 
-from accounts.models import ActionRecord
-from discussion.models import CommentNode
-from recaptcha.recaptcha_newforms import RecaptchaField
-from lib import appcheck
-
+from recaptcha.recaptcha_newforms       import RecaptchaField
+from discussion.models                  import CommentNode
+from accounts.models                    import ActionRecord
+from lib                                import appcheck
+from settingsDB.utils                   import SettingsCached
 
 class CommentForm(forms.Form):
     body = CommentNode._meta.get_field('body').formfield()
@@ -62,10 +61,10 @@ class AnonymousCommentForm(CommentForm):
     site = User._meta.get_field('site').formfield()
 
     def __init__(self, *args, **kwargs):
-        if settings.CAPTCHA == 'simple':
+        if SettingsCached.param.CAPTCHA == 'simple':
             from captcha.fields import CaptchaField
             self.base_fields['captcha'] = CaptchaField()
-        elif settings.CAPTCHA == 'recaptcha':
+        elif SettingsCached.param.CAPTCHA == 'recaptcha':
             self.base_fields['captcha'] = RecaptchaField(kwargs['remote_ip'], label=_('Are you human?'))
 
         super(AnonymousCommentForm, self).__init__(*args, **kwargs)
@@ -84,7 +83,7 @@ class AnonymousCommentForm(CommentForm):
             self.user = User.objects.get(email=self.cleaned_data['email'])
             user_is_new = False
         except User.DoesNotExist:
-            func = (settings.ANONYMOUS_COMMENTS_APPROVED
+            func = (SettingsCached.param.ANONYMOUS_COMMENTS_APPROVED
                     and ActionRecord.registrations.create_user
                     or ActionRecord.registrations.create_inactive_user)
             password = uuid.uuid4().hex[:10]
@@ -94,7 +93,7 @@ class AnonymousCommentForm(CommentForm):
                              site=self.cleaned_data['site'] or '')
             user_is_new = True
 
-        return super(AnonymousCommentForm, self).save(approved=settings.ANONYMOUS_COMMENTS_APPROVED and user_is_new,
+        return super(AnonymousCommentForm, self).save(approved=SettingsCached.param.ANONYMOUS_COMMENTS_APPROVED and user_is_new,
                                                       user_is_new=user_is_new)
 
 

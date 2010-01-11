@@ -55,6 +55,13 @@ class Settings(models.Model):
 		('recaptcha', 'Recaptcha'),
 	), max_length='9', blank=True, default='')
 	
+	RECAPTCHA_THEME = models.CharField(verbose_name='Captcha theme', choices=(
+		('red'       , 'Red'),
+		('white'     , 'White'),
+		('blackglass', 'Blackglass'),
+		('clean'     , 'Clean'),
+	), max_length='10', blank=True, default='red')
+	
 	#СДЕЛАТЬ IS_ENABLED ТОЛЬКО ОДНУ ЗАПИСЬ
 	def save(self):
 		super(Settings, self).save()
