@@ -1,10 +1,11 @@
 # -*- mode: python; coding: utf-8; -*-
+from django.contrib.sites.models import Site
+from django.contrib.sites.admin  import SiteAdmin
+from django.contrib.auth.admin   import UserAdmin
+from django.contrib              import admin
 
-from django.contrib.auth.admin import UserAdmin
-from django.contrib import admin
-
-from accounts.models import ActionRecord
-from accounts.forms import BfUserChangeForm
+from accounts.models             import ActionRecord
+from accounts.forms              import BfUserChangeForm
 
 UserAdmin.form = BfUserChangeForm
 
@@ -20,4 +21,5 @@ class ActionRecordAdmin(admin.ModelAdmin):
     search_fields = ['user']
     list_filter = ('user', 'date')
 
-admin.site.register(ActionRecord, ActionRecordAdmin)
+#admin.site.register(ActionRecord, ActionRecordAdmin)
+admin.site.unregister(Site)

@@ -51,7 +51,6 @@ class Settings(models.Model):
 	)
 	
 	CAPTCHA = models.CharField(verbose_name='Captcha type', choices=(
-		(''         , 'None'),
 		('simple'   , 'Simple'),
 		('recaptcha', 'Recaptcha'),
 	), max_length='9', blank=True, default='')
