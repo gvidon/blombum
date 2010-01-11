@@ -6,42 +6,34 @@
 		<a class="b-skip" href="#content">{% trans "Skip to main content" %}</a>
 
 		{% if not user.is_authenticated %}
-		<ul class="b-login-bar">
-			<li>
-				<a href="javascript://" id="login-email">Login</a>
+		<div class="b-login-bar">
+			<form id="login-form" action="{% url login %}" method="post">
+				<ul>
+					<li><label>{% trans "E-Mail" %}: <input type="text" id="email" name="email" /></label>
+						<span><a href="#login-form" id="login-openid">{% trans "OpenID" %}</a></span>
+					</li>
 
-				<form id="login-form" action="{% url login %}" method="post">
-					<label>E-Mail:
-					<input type="text" id="email" name="email" /></label>
-
-					<label>{% trans "Password" %}:
-					<input type="password" id="password" name="password" /></label>
-
-					<a href="{% url password_reset %}">{% trans "forgot it?" %}</a>
-
-					<input type="submit" value="{% trans "Login" %}" />
-				</form>
-			</li>
-			<li>
-				<a href="" id="login-openid">OpenID</a>
-
-				<form id="openid-form" action="{% url openid_signin %}" method="post">
-					<label>OpenID:
-					<input type="text" id="openid_url" name="openid_url" /></label>
-					<input type="submit" value="{% trans "Login" %}" />
-				</form>
-			</li>
-			<li>
-				<a href="" id="login-close">&times;</a>
-			</li>
-		</ul>
+					<li><label>{% trans "Password" %}: <input type="password" id="password" name="password" /></label>
+						<span><a href="{% url password_reset %}">{% trans "forgot it?" %}</a></span>
+					</li>
+				</ul>
+				<input type="submit" value="{% trans "Login" %}" />
+			</form>
+			<form id="openid-form" action="{% url openid_signin %}" method="post" style="display: none;">
+				<ul>
+					<li><label>{% trans "OpenID" %}: <input type="text" id="openid_url" name="openid_url" /></label>
+						<span><a href="#login-form" id="login-email">{% trans "E-Mail" %}</a></span>
+					</li>
+				</ul>
+				<input type="submit" value="{% trans "Login" %}" />
+			</form>
+		</div>
 
 		<script type="text/javascript">
-			form_close();
+			$("#login-form").show();
 
 			$("#login-email").attr("href", "javascript://");
 			$("#login-openid").attr("href", "javascript://");
-			$("#login-close").attr("href", "javascript://");
 
 			$("#login-email").bind("click", function () {
 				show_login();
@@ -49,10 +41,6 @@
 			
 			$("#login-openid").bind("click", function () {
 				show_openid();
-			});
-
-			$("#login-close").bind("click", function () {
-				form_close()
 			});
 		</script>
 		{% endif %}
