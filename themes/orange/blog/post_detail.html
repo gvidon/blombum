@@ -12,6 +12,7 @@
 	{% theme_css "highlight" %}
 	{% theme_js "highlight.pack" %}
 	<script type="text/javascript">initHighlightingOnLoad();</script>
+	{% ifequal settings.CAPTCHA "recaptcha" %}<script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>{% endifequal %}
 	{% theme_js "comments" %}
 	{% theme_js "jquery.form" %}
 	{% theme_js "ajaxforms" %}
