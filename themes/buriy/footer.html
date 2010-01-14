@@ -1,13 +1,4 @@
-{% if settings.GA_ACC and not user.is_staff %}
-<!-- Google analitics counter -->
-<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-<script type="text/javascript">try {
-var pageTracker = _gat._getTracker("{{ settings.GA_ACC }}");
-pageTracker._trackPageview();
-} catch(err) {}</script>
-{% endif %}
-
 {% ifapp debug %}
-{% load orm_debug %}
-{% orm_debug %}
+	{% load orm_debug %}
+	{% orm_debug %}
 {% endifapp %}

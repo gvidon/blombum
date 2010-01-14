@@ -31,7 +31,12 @@
     <link rel="icon" href="{{ THEME_STATIC_URL }}blog.gif"/>
     {% block extrahead %}{% endblock %}
 </head>
+
 <body>
+    {% if settings.GA_ACC_CODE and not user.is_staff %}
+			<!-- Google analitics counter -->
+			<script type="text/javascript">{{ settings.GA_ACC_CODE|safe }}</script>
+		{% endif %}
 
 <div id="header"><a name="top"></a>
     <h1><a href="{% url post_list %}" accesskey="1">{{ site.name }}</a></h1>

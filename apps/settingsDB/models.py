@@ -20,7 +20,7 @@ class Settings(models.Model):
 	RECAPTCHA_PRIVATE_KEY       = models.CharField(verbose_name=_('Recaptcha private key'), max_length=128, blank=True, default='')
 	
 	# process it separately in hash (settings_local.py)
-	GA_ACC_CODE                 = models.TextField(verbose_name=_('GoogleAnalytics code'), max_length=255, blank=True, default='')
+	GA_ACC_CODE                 = models.TextField(verbose_name=_('GoogleAnalytics code'), help_text=_('JavaScript code'), blank=True, default='')
 	
 	# process it separately in hash (settings_local.py)
 	FEEDBURNER_NAME             = models.CharField(verbose_name=_('Your feed name in feedburner'), max_length=128, blank=True, default='')

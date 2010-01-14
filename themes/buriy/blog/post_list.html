@@ -6,7 +6,7 @@
 
 {% block extrahead %}
 <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/highlight.css" />
-<script type="text/javascript" src="{{ STATIC_URL }}js/highlight.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}js/highlight.pack.js"></script>
 <script type="text/javascript">initHighlightingOnLoad();</script>
 {% if tag %}
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}: posts with tag '{{ tag }}' feed" href="{% url feed feedurl %}" />
