@@ -1,36 +1,66 @@
 /* Общие стили
 ******************************************************************************/
 
+select,button {
+	margin:0;
+	padding:0;
+}
+
+textarea {
+	resize: vertical;
+}
+
 input,
+button,
 textarea,
 select {
 	font: normal normal 1em/1 Arial, Verdana, Tahoma, 'Trebuchet ms', sans-serif;
 	color: #333333;
 	background-color: #eeeeee;
-	border: 1px inset;
+	vertical-align: top;
 }
 
+input,
+button,
+textarea {
+	border: 1px solid;
+	border-color: #444444 #cccccc #cccccc #444444;
+}
 
+select {
+	border: 1px solid #444444;
+}
+
+button,
 input[type='button'],
+input[type='reset'],
 input[type='submit'] {
-	line-height: 1;
+	line-height: 1.2;
 	padding: 1px;
-	border: 1px outset #666666;
-	background-color: #ffffff;
+	background-color: #eeeeee;
 	margin-right: 5px;
-	vertical-align: bottom;
+
+	border: 1px solid;
+	border-color: #cccccc #444444 #444444 #cccccc;
+	border-radius: 2px;
 }
 
+button:focus,
 input[type='button']:focus,
+input[type='reset']:focus,
 input[type='submit']:focus {
 	background-color: #f8f8f8;
 }
 
+input[type='radio'],
 input[type='checkbox'] {
-	vertical-align: middle;
-	padding: 1px;
+	vertical-align: text-bottom;
+	margin: 0 .5ex;
 }
 
+label {
+	padding-right: 1ex;
+}
 
 /* Частные стили
 ******************************************************************************/
@@ -63,14 +93,21 @@ input[type='checkbox'] {
 	display: block;
 }
 
+#openid-form,
+#login-form {
+	font-size: .8em;
+}
 
 #openid-form,
 #login-form {
 	white-space: nowrap;
 }
 
-#openid-form label,
-#login-form label,
+#openid-form ul,
+#login-form ul {
+	display: inline;
+}
+
 #openid-form input,
 #login-form input {
 	display: inline;
@@ -78,7 +115,9 @@ input[type='checkbox'] {
 
 #openid-form label,
 #login-form label {
-	margin: 0 5px 5px 0;
+	display: block;
+	border-bottom: 1px solid #444444;
+	padding-bottom: 3px;
 }
 
 	#openid-form #openid_url {
@@ -89,8 +128,3 @@ input[type='checkbox'] {
 	#login-form #password {
 		width: 5em;
 	}
-
-#login-close {
-	font-size: 1.1em;
-	line-height: 1em;
-}

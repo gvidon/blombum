@@ -1,7 +1,7 @@
-*.pyc
-/settings_default.py
-/settings_local.py
-/settings.py
-/run
 *~
+*.pyc
+/settings.py
+/settings_default.py
+/settings_account.py
+/settings_local.py
 /byteflow

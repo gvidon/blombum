@@ -29,14 +29,12 @@ html {
 
 .l-content {
 	float: left;
-	/*width: 485px;*/
 	width: 635px;
 	margin: 0 0 0 15px;
 }
 
 .l-sidebar {
 	float: left;
-	/*width: 255px;*/
 	width: 255px;
 	margin-left: 15px;
 
@@ -97,6 +95,8 @@ html {
 .l-header .b-login-bar {
 	position: absolute;
 	top: 0;
+	height: 34px;
+	overflow: hidden;
 }
 
 	.l-header .b-login-bar li {
