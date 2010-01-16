@@ -1,0 +1,9 @@
+#comments p {
+	margin-bottom: 0;
+}
+
+#comments > li {
+	padding-bottom: .5em;
+	margin-bottom: .5em;
+	border-bottom: 1px solid;
+}
