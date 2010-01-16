@@ -52,20 +52,22 @@
 
 	{% comment_tree_for_object object as comments %}
 	{% block comments %}
-		<div id="comments" class="b-comments">
+		<div class="b-comments">
 			<h3>{% trans "Comments" %}</h3>
+			<ul id="comments">
 			{% if not comments %}
-				<div>{% trans "No comments for this post" %}</div>
+				<li>{% trans "No comments for this post" %}</li>
 			{% endif %}
 
 			{% for comment in comments %}
 				{% include "blog/comment.html" %}
 			{% endfor %}
-
-			{% if object.comments_open %}{% if not reply_to %}
-				{% include "blog/comment_form.html" %}
-			{% endif %}{% endif %}
+			</ul>
 		</div>
+
+		{% if object.comments_open %}{% if not reply_to %}
+			{% include "blog/comment_form.html" %}
+		{% endif %}{% endif %}
 
 		{% if comments %} {# display link for commenting at bottom to avoid confusion #}
 		<span>
@@ -81,4 +83,3 @@
 		{% endif %}
 	{% endblock %}
 {% endblock %}
-

@@ -1,8 +1,9 @@
 {% load i18n %}
-<div
+<li
+	class="{% cycle odd,even %}{% ifequal object.author comment.user %} creator{% endifequal %}"
+	id="c{{ comment.id }}"
 	style="margin-left:{% widthratio comment.level 30 100 %}%"
-	class="blogcomment {% cycle odd,even %}{% ifequal object.author comment.user %} creator{% endifequal %}"
-	id="c{{ comment.id }}">
+	>
 
 	<div class="text">
 		{% if settings.GRAVATAR_ENABLE %}<img alt="avatar" src="{{ comment.get_gravatar_url }}" class="avatar" />{% endif %}
@@ -52,4 +53,4 @@
 	{% if object.comments_open %}{% ifequal reply_to comment.id %}
 	{% include "blog/comment_form.html" %}
 	{% endifequal %}{% endif %}
-</div>
+</li>

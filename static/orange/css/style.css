@@ -1,6 +1,7 @@
 @import url(reset.css);
 @import url(typo.css);
 @import url(forms.css);
+@import url(comments.css);
 
 html {
 	background: #ffffff;

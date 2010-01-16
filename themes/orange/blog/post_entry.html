@@ -19,6 +19,7 @@
 		<li class="b-comm-count">
 			<a href="{{ object.get_absolute_url }}#comments">{{ object.approved_comments_count }} {{ object.approved_comments_count|choose_plural:_("comment, comments, comments") }}</a>
 		</li>
+
 		{% ifapp pingback %}
 		<li class="b-ping-count">
 			<a href="{{ object.get_absolute_url }}#pingbacks">
@@ -38,5 +39,5 @@
 		{% endif %}
 	</div>
 
-	{% if post_detail %} {% bookmarks object %} {% endif %}
+	{#% if post_detail %} {% bookmarks object %} {% endif %#}
 </div>
