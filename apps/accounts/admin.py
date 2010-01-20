@@ -11,15 +11,15 @@ UserAdmin.form = BfUserChangeForm
 
 UserAdmin.fieldsets += (
     ('Byteflow Extensions', {'fields': ('site', 'email_new')}),
-)
-
-UserAdmin.list_display  = ('username', 'email', 'first_name', 'is_staff', 'is_active')
+    )
+UserAdmin.list_display = ('username', 'email', 'first_name', 'is_staff', 'is_active')
 UserAdmin.search_fields = ('username', 'first_name', 'email')
 
+
 class ActionRecordAdmin(admin.ModelAdmin):
-    list_display  = ('user', 'date')
+    list_display = ('user', 'date')
     search_fields = ['user']
-    list_filter   = ('user', 'date')
+    list_filter = ('user', 'date')
 
 #admin.site.register(ActionRecord, ActionRecordAdmin)
 admin.site.unregister(Site)

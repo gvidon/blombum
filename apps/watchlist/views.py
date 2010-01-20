@@ -1,10 +1,10 @@
 from django.contrib.contenttypes.models import ContentType
-from django.shortcuts import get_object_or_404
-from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import login_required
+from django.shortcuts                   import get_object_or_404
+from django.http                        import HttpResponseRedirect
+from django.contrib.auth.decorators     import login_required
 
-from lib.decorators import render_to
-from watchlist.models import Subscription
+from lib.decorators                     import render_to
+from watchlist.models                   import Subscription
 
 
 @login_required

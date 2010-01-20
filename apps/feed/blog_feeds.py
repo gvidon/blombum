@@ -1,32 +1,31 @@
 # -*- mode: python; coding: utf-8; -*-
 
-from datetime import datetime as dt
+from datetime                         import datetime as dt
 
 from django.contrib.syndication.feeds import Feed as RssFeed
-from django.contrib.sites.models import Site
-from django.contrib.auth.models import User
-from django.conf import settings
-from django.http import Http404
-from django.http import HttpResponseRedirect
-from django.template.defaultfilters import pluralize
+from django.template.defaultfilters   import pluralize
+from django.contrib.sites.models      import Site
+from django.contrib.auth.models       import User
+from django.http                      import Http404
+from django.http                      import HttpResponseRedirect
 
-from atom import Feed as AtomFeed
+from atom                             import Feed as AtomFeed
 
-from blog.models import Post
-from discussion.models import CommentNode
-from lib.helpers import reverse
-from lib.db import load_content_objects
-from tagging.models import Tag, TaggedItem
-from tagging.utils import get_tag_list
-
+from discussion.models                import CommentNode
+from tagging.models                   import Tag, TaggedItem
+from tagging.utils                    import get_tag_list
+from blog.models                      import Post
+from lib.helpers                      import reverse
+from lib.db                           import load_content_objects
+from settingsDB.utils                 import SettingsCached
 
 def link(location):
-    return '%s://%s%s' % (settings.SITE_PROTOCOL, Site.objects.get_current().domain, location)
+    return '%s://%s%s' % (SettingsCached.param.SITE_PROTOCOL, Site.objects.get_current().domain, location)
 
 
 def get_feed_type(feed_type):
-    if ((settings.USE_ATOM and feed_type == 'atom') or
-        (not settings.USE_ATOM and feed_type == 'rss')):
+    if ((SettingsCached.param.USE_ATOM and feed_type == 'atom') or
+        (not SettingsCached.param.USE_ATOM and feed_type == 'rss')):
         return 'feed'
     return '%s_feed' % feed_type
 
@@ -65,7 +64,7 @@ def _BlogEntries(Feed, type='atom'):
         item_pubdate = item_published
 
         def item_content(self, item):
-            html = settings.SHORT_POSTS_IN_FEED and item.html_short or item.html
+            html = SettingsCached.param.SHORT_POSTS_IN_FEED and item.html_short or item.html
             return {'type': 'html'}, html
 
         def item_categories(self, item):
@@ -125,7 +124,7 @@ def _PostsByAuthor(Feed, type='atom'):
         item_pubdate = item_published
 
         def item_content(self, item):
-            html = settings.SHORT_POSTS_IN_FEED and item.html_short or item.html
+            html = SettingsCached.param.SHORT_POSTS_IN_FEED and item.html_short or item.html
             return {'type': 'html'}, html
 
         def item_links(self, item):
@@ -211,7 +210,7 @@ def _PostsByTag(Feed, type='atom'):
         item_pubdate = item_published
 
         def item_content(self, item):
-            html = settings.SHORT_POSTS_IN_FEED and item.html_short or item.html
+            html = SettingsCached.param.SHORT_POSTS_IN_FEED and item.html_short or item.html
             return {'type': 'html'}, html
 
         def item_links(self, item):

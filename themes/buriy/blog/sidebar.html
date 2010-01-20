@@ -69,3 +69,15 @@
     <dd><a title="comments feed" href="{% url rss_feed "comments" %}">{% trans "Comments feed" %}</a></li>
     </dt>
 </div>
+
+{% if settings.FEEDBURNER_NAME %}
+	<div class="sidebar">
+		<a href="http://feeds.feedburner.com/{{ settings.FEEDBURNER_NAME }}">
+			<img src="http://feeds.feedburner.com/~fc/{{ settings.FEEDBURNER_NAME }}?bg=99CCFF&amp;fg=444444&amp;anim=0"
+				height="26"
+				width="88"
+				style="border:0"
+				alt="" />
+		</a>
+	</div>
+{% endif %}
