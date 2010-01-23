@@ -23,11 +23,11 @@
 
 <div class="sidebar">
 <dl class="sidebardl">
-    <dt>Categories</dt>
-    {% tag_cloud_for_model blog.post as categories %}
+    <dt>{% trans "Last posts" %}</dt>
+    {% tag_cloud_for_model blog.post as categories with steps=3%}
     {% for cat in categories %} 
     <dd>
-        <a href="{{cat.get_absolute_url}}"> {{cat.name}} </a> 
+        <a href="{{cat.get_absolute_url}}" style="font-size: {{ cat.font_size }}em">{{ cat.name }}</a> 
     </dd>
     {% endfor %}
 </dl>
