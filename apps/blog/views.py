@@ -125,8 +125,10 @@ def post_detail(request, year, month, day, slug):
             c, user_is_new = form.save()
             if not request.user.is_authenticated():
                 if user_is_new:
-                    c.user.backend = 'django.contrib.auth.backends.ModelBackend'
-                    _login(request, c.user)
+                    #FIXED 23.01.2010
+                    if SettingsCached.param.ANONYMOUS_COMMENTS_APPROVED:
+                        c.user.backend = 'django.contrib.auth.backends.ModelBackend'
+                        _login(request, c.user)
                     message = _('Please look in your mailbox for info about your account.')
                 else:
                     ActionRecord.approvals.send_approval(c)

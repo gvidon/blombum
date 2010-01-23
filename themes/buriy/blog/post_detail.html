@@ -15,7 +15,6 @@
 {% ifequal settings.CAPTCHA "recaptcha" %}<script type="text/javascript" src="http://api.recaptcha.net/js/recaptcha_ajax.js"></script>{% endifequal %}
 {% theme_js "comments" %}
 {% theme_js "jquery.form" %}
-{% theme_js "ajaxforms" %}
 <link rel="alternate" type="application/rss+xml" title="{{ site.name }}: comments on {{ object.name }} feed" href="{% url feed feedurl %}" />
 {% ifapp pingback %}<link rel="pingback" href="http://{{ site.domain }}{% url xmlrpc %}" />{% endifapp %}
 {% revcanonical object %}
@@ -51,7 +50,8 @@
                                            
         </div>
     {% endblock %}
-    <h2>
-    <a class="comment-link" style="display: none" onclick="return comment();" href="#">{% trans "Add comment" %}</a>
-    </h2>
+    
+    <h2><a class="comment-link" style="display: none" onclick="return comment();" href="#">
+    	{% trans "Add comment" %}
+    </a></h2>
 {% endblock %}

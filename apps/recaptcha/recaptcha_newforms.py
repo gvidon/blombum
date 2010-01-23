@@ -76,6 +76,7 @@ class RecaptchaField(forms.Field):
             return True
         rc = librecaptcha.submit(challenge, response, privkey, self.remote_ip)
         if not rc.is_valid:
+            print rc.error_code
             msg = ERROR_CODES.get(rc.error_code, ERROR_CODES['unknown'])
             raise forms.ValidationError(msg)
 
