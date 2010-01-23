@@ -3,7 +3,7 @@
 }
 
 #comments > li {
-	padding-bottom: .5em;
-	margin-bottom: .5em;
-	border-bottom: 1px solid;
+	padding-bottom: .75em;
+	margin-bottom: 1em;
+	border-bottom: 2px solid #e5e5e5;
 }

@@ -14,77 +14,6 @@ a:hover {
 	border-bottom: 1px dotted;
 }
 
-/* Заголовки
-******************************************************************************/
-
-.l-header h1 {
-	font-size: 2.5em;
-	font-weight: normal;
-	letter-spacing: -.05em;
-}
-
-.l-content h2,
-.l-content .b-comments h3,
-.l-sidebar h3 {
-	margin: 0 0 7px -15px;
-	padding: 5px 15px;
-	border-bottom: 2px solid #e5e5e5;
-
-	font-size: 1.4em;
-	font-weight: normal;
-}
-
-.l-header h1,
-.l-content h2,
-.l-content .b-comments h3,
-.l-sidebar h3,
-.l-header h1 a,
-.l-content h2 a,
-.l-content .b-comments h3 a,
-.l-sidebar h3 a {
-	color: #ff9900;
-	font-weight: normal;
-}
-
-.l-header h1 {
-	border-bottom: none;
-}
-
-.b-post .b-meta {
-	margin-bottom: 15px;
-}
-
-
-/* Линки rss и Blogroll */
-	.l-sidebar h3 a {
-		line-height: 1;
-	}
-
-		.l-sidebar h3 a img {
-		}
-
-/* Иерархические заголовки для футера и сайдбара */
-.l-header h2,
-.l-sidebar h2,
-.l-footer h2 {
-	display: none;
-}
-
-/*
-******************************************************************************/
-
-.bookmarks a {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.bookmarks a img {
-	vertical-align: middle;
-}
-
-/*
-******************************************************************************/
-
 strong {
 	font-weight: bold;
 }
@@ -170,4 +99,68 @@ q {
 :selection {
 	color: #000000;
 	background: #cc9966;
+}
+
+h1 a, h2 a, h3 a,
+h4 a, h5 a, h6 a {
+	color: inherit;
+	text-decoration: inherit;
+}
+
+/* Заголовки
+******************************************************************************/
+
+.l-header h1 {
+	font-size: 2.5em;
+	font-weight: normal;
+	letter-spacing: -.05em;
+}
+
+.l-content h2,
+.l-content .b-comments h3,
+.l-sidebar h3,
+#comment-form h3 {
+	margin: 0 0 7px -15px;
+	padding: 5px 15px;
+	border-bottom: 1px solid #999999;
+
+	color: #ff9900;
+	font-size: 1.4em;
+	font-weight: normal;
+}
+
+.l-header h1 {
+	border-bottom: none;
+}
+
+.b-post .b-meta {
+	margin-bottom: 15px;
+}
+
+
+/* Линки rss и Blogroll */
+	.l-sidebar h3 a {
+		line-height: 1;
+	}
+
+		.l-sidebar h3 a img {
+		}
+
+/* Иерархические заголовки для футера и сайдбара */
+.l-header h2,
+.l-sidebar h2,
+.l-footer h2 {
+	display: none;
+}
+
+/*
+******************************************************************************/
+
+.bookmarks a {
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.bookmarks a img {
+	vertical-align: middle;
 }

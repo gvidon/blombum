@@ -144,17 +144,6 @@ html {
 /*
 ******************************************************************************/
 
-.b-post {
-	margin-bottom: 30px;
-}
-
-.b-comments {
-	margin-bottom: 30px;
-}
-
-/*
-******************************************************************************/
-
 .l-footer a {
 	color: #999999;
 	text-decoration: none;
@@ -167,6 +156,14 @@ html {
 /*
 ******************************************************************************/
 
+.b-post {
+	margin-bottom: 30px;
+}
+
+.b-comments {
+	margin-bottom: 30px;
+}
+
 .b-block {
 	margin-bottom: 15px;
 }
@@ -177,3 +174,7 @@ html {
 
 .b-meta li:before {content: ' | '}
 .b-meta li:first-child:before {content: ''}
+
+.hidden {
+	display: none;
+}

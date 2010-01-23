@@ -63,11 +63,11 @@
 				{% include "blog/comment.html" %}
 			{% endfor %}
 			</ul>
+			{% if object.comments_open %}{% if not reply_to %}
+				{% include "blog/comment_form.html" %}
+			{% endif %}{% endif %}
 		</div>
 
-		{% if object.comments_open %}{% if not reply_to %}
-			{% include "blog/comment_form.html" %}
-		{% endif %}{% endif %}
 
 		{% if comments %} {# display link for commenting at bottom to avoid confusion #}
 		<span>
