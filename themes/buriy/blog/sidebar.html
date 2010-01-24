@@ -3,7 +3,14 @@
 
 <div class="sidebar">
 <dl class="sidebardl">
-    <dt>Navigation</dt>
+	  <dt>{% trans "Messages" %}</dt><br/>
+	  {% site_messages %}
+</dl>
+</div>
+
+<div class="sidebar">
+<dl class="sidebardl">
+    <dt>{% trans "Navigation" %}</dt>
     <dd><a href="/" title="Today&#39;s entry">Today</a></dd>
     <dd><a href="/2007/" title="Archives 2007">Archives 2007</a></dd>
     <dd><a href="/2006/" title="Archives 2006">Archives 2006</a></dd>
