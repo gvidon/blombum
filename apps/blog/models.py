@@ -8,44 +8,44 @@ from django.utils.translation    import ugettext_lazy as _
 from django.contrib.contenttypes import generic
 from django.contrib.sites.models import Site
 
-from lib                         import appcheck
-from lib.helpers                 import reverse, signals
-from render                      import render, RENDER_METHODS
-from blog.managers               import PostManager, SitePostManager, PublicPostManager
 from discussion.models           import CommentNode
+from settingsDB.utils            import SettingsCached
 from tagging.fields              import TagField
+from blog.managers               import PostManager, SitePostManager, PublicPostManager
 from tagging.utils               import parse_tag_input
+from lib.helpers                 import reverse, signals
 from pingback                    import Pingback, create_ping_func
 from pingback                    import ping_external_links, ping_directories
-from settingsDB.utils            import SettingsCached
+from render                      import render, RENDER_METHODS
+from lib                         import appcheck
 
 import xmlrpc
 
 models.signals.post_save.connect(Site, lambda **kw: Site.objects.clear_cache())
 models.signals.post_delete.connect(Site, lambda **kw: Site.objects.clear_cache())
 
-
 class Post(models.Model):
-    site = models.ForeignKey(Site, related_name='posts')
-    author = models.ForeignKey(User, related_name='posts')
-    name = models.CharField(_(u'Name'), max_length=SettingsCached.param.NAME_LENGTH)
-    slug = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH, blank=True, unique_for_date="date")
-    text = models.TextField(_(u'Text'), help_text=u'Use &lt;!--more--&gt; to separate heading with body')
-    render_method = models.CharField(_(u'Render method'), max_length=15, choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
-    html = models.TextField(_(u'HTML'), editable=False, blank=True)
-    date = models.DateTimeField(_(u'Date'), default=datetime.now)
-    upd_date = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
-    is_draft = models.BooleanField(verbose_name=_(u'Draft'), default=False)
+    site            = models.ForeignKey(Site, related_name='posts')
+    author          = models.ForeignKey(User, related_name='posts')
+    name            = models.CharField(_(u'Name'), max_length=SettingsCached.param.NAME_LENGTH)
+    slug            = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH, blank=True, unique_for_date="date")
+    text            = models.TextField(_(u'Text'), help_text=u'Use &lt;!--more--&gt; to separate heading with body')
+    render_method   = models.CharField(_(u'Render method'), max_length=15, choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
+    html            = models.TextField(_(u'HTML'), editable=False, blank=True)
+    date            = models.DateTimeField(_(u'Date'), default=datetime.now)
+    upd_date        = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
+    is_draft        = models.BooleanField(verbose_name=_(u'Draft'), default=False)
     enable_comments = models.BooleanField(default=True)
-    tags = TagField(help_text=u'Delimiters are commas or spaces if there is no commas. Phrases may also be quoted with "double quotes", which may contain commas as part of the tag names they define.')
+    tags            = TagField(help_text=u'Delimiters are commas or spaces if there is no commas. Phrases may also be quoted with "double quotes", which may contain commas as part of the tag names they define.')
+    
+    crosspost_que   = models.ManyToManyField('crossposting.SideService', verbose_name=_(u'Crosspost'), blank=True, db_table='crossposting_que')
+    comments        = generic.GenericRelation(CommentNode)
+    pingbacks       = generic.GenericRelation(Pingback)
 
-    comments = generic.GenericRelation(CommentNode)
-    pingbacks = generic.GenericRelation(Pingback)
-
-    whole_objects = PostManager()
-    all_objects = SitePostManager()
-    objects = PublicPostManager()
-    plain_manager = models.Manager()
+    whole_objects   = PostManager()
+    all_objects     = SitePostManager()
+    objects         = PublicPostManager()
+    plain_manager   = models.Manager()
 
     class Meta:
         db_table            = 'blog_post'

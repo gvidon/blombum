@@ -1,10 +1,10 @@
 # -*- mode: python; coding: utf-8; -*-
-
-from django.contrib             import admin
 from django.contrib.auth.models import User
-from lib                        import libadmin
+from django.contrib             import admin
+
+from settingsDB.utils           import SettingsCached
 from blog.models                import Post
-from settingsDB.utils           import SettingsCached       
+from lib                        import libadmin
 
 class PostAdmin(libadmin.BFAdmin):
     prepopulated_fields = {'slug': ('name', )}
@@ -14,6 +14,7 @@ class PostAdmin(libadmin.BFAdmin):
     fieldsets           = (
         (None, {'fields': (('author', 'site'),
                            ('name', 'slug'),
+                           ('crosspost_que',),
                            'tags', 'text', 'render_method', 'date',
                            ('is_draft', 'enable_comments'))}),
         )
@@ -25,9 +26,14 @@ class PostAdmin(libadmin.BFAdmin):
                 
                 '/tinymce/tiny_mce.js',
                 SettingsCached.param.STATIC_URL+'filebrowser/js/TinyMCEAdmin.js',
+                
+                SettingsCached.param.STATIC_URL+'js/jqModal.js',
+                SettingsCached.param.STATIC_URL+'js/crossposting.js',
             )
             
             css = {'all': (
+                SettingsCached.param.STATIC_URL+'css/jqModal.css',
+                
                 SettingsCached.param.STATIC_URL+'js/tinymce/themes/simple/skins/default/ui.css',
                 SettingsCached.param.STATIC_URL+'js/tinymce/themes/advanced/skins/default/ui.css',
                 SettingsCached.param.STATIC_URL+'js/tinymce/themes/advanced/skins/o2k7/ui.css',

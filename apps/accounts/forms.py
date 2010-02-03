@@ -23,7 +23,8 @@ class ProfileForm(forms.Form):
     name = forms.CharField(max_length=30, required=False, label=_(u'Name'))
     email = forms.EmailField(max_length=128, required=False, label=_(u'Email'), help_text=_(u"Changing email requires activation"))
     site = forms.CharField(max_length=200, required=False, label=_(u'Site'))
-    current_password = forms.CharField(widget=forms.PasswordInput(), label=_(u'Current password'))
+    #FIXED 02.02.2010: not required feature
+    #current_password = forms.CharField(widget=forms.PasswordInput(), label=_(u'Current password'))
     password1 = forms.CharField(widget=forms.PasswordInput(), required=False, label=_(u'Password'), help_text=_(u"Leave blank to keep current"))
     password2 = forms.CharField(widget=forms.PasswordInput(), required=False, label=_(u'Password'), help_text=_(u"Repeat, to catch typos"))
 
@@ -55,7 +56,9 @@ class ProfileForm(forms.Form):
         else:
             return self.cleaned_data['email']
 
-    def clean_current_password(self):
+    #FIXED 02.02.2010: not required feature
+    #def clean_current_password(self):
+    def _clean_current_password(self):
         if not self.user.email:
             return self.cleaned_data['current_password']
 
