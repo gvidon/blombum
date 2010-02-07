@@ -1,12 +1,5 @@
 {% load i18n %}
-
-<div id="footer">{{ settings.FOOTER|safe }},
-  {% trans "Powered by " %} <a href="http://byteflow.su">Byteflow</a>
-</div>
-
-{% if settings.GA_ACC_CODE and not user.is_staff %}
-	<!-- Google analitics counter -->
-	<script type="text/javascript" src="http://www.google-analytics.com/ga.js"></script>
-	
-	<script type="text/javascript">{{ settings.GA_ACC_CODE|safe }}</script>
-{% endif %}
+{% load bfmarkup %}
+			<h2>{% trans "Copyright" %}</h2>
+			{{ settings.FOOTER|safe }}.
+			{% trans "Powered by " %} <a href="http://byteflow.su">Byteflow</a>

@@ -1,37 +1,59 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
 {% load i18n %}
 {% load theme %}
-<html xmlns="http://www.w3.org/1999/xhtml">
+{% load sidebar %}
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title>{{ site.name }}: {% block title %}main{% endblock %}</title>
-  {% theme_css %}
-  <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: blog entries feed" href="{% url feed "blog" %}" />
-  <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: comments feed" href="{% url feed "comments" %}" />
-  <link rel="openid2.provider" href="{% absolute_url openid_endpoint %}"/>
-  <link rel="openid.server" href="{% absolute_url openid_endpoint %}"/>
-  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-  {% theme_js "login-shortcuts" %}
-  <script type="text/javascript" src="{% url processed_js %}"></script>
-  {% block extrahead %}{% endblock %}
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>{{ site.name }}: {% block title %}{{ settings.TAGLINE }}{% endblock %}</title>
+	<meta name="description" content="{% block description %}{{ settings.TAGLINE }}{% endblock %}" />
+	<meta name="generator" content="Byteflow" />
+	<meta name="author" content="{{ site.name }}" />
+
+	<link rel="shortcut icon" type="image/x-icon" href="{{ THEME_STATIC_URL }}img/favicon.ico" />
+	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "blog entries feed" %}" href="{% url feed "blog" %}" />
+	<link rel="alternate" type="application/atom+xml" title="{{ site.name }}: {% trans "comments feed" %}" href="{% url feed "comments" %}" />
+	<link rel="openid2.provider" href="{% absolute_url openid_endpoint %}" />
+	<link rel="openid.server" href="{% absolute_url openid_endpoint %}" />
+
+	{% theme_css "style" %}
+	<!--[if IE 6]>{% theme_css "ie6" %}<![endif]-->
+
+	<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script-->
+	{% theme_js "login-shortcuts" %}
+	<script type="text/javascript" src="{% url processed_js %}"></script>
+
+	<!-- extra header block begins here -->
+	{% block extrahead %}{% endblock %}
 </head>
+
 <body>
-<div id="page">
+	{% if settings.GA_ACC_CODE and not user.is_staff %}
+		<!-- Google analytics counter -->
+		<script type="text/javascript">{{ settings.GA_ACC_CODE|safe }}</script>
+	{% endif %}
+	<div class="l-wrap">
+		<div class="l-header">
+			{% include "head.html" %}
+		</div>
 
-  {% include "head.html" %}
+		<div id="content" class="l-content">
+			{% site_messages %}
+			{% block content %}{% endblock %}
+		</div>
 
-  <div id="bodyblock">
-    <div id="sidebar">{% block sidebar %}asd{% endblock %}</div>
-    <div id="content">
-      {% site_messages %}
-      {% block content %}{% endblock %}
-    </div>
-  </div>
-	
-  {% include "footer.html" %}
-	
-</div>
+		<div class="l-sidebar">
+			{% block sidebar %}
+				{% sidebar %}
+			{% endblock %}
+		</div>
 
-{% if debug %}{% include "debug.html" %}{% endif %}
+		<div class="l-footer">
+			{% include "footer.html" %}
+		</div>
+	</div>
+	{% include "closure.html" %}
 </body>
 </html>

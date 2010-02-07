@@ -5,15 +5,17 @@
 {% block title %}Password reset{% endblock %}
 
 {% block content %}
-<h1>{% trans "Password reset" %}</h1>
+<h2>{% trans "Password reset" %}</h2>
 {% if success %}
-<p>{{ success }}</p>
+	<p>{{ success }}</p>
 {% else %}
-<p>{{ error }}</p>
-<p>{% trans "Please enter your email." %}</p>
-<form action="." method="POST">
-  <p><input type="text" name="email" /></p>
-  <p><input type="submit" value="{% trans "Reset password" %}" /></p>
-</form>
+	<p>{{ error }}</p>
+	<form action="." method="POST">
+		<ul>
+			<li><label for="email">{% trans "Please enter your email." %} </label></li>
+			<li><input type="text" name="email" /></li>
+			<li><input type="submit" value="{% trans "Reset password" %}" /></li>
+		</ul>
+	</form>
 {% endif %}
 {% endblock %}  

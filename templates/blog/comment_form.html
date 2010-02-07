@@ -1,13 +1,22 @@
 {% load i18n %}
 
 <div id="comment-form">
-<h2>{% blocktrans %}Comment form for &laquo;{{ object }}&raquo;{% endblocktrans %}</h2>
-<div class="metadata">You can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> here.</div>
-<form id="comment-form-itself" action="." method="post">
-  {{ form.as_p }}
-  <div id="comment-preview"></div>
-  <input type="submit" class="button" value="{% trans "Comment" %}" />
-  <input type="button" class="button" value="{% trans "Preview" %}" onclick="return preview_comment('{% url comment_preview %}');" />
-  <input type="button" class="button" value="{% trans "Cancel" %}" onclick="return cancel_comment();" />
-</form>
+	<h3>{% blocktrans %}Comment form for &laquo;{{ object }}&raquo;{% endblocktrans %}</h3>
+	<form id="comment-form-itself" action="." method="post">
+		<ul>
+			<li class="form-info">You can use <a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a> here.</li>
+			{% if request.user.is_authenticated %}
+				{% include 'blog/forms/_comment.html' %}
+			{% else %}
+				{% include 'blog/forms/_anonymous-comment.html' %}
+			{% endif %}
+			<li class="form-button-row">
+				<input class="form-button form-submit" type="submit" value="{% trans "Comment" %}" />
+				<input class="form-button" type="button" value="{% trans "Preview" %}" onclick="return preview_comment('{% url comment_preview %}');" />
+				<input class="form-button" type="button" value="{% trans "Cancel" %}" onclick="return cancel_comment();" />
+				<input type="hidden" name="reply_to" id="id_reply_to" />
+			</li>
+		</ul>
+	</form>
+	<div id="comment-preview"></div>
 </div>
