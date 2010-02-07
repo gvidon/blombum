@@ -1,0 +1,31 @@
+{% load i18n %}
+
+<li class="form-comment-name{% if form.errors.name %} erroneus{% endif %}">
+	<label for="id_name">{{ form.name.label }}</label>
+	{{ form.name }}
+	{{ form.name.help_text }}
+</li>
+
+<li class="form-comment-email{% if form.errors.email %} erroneus{% endif %}">
+	<label for="id_email">{{ form.email.label }}</label>
+	{{ form.email }}
+	{{ form.email.help_text }}
+</li>
+
+<li class="form-comment-site{% if form.errors.site %} erroneus{% endif %}">
+	<label for="id_site">{{ form.site.label }}</label>
+	{{ form.site }}
+	{{ form.site.help_text }}
+</li>
+
+<li class="form-comment-subscribe{% if form.errors.subscribe %} erroneus{% endif %}">
+	<label for="id_subscribe">{{ form.subscribe.label }}</label>
+	{{ form.subscribe }}
+	{{ form.subscribe.help_text }}
+</li>
+
+<li class="form-comment-body{% if form.errors.body %} erroneus{% endif %}">
+	<label for="id_body">{{ form.body.label }}</label>
+	{{ form.body }}
+	{{ form.body.help_text }}
+</li>
