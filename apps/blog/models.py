@@ -25,27 +25,27 @@ models.signals.post_save.connect(Site, lambda **kw: Site.objects.clear_cache())
 models.signals.post_delete.connect(Site, lambda **kw: Site.objects.clear_cache())
 
 class Post(models.Model):
-    site            = models.ForeignKey(Site, related_name='posts')
-    author          = models.ForeignKey(User, related_name='posts')
-    name            = models.CharField(_(u'Name'), max_length=SettingsCached.param.NAME_LENGTH)
-    slug            = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH, blank=True, unique_for_date="date")
-    text            = models.TextField(_(u'Text'), help_text=u'Use &lt;!--more--&gt; to separate heading with body')
-    render_method   = models.CharField(_(u'Render method'), max_length=15, choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
-    html            = models.TextField(_(u'HTML'), editable=False, blank=True)
-    date            = models.DateTimeField(_(u'Date'), default=datetime.now)
-    upd_date        = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
-    is_draft        = models.BooleanField(verbose_name=_(u'Draft'), default=False)
-    enable_comments = models.BooleanField(default=True)
-    tags            = TagField(help_text=u'Delimiters are commas or spaces if there is no commas. Phrases may also be quoted with "double quotes", which may contain commas as part of the tag names they define.')
+    site             = models.ForeignKey(Site, related_name='posts')
+    author           = models.ForeignKey(User, related_name='posts')
+    name             = models.CharField(_(u'Name'), max_length=SettingsCached.param.NAME_LENGTH)
+    slug             = models.SlugField(_(u'Slug'), max_length=SettingsCached.param.NAME_LENGTH, blank=True, unique_for_date="date")
+    text             = models.TextField(_(u'Text'), help_text=u'Use &lt;!--more--&gt; to separate heading with body')
+    render_method    = models.CharField(_(u'Render method'), max_length=15, choices=RENDER_METHODS, default=SettingsCached.param.RENDER_METHOD)
+    html             = models.TextField(_(u'HTML'), editable=False, blank=True)
+    date             = models.DateTimeField(_(u'Date'), default=datetime.now)
+    upd_date         = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
+    is_draft         = models.BooleanField(verbose_name=_(u'Draft'), default=False)
+    enable_comments  = models.BooleanField(default=True)
+    tags             = TagField(help_text=u'Delimiters are commas or spaces if there is no commas. Phrases may also be quoted with "double quotes", which may contain commas as part of the tag names they define.')
     
-    crosspost_que   = models.ManyToManyField('crossposting.SideService', verbose_name=_(u'Crosspost'), blank=True, db_table='crossposting_que')
-    comments        = generic.GenericRelation(CommentNode)
-    pingbacks       = generic.GenericRelation(Pingback)
+    crossposting_que = models.ManyToManyField('crossposting.SideService', verbose_name=_(u'Crosspost'), blank=True, db_table='crossposting_que')
+    comments         = generic.GenericRelation(CommentNode)
+    pingbacks        = generic.GenericRelation(Pingback)
 
-    whole_objects   = PostManager()
-    all_objects     = SitePostManager()
-    objects         = PublicPostManager()
-    plain_manager   = models.Manager()
+    whole_objects    = PostManager()
+    all_objects      = SitePostManager()
+    objects          = PublicPostManager()
+    plain_manager    = models.Manager()
 
     class Meta:
         db_table            = 'blog_post'
@@ -107,6 +107,23 @@ class Post(models.Model):
             self.get_absolute_url(), _('view'))
     view_link.allow_tags = True
 
+#CROSSPOSTING QUE
+@signals.post_save(sender=Post)
+def crossposting(instance, created, **kwargs):
+    import json
+    
+    instance.select_related().save()
+    
+    print json.dumps([{
+        'crawler': s.type,
+        
+        'params' : dict(map(lambda N: (N, s.__getattribute__(N)),
+            ('login', 'email', 'password') +
+            { 'blogger': ('blog_id',) }.get(s.type, ())
+        ) + [
+            ('body', instance.text), ('tags', instance.tags)
+        ]),
+    } for s in instance.crossposting_que.all()])
 
 # Pingback and directory ping handling
 def pingback_blog_handler(year, month, day, slug, **kwargs):

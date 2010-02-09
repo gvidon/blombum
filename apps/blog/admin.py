@@ -14,7 +14,7 @@ class PostAdmin(libadmin.BFAdmin):
     fieldsets           = (
         (None, {'fields': (('author', 'site'),
                            ('name', 'slug'),
-                           ('crosspost_que',),
+                           ('crossposting_que',),
                            'tags', 'text', 'render_method', 'date',
                            ('is_draft', 'enable_comments'))}),
         )

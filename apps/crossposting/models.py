@@ -6,8 +6,12 @@ class SideService(models.Model):
 	name     = models.CharField(_(u'Account name'), max_length=128)
 	url      = models.CharField(_(u'Your page URL'), max_length=128, blank=True)
 	
-	login    = models.CharField(_(u'Login'), max_length=128)
+	email    = models.CharField(_(u'Email'), max_length=128)
+	login    = models.CharField(_(u'Login'), max_length=128, blank=True, null=True, help_text=_(u'Leave it empty if service uses email as login'))
 	password = models.CharField(_(u'Password'), max_length=64)
+	
+	# required for blogger.com
+	blog_id  = models.CharField(_(u'Your blog id'), max_length=32, blank=True, null=True)
 	
 	type  = models.CharField(_(u'Name'), choices=(
 		('blogger', 'Blogger.com'),
