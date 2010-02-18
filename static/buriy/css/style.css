@@ -362,3 +362,7 @@ img {
 .bookmarks a:hover {
     background: none;
 }
+
+img {
+	max-width: 100%;
+}
