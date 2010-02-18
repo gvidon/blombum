@@ -1,0 +1,13 @@
+[
+	{
+		"crawler": "blogger",
+		"params": {
+			"email"   : "rised.from.the.ashes@gmail.com",
+			"password": "",
+			"blogid"  : "4901925483547406929",
+			"body"    : "Blogressor test. Кодировка не ломается, нет?",
+			"tags"    : "тэг, еще, третий"
+		}
+	}
+]
+

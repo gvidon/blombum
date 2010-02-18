@@ -4,6 +4,7 @@ var
 
 var crawlers = {
 	'blogger': require('./crawlers/blogger'),
+	'twitter': require('./crawlers/twitter'),
 };
 
 // сделать запрос по параметрам текущего обработчика и отдать
@@ -30,11 +31,12 @@ process.stdio.open();
 //имени кроулера, ссылки (на которую отправить результат), параметрами и данными поста
 process.stdio.addListener('data', function (data) {
 	var input = JSON.parse(data);
-	
+
 	sys.puts(input[0]['crawler']);
-	
+
 	for(i in input)
-		processParams(crawlers[input[i]['crawler']],
+		processParams(
+			crawlers[input[i]['crawler']],
 			crawlers[input[i]['crawler']].actions['auth']('', input[i]['params'])
 		);
 });
