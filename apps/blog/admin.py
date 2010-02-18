@@ -2,11 +2,12 @@
 from django.contrib.auth.models import User
 from django.contrib             import admin
 
+from crossposting.admin         import BFPostAdmin
 from settingsDB.utils           import SettingsCached
 from blog.models                import Post
 from lib                        import libadmin
 
-class PostAdmin(libadmin.BFAdmin):
+class PostAdmin(BFPostAdmin):
     prepopulated_fields = {'slug': ('name', )}
     list_display        = ('name', 'date', 'author', 'enable_comments', 'comments_open', 'is_draft', 'site', 'view_link')
     search_fields       = ('name', 'text')
@@ -33,6 +34,7 @@ class PostAdmin(libadmin.BFAdmin):
             
             css = {'all': (
                 SettingsCached.param.STATIC_URL+'css/jqModal.css',
+                SettingsCached.param.STATIC_URL+'css/crossposting.css',
                 
                 SettingsCached.param.STATIC_URL+'js/tinymce/themes/simple/skins/default/ui.css',
                 SettingsCached.param.STATIC_URL+'js/tinymce/themes/advanced/skins/default/ui.css',

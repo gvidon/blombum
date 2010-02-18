@@ -11,7 +11,7 @@ class SideService(models.Model):
 	password = models.CharField(_(u'Password'), max_length=64)
 	
 	# required for blogger.com
-	blog_id  = models.CharField(_(u'Your blog id'), max_length=32, blank=True, null=True)
+	blogid   = models.CharField(_(u'Your blog id'), max_length=32, blank=True, null=True)
 	
 	type  = models.CharField(_(u'Name'), choices=(
 		('blogger', 'Blogger.com'),
@@ -30,8 +30,9 @@ class SideService(models.Model):
 class Crosspost(models.Model):
 	post        = models.ForeignKey('blog.Post', verbose_name=_(u'Post'), related_name='crossposts')
 	service     = models.ForeignKey('SideService', verbose_name=_(u'Service name'))
+	code        = models.CharField(_(u'Security'), max_length=32, unique=True, blank=True, null=True)
 	
-	started_at  = models.DateTimeField(_(u'Process start time'), blank=True, null=True)
+	started_at  = models.DateTimeField(_(u'Process start time'), auto_now_add=True, blank=True, null=True)
 	finished_at = models.DateTimeField(_(u'Process finish time'), blank=True, null=True)
 	
 	error_code  = models.CharField(_(u'Error code'), max_length=8, blank=True, null=True)

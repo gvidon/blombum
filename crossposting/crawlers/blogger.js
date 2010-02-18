@@ -20,7 +20,7 @@ exports.actions = {
 		},
 	}},
 	
-	'post': function(data, params) {return {
+	'post': function(data, params) { return {
 		'url'   : 'http://www.blogger.com/feeds/'+params['blogid']+'/posts/default',
 		'parser': 'grab-post-url',
 		

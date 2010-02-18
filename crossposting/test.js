@@ -27,11 +27,23 @@ emm = events.EventEmitter;
 
 emm.addListener('checkDaTheez', function() { sys.puts('working'); })
 emm.emit('checkDaTheez');
-*/
 
 var sys = require('sys');
 
 process.stdio.open();
 process.stdio.addListener("data", function (data) {
 	for(i in JSON.parse(data)) sys.puts(JSON.parse(data)[i].somevar);
+});
+
+var sys = require('sys'), libxml = require('./lib/libxmljs');
+
+sys.puts(libxml.parseHtmlString('text').get('//entry/link[@rel="alternate"]/@href').children()[0].text());
+*/
+
+var rest = require('./lib/restler');
+
+rest.post('http://localhost:8000/crossposting/9abbf2075e5e08b4f72fbdf3ccbc61b0', {
+	data: {'url': 'http://google.com'},
+}).addListener('complete', function(data, response) {
+	sys.puts(data);
 });

@@ -1,10 +1,29 @@
 $(document).ready(function() {
-	/*
-	$('#id_crosspost_que').hide();
+	$('.form-row.crossposting_que').hide().after('<div class="form-row">\
+		Crosspost URLs <div class="ajaxloader">&nbsp;</div>\
+		<ul id="crossposts"></ul><br/>\
+	</div>').after('<div class="form-row"><a id="show-services" href="#">Make more crossposts</a></div>');
 	
-	$('#id_crosspost_que').after('<a class="jqModal" href="#">text</a>');
-	$('#id_crosspost_que').after('<div id="asd" class="jqmWindow"><div class="jqmTitle">Crossposting</div><div class="jqmClose"><a href="#">закрыть</a></div>asdasd</div>');
+	$.getJSON('/crossposting/urls/7', function(data) {
+		$('#crossposts').html('');
+		
+		if( ! data['urls'])
+			$('#crossposts').append('<li>No crossposts made yet</li>');
+		else
+			for(var i in data['urls'])
+				$('#crossposts').append('<li><a href="'+data['urls'][i]+'" target="_blank">'+
+					data['urls'][i]+
+				'</a></li>');
+		
+		$('.ajaxloader').hide();
+		
+		return true;
+	});
 	
-	$('#asd').jqm();
-	*/
+	$('#show-services').click(function() {
+		$(this).parent().hide();
+		$('.form-row.crossposting_que').show();
+		
+		return false;
+	});
 });

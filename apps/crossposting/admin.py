@@ -1,6 +1,9 @@
 # -*- mode: python; coding: utf-8; -*-
 from django.contrib      import admin
+from django.conf         import settings
+
 from crossposting.models import Crosspost, SideService
+from lib.libadmin        import BFAdmin
 
 class SideServiceAdmin(admin.ModelAdmin):
 	list_display        = ('name', 'url', 'login', 'type')
@@ -12,3 +15,72 @@ class CrosspostAdmin(admin.ModelAdmin):
 
 admin.site.register(Crosspost, CrosspostAdmin)
 admin.site.register(SideService, SideServiceAdmin)
+
+class BFPostAdmin(BFAdmin):
+    """
+    Класс для замены метода PostForm.save(). Единственный момент где
+    можно перехватить пост с уже обновленной связью crossposting_que (в джанге 1.2
+    для этого есть сигнал post_save_m2m)
+    """
+
+    def get_form(self, request, obj=None, **kwargs):
+        import hashlib, httplib, json, random, re, subprocess
+        from django.db import IntegrityError
+        
+        form = super(BFPostAdmin, self).get_form(request, obj, **kwargs)
+        
+        original = form.save
+        
+        # после сохранения поста собрать претендентов из crossposting_que,
+        # записать в crosspost и запустить процесс кросспостинга
+        def save_m2m(self, commit):
+            md5hash = hashlib.md5()
+            params  = []
+            post    = original(self, commit)
+            
+            #построить структуру параметров для блогрессора
+            for service in self.cleaned_data['crossposting_que']:
+                
+                code = None
+                
+                # сгенерирую уникальный в пределах таблицы код для каждого краулера
+                while not locals().get('code'):
+                    try:
+                        code = Crosspost.objects.create(
+                            service = service,
+                            post    = post,
+                            code    = md5hash.hexdigest()
+                        ).code
+                        
+                    except IntegrityError:
+                        md5hash.update(str(random.random()*50))
+                
+                params.append({
+                    'crawler' : service.type,
+                    'security': code,
+                    
+                    'params'  : dict(map(lambda N: (N, service.__getattribute__(N)),
+                        ('login', 'email', 'password') +
+                        { 'blogger': ('blogid',) }.get(service.type, ())
+                    ) + [
+                        ('body', self.cleaned_data['text']), ('tags', self.cleaned_data['tags'])
+                    ]),
+                })
+            
+            # отправить JSON блогрессору и очистить очередь
+            try:
+                B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST, timeout=2)
+                
+                B.request('POST', '/', re.sub('(\r\n|&nbsp;)', '', json.dumps(params)))
+                B.close()
+                
+                self.cleaned_data['crossposting_que'] = []
+                
+            except:
+                Crosspost.objects.filter(post=post).delete()
+            
+            return post
+        
+        form.save = save_m2m
+        
+        return form

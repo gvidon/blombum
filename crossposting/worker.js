@@ -1,6 +1,11 @@
 var
 	rest = require('./lib/restler'),
-	sys  = require('sys');
+	sys  = require('sys'),
+	http = require('http');
+
+var
+	RESULT_CATCHER_URL = 'http://localhost:8000/crossposting/',
+	SERVER_PORT        = 8001;
 
 var crawlers = {
 	'blogger': require('./crawlers/blogger'),
@@ -8,7 +13,7 @@ var crawlers = {
 
 // сделать запрос по параметрам текущего обработчика и отдать
 // результаты для обработки следующему
-function processParams(crawler, P) {
+function processParams(crawler, code, P) {
 	rest.post(P['url'], {
 		headers: P['HEADERS'],
 		data   : P['POST'],
@@ -16,25 +21,38 @@ function processParams(crawler, P) {
 		P = crawler.actions[P['parser']](data, P);
 		
 		if(P['url']) {
-			processParams(crawler, P);
+			processParams(crawler, code, P);
 			return false;
 		}
 		
-		sys.puts(P['entry']);
+		//отправить блог движку полученные урлы
+		rest.post(
+			RESULT_CATCHER_URL + code,
+			{ data: {'url': P['entry']} }
+		).addListener('complete', function(data, response) {
+				sys.puts(P['entry']);
+				sys.puts(data);
+		});
 	});
 }
 
-process.stdio.open();
+http.createServer(function (request, response) {
+	var data = '';
+	
+	request.addListener('body', function(chunk) {
+		data += chunk;
+	});
+	
+	request.addListener('complete', function() {
+		var input = JSON.parse(data);
+		
+		for(i in input)
+			processParams(
+				crawlers[input[i]['crawler']],
+				input[i]['security'],
+				crawlers[input[i]['crawler']].actions['auth']('', input[i]['params'])
+			);
+	});
+}).listen(SERVER_PORT);
 
-//получить через stdin входные данные - массив с хэшами из:
-//имени кроулера, ссылки (на которую отправить результат), параметрами и данными поста
-process.stdio.addListener('data', function (data) {
-	var input = JSON.parse(data);
-	
-	sys.puts(input[0]['crawler']);
-	
-	for(i in input)
-		processParams(crawlers[input[i]['crawler']],
-			crawlers[input[i]['crawler']].actions['auth']('', input[i]['params'])
-		);
-});
+sys.puts('Ready to serve, master!');

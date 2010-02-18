@@ -107,24 +107,6 @@ class Post(models.Model):
             self.get_absolute_url(), _('view'))
     view_link.allow_tags = True
 
-#CROSSPOSTING QUE
-@signals.post_save(sender=Post)
-def crossposting(instance, created, **kwargs):
-    import json
-    
-    instance.select_related().save()
-    
-    print json.dumps([{
-        'crawler': s.type,
-        
-        'params' : dict(map(lambda N: (N, s.__getattribute__(N)),
-            ('login', 'email', 'password') +
-            { 'blogger': ('blog_id',) }.get(s.type, ())
-        ) + [
-            ('body', instance.text), ('tags', instance.tags)
-        ]),
-    } for s in instance.crossposting_que.all()])
-
 # Pingback and directory ping handling
 def pingback_blog_handler(year, month, day, slug, **kwargs):
     from datetime import time, date, datetime
