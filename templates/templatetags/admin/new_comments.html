@@ -1,0 +1,20 @@
+{% load i18n %}
+
+{% if comments %}
+	<ul class="actionlist">{% for comment in comments %}<li>
+		<a href="{% url mark-comments-read comment.id %}">
+			{{ comment.body_html|striptags|truncatewords:"7" }}...
+		</a><br/>
+		
+		<span class="mini quiet">
+			{{ comment.pub_date|date:"H:i d M Y" }}
+			<a href="/admin/auth/user/{{ comment.user.id }}/">{{ comment.user.username }}</a>
+		</span>
+	</li>{% endfor %}</ul>
+	
+	<strong><a href="/admin/discussion/commentnode/" style="font-size: 0.8em">
+		{% trans 'All comments' %}
+	</a></strong>
+{% else %}
+	<br/><p>{% trans 'You have no new comments' %}</p>
+{% endif %}

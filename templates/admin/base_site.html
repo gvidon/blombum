@@ -1,10 +1,60 @@
 {% extends "admin/base.html" %}
-{% load i18n %}
+{% load i18n adminmedia %}
 
 {% block title %}{{ title }} | {% trans 'Django site admin' %}{% endblock %}
 
-{% block branding %}
-<h1 id="site-name">Your personal Blombum</h1>
-{% endblock %}
+{% block extrastyle %}<link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/topnav.css" />{% endblock %}
 
-{% block nav-global %}{% endblock %}
+{% block branding %}{% ifnotequal request.path '/admin/' %}
+	{% if not request.user.is_authenticated or not request.user.is_superuser %}
+		<h1 id="site-name" style="margin-bottom: 0px;">{% trans 'Your personal Blombum' %}</h1>
+	{% endif %}
+{% else %}
+	<h1 id="site-name" style="margin-bottom: 0px;">{% trans 'Your personal Blombum' %}</h1>
+{% endifnotequal %}{% endblock %}
+
+{% block nav-global %}
+	{% ifnotequal request.path '/admin/' %}
+		{% if request.user.is_authenticated and request.user.is_superuser %}<div class="topnav">
+			<div>
+				<h2>{% trans 'Blog' %}</h2>
+			
+				<ul>
+					<li><a href="/admin/blog/post/add/">{% trans 'New message' %}</a></li>
+					<li><a href="/admin/blog/post">{% trans 'Entries' %}</a></li>
+					<li><a href="/admin/discussion/commentnode/">{% trans 'Comments' %}</a></li>
+				</ul>
+			</div>
+		
+			<div>
+				<h2>{% trans 'Settings' %}</h2>
+			
+				<ul>
+					<li><a href="/admin/settingsDB/settings/add">{% trans 'New config set' %}</a></li>
+					<li><a href="/admin/settingsDB/settings">{% trans 'Edit config set' %}</a></li>
+				</ul>
+			</div>
+		
+			<div>
+				<h2>{% trans 'Social services' %}</h2>
+			
+				<ul>
+					<li><a href="/admin/crossposting/sideservice/add">{% trans 'New account' %}</a></li>
+					<li><a href="/admin/crossposting/sideservice/">{% trans 'Edit accounts' %}</a></li>
+					<li><a href="/admin/crossposting/crosspost/">{% trans 'Published posts' %}</a></li>
+				</ul>
+			</div>
+		
+			<div>
+				<h2>{% trans "Accounts" %}</h2>
+			
+				<ul>
+					<li><a href="/admin/auth/user/add">{% trans 'New user' %}</a></li>
+					<li><a href="/admin/auth/user">{% trans 'Edit users' %}</a></li>
+					<li><a href="/admin/auth/group/add">{% trans 'New group' %}</a></li>
+					<li><a href="/admin/auth/group">{% trans 'Edit groups' %}</a></li>
+				</ul>
+			</div>
+		</div>{% endif %}
+	{% endifnotequal %}
+{% endblock %}

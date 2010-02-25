@@ -628,11 +628,12 @@ table#change-history tbody th {
 }
 
 #content {
-    margin: 10px 15px;
+    margin: 10px 10px;
 }
 
 #header {
     width: 100%;
+    padding-bottom: 10px;
 }
 
 #content-main {
@@ -682,9 +683,17 @@ table#change-history tbody th {
     margin-right: 15px;
 }
 
+/*
+FIXED 24.02.2010
 .dashboard #content {
     width: 500px;
 }
+*/
+.dashboard #content {
+    margin-left: 30px;
+    width: 540px;
+}
+
 
 /* HEADER */
 

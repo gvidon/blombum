@@ -10,8 +10,9 @@ from django.http               import HttpResponseServerError
 from django.template.context   import RequestContext, Context
 from django.template.loader    import render_to_string
 
-from blog.sitemaps             import BlogSitemap, IndexSitemap, BlogTagsSitemap
+from discussion.views          import redirect_to_view
 from tagging.models            import Tag
+from blog.sitemaps             import BlogSitemap, IndexSitemap, BlogTagsSitemap
 from lib                       import appcheck
 
 def error500(request, template_name='500.html'):
@@ -40,25 +41,28 @@ admin.autodiscover()
 
 urlpatterns += patterns(
     '',
-    url(r''                                , include('revcanonical.urls')),
-    url(r'^admin/postimage/'               , include('postimage.urls')),
-    url(r'^admin/filebrowser/'             , include('filebrowser.urls')),
+    url(r''                                   , include('revcanonical.urls')),
+    url(r'^admin/postimage/'                  , include('postimage.urls')),
+    url(r'^admin/filebrowser/'                , include('filebrowser.urls')),
     
-    url(r'^admin/?(.*)'                    , admin.site.root, name='admin'),
+    url(r'^admin/?(.*)'                       , admin.site.root, name='admin'),
     
-    url(r'^accounts/'                      , include('accounts.urls')),
-    url(r'^crossposting/'                  , include('crossposting.urls')),
-    url(r'^openid/'                        , include('openidconsumer.urls')),
-    url(r'^openidserver/'                  , include('openidserver.urls')),
-    url(r'^%s' % settings.BLOG_URLCONF_ROOT, include('blog.urls')),
-    url(r'^sitemap.xml$'                   , 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
-    url(r'^xmlrpc/'                        , include('xmlrpc.urls')),
-    url(r'^captcha/'                       , include('captcha.urls')),
-    url(r'^robots.txt$'                    , include('robots.urls')),
-    url(r'^feeds/'                         , include('feed.urls')),
+    url(r'^accounts/'                         , include('accounts.urls')),
+    url(r'^crossposting/'                     , include('crossposting.urls')),
+    url(r'^openid/'                           , include('openidconsumer.urls')),
+    url(r'^openidserver/'                     , include('openidserver.urls')),
+    url(r'^%s' % settings.BLOG_URLCONF_ROOT   , include('blog.urls')),
+    url(r'^sitemap.xml$'                      , 'django.contrib.sitemaps.views.sitemap', {'sitemaps': sitemaps}),
+    url(r'^xmlrpc/'                           , include('xmlrpc.urls')),
+    url(r'^captcha/'                          , include('captcha.urls')),
+    url(r'^robots.txt$'                       , include('robots.urls')),
+    url(r'^feeds/'                            , include('feed.urls')),
+    
+    #mark coomment node as viewd and redirect to admin comment edit page
+    url(r'^commentnode/viewed/(?P<id>[\d]+)/?', redirect_to_view, name='mark-comments-read'),
     
     # tinymce and admin page for blog post must on the same domain
-    url(r'^tinymce/'                       , include('tinymce.urls')),
+    url(r'^tinymce/'                          , include('tinymce.urls')),
 )
 
 if appcheck.watchlist:

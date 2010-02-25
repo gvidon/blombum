@@ -1,0 +1,6 @@
+#crossposts li { margin: 0px; padding: 5px; list-style-type: none; }
+
+.ajaxloader {
+	width: 15px; height: 15px;
+	background-image: url(/img/ajaxloader.gif);
+	background-repeat: no-repeat; }

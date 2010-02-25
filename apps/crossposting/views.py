@@ -16,6 +16,9 @@ def catch(request, code):
 		crosspost.finished_at = datetime.today()
 		crosspost.url         = request.POST['url']
 		
+		crosspost.error_code  = request.POST.get('error', '')
+		crosspost.error_stage = request.POST.get('error_stage', '')
+		
 		crosspost.save()
 		
 		return HttpResponse('{ postid: %d, serviceid: %d }' % (crosspost.post.id, crosspost.service.id))
@@ -27,6 +30,11 @@ def catch(request, code):
 def urls(request, id):
 	#!!WARN!!: тут еще отправлять инфу о том - закончен
 	#кросспостинг поста или нет и когда
-	return HttpResponse(json.dumps({ 'urls': [C.url for C in Crosspost.objects.filter(post=id)] }))
+	return HttpResponse(json.dumps([{
+		'service': C.service.name,
+		'error'  : C.error_code,
+		'date'   : C.finished_at and C.finished_at.strftime("%d %B %Y") or None,
+		'url'    : C.url,
+	} for C in Crosspost.objects.filter(post=id).order_by('service')]))
 
 

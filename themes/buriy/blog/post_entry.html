@@ -2,7 +2,7 @@
 {% load i18n %}
 {% load bookmarks %}
 <div class="contenttitle">
-<h2>{{ object.date|date:"m/j" }}: <a
+<h2>{{ object.date|datelinks }}: <a
     title="Blog entry: {{ object.name }}"
     href="{{ object.get_absolute_url }}"> {{ object.name }}</a></h2>
 </div>

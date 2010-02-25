@@ -35,7 +35,7 @@ class Crosspost(models.Model):
 	started_at  = models.DateTimeField(_(u'Process start time'), auto_now_add=True, blank=True, null=True)
 	finished_at = models.DateTimeField(_(u'Process finish time'), blank=True, null=True)
 	
-	error_code  = models.CharField(_(u'Error code'), max_length=8, blank=True, null=True)
+	error_code  = models.CharField(_(u'Error code'), max_length=32, blank=True, null=True)
 	error_stage = models.CharField(_(u'Error stage'), max_length=8, blank=True, null=True)
 	
 	url         = models.CharField(_(u'Crosspost URL'), max_length=255, blank=True, null=True)

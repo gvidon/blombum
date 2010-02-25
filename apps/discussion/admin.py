@@ -1,9 +1,7 @@
 # -*- mode: python; coding: utf-8; -*-
 
-from django.contrib import admin
-
 from discussion.models import CommentNode
-
+from django.contrib    import admin
 
 class CommentNodeAdmin(admin.ModelAdmin):
     list_display = ('get_clean_html', 'user', 'pub_date', 'content_type',

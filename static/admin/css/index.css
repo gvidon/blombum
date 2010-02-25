@@ -1,0 +1,6 @@
+.menu-icons { margin-bottom: 140px; }
+	.menu-icons div { float: left; text-align: center; margin-right: 40px; font-size: 0.8em; }
+		
+		.menu-icons div a .icon { text-align: center; height: 80px; }
+
+.stat { float: left; margin-right: 50px; height: 800px; }

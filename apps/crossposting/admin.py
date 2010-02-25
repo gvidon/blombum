@@ -25,10 +25,32 @@ class BFPostAdmin(BFAdmin):
 
     def get_form(self, request, obj=None, **kwargs):
         import hashlib, httplib, json, random, re, subprocess
-        from django.db import IntegrityError
+        
+        from django.forms import ValidationError
+        from django.db    import IntegrityError
+        
+        # проверить доступность сервера блогрессора
+        # и если он выключен - написать на форме, что в
+        # данный момент кросспостинг не доступен
+        def pingup_blogressor(self):
+            
+            if not self.cleaned_data['crossposting_que']:
+                return self.cleaned_data['crossposting_que']
+            
+            try:
+                B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST, timeout=2)
+                B.request('POST', '/', '[]')
+                B.close()
+                
+                return self.cleaned_data['crossposting_que']
+            except:
+                raise ValidationError(
+                    u'Sorry but crossposting is not available now.'+
+                    'You can save your post and try later.')
         
         form = super(BFPostAdmin, self).get_form(request, obj, **kwargs)
-        
+        form.clean_crossposting_que = pingup_blogressor
+            
         original = form.save
         
         # после сохранения поста собрать претендентов из crossposting_que,
@@ -38,7 +60,7 @@ class BFPostAdmin(BFAdmin):
             params  = []
             post    = original(self, commit)
             
-            #построить структуру параметров для блогрессора
+            #построить структуру параметров блогрессора для каждого кросспоста
             for service in self.cleaned_data['crossposting_que']:
                 
                 code = None
@@ -77,7 +99,7 @@ class BFPostAdmin(BFAdmin):
                 self.cleaned_data['crossposting_que'] = []
                 
             except:
-                Crosspost.objects.filter(post=post).delete()
+                Crosspost.objects.filter(code__in=[P['security'] for P in params]).delete()
             
             return post
         

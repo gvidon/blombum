@@ -1,0 +1,6 @@
+.topnav { margin: 0px 0px 0px 40px; }
+	.topnav div { float: left; margin-right: 20px; margin-bottom: 10px; }
+		.topnav div h2 { font-size: 1em; }
+	
+	.topnav div ul { margin: 0px; padding-left: 00px;}
+		.topnav div ul li { list-style: none; }

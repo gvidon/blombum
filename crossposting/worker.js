@@ -28,7 +28,7 @@ function processParams(crawler, code, P) {
 		//отправить блог движку полученные урлы
 		rest.post(
 			RESULT_CATCHER_URL + code,
-			{ data: {'url': P['entry']} }
+			{ data: {'url': P['entry'], 'error': (P['error'] ? P['error'] : '')} }
 		).addListener('complete', function(data, response) {
 				sys.puts(P['entry']);
 				sys.puts(data);

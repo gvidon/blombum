@@ -3,17 +3,16 @@
 import datetime
 import md5
 
-from django.conf import settings
-from django.db import backend, connection, models
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes import generic
-from django.contrib.auth.models import User
-from django.utils.translation import ugettext_lazy as _
-from django.utils.html import strip_tags
+from django.contrib.contenttypes        import generic
+from django.contrib.auth.models         import User
+from django.utils.translation           import ugettext_lazy as _
+from django.utils.html                  import strip_tags
+from django.conf                        import settings
+from django.db                          import backend, connection, models
 
-from blog.templatetags.nofollow import nofollow
-from render import render
-
+from blog.templatetags.nofollow         import nofollow
+from render                             import render
 
 class CommentNodeManager(models.Manager):
     def for_object(self, obj):
@@ -93,27 +92,30 @@ class CommentNode(models.Model):
     a tree of comments.
     """
     # Comment fields
-    user = models.ForeignKey(User, related_name='comments')
-    pub_date = models.DateTimeField(_(u'Publishing date'), editable=False,
+    user          = models.ForeignKey(User, related_name='comments')
+    pub_date      = models.DateTimeField(_(u'Publishing date'), editable=False,
                                     default=datetime.datetime.now)
-    upd_date = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
-    body = models.TextField(_(u'Body'))
-    body_html = models.TextField(_(u'Body HTML'), editable=False)
-    reply_to_id = models.PositiveIntegerField(editable=False, null=True, blank=True)
-    approved = models.BooleanField(default=False)
+    upd_date      = models.DateTimeField(_(u'Date'), auto_now=True, editable=False)
+    body          = models.TextField(_(u'Body'))
+    body_html     = models.TextField(_(u'Body HTML'), editable=False)
+    reply_to_id   = models.PositiveIntegerField(editable=False, null=True, blank=True)
+    approved      = models.BooleanField(default=False)
 
     # Generic relation to the object being commented on
-    content_type = models.ForeignKey(ContentType)
-    object_id = models.PositiveIntegerField(db_index=True)
-    object = generic.GenericForeignKey('content_type', 'object_id')
+    content_type  = models.ForeignKey(ContentType)
+    object_id     = models.PositiveIntegerField(db_index=True, editable=False)
+    object        = generic.GenericForeignKey('content_type', 'object_id')
 
     # Tree fields
-    lft = models.PositiveIntegerField(db_index=True, editable=False)
-    rght = models.PositiveIntegerField(editable=False)
+    lft           = models.PositiveIntegerField(db_index=True, editable=False)
+    rght          = models.PositiveIntegerField(editable=False)
 
-    all_objects = CommentNodeManager()
-    objects = ApprovedCommentNodeManager()
-
+    all_objects   = CommentNodeManager()
+    objects       = ApprovedCommentNodeManager()
+    
+    # Required for start page statistic
+    admin_view_at = models.DateTimeField(editable=False, blank=True, null=True)
+    
     class Meta:
         db_table            = 'comment_nodes'
         verbose_name        = _('Comment')
@@ -123,6 +125,10 @@ class CommentNode(models.Model):
         return self.body[:50]
 
     def get_clean_html(self):
+        if not self.admin_view_at:
+            self.admin_view_at = datetime.datetime.today()
+            self.save()
+        
         return strip_tags(self.body_html)[:50]
     get_clean_html.allow_tags = True
 

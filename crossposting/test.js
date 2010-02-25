@@ -40,10 +40,7 @@ var sys = require('sys'), libxml = require('./lib/libxmljs');
 sys.puts(libxml.parseHtmlString('text').get('//entry/link[@rel="alternate"]/@href').children()[0].text());
 */
 
-var rest = require('./lib/restler');
+var A = {}, sys = require('sys');
 
-rest.post('http://localhost:8000/crossposting/9abbf2075e5e08b4f72fbdf3ccbc61b0', {
-	data: {'url': 'http://google.com'},
-}).addListener('complete', function(data, response) {
-	sys.puts(data);
-});
+sys.puts((A['asd'] ? A['asd'] : 'no'));
+

@@ -33,7 +33,7 @@
 		<h2>{% trans "Navigation" %}</h2>
 		<ul class="b-static-links">
 			{% if user.is_authenticated %}
-				{% if user.is_staff %}<li><a href="{% url admin "." %}">{% trans "Admin" %}</a></li>{% endif %}
+				{% if user.is_staff %}<li><a href="{% url admin '' %}">{% trans "Admin" %}</a></li>{% endif %}
 				<li><a href="{% url profile_edit %}">{% trans "Profile" %}</a></li>
 				<li><a href="{% url logout %}">{% trans "Logout" %}</a></li>
 			{% endif %}
