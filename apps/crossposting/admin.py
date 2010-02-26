@@ -80,6 +80,7 @@ class BFPostAdmin(BFAdmin):
                 params.append({
                     'crawler' : service.type,
                     'security': code,
+                    'catcher' : request.META['HTTP_HOST'],
                     
                     'params'  : dict(map(lambda N: (N, service.__getattribute__(N)),
                         ('login', 'email', 'password') +

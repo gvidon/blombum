@@ -40,7 +40,6 @@ var sys = require('sys'), libxml = require('./lib/libxmljs');
 sys.puts(libxml.parseHtmlString('text').get('//entry/link[@rel="alternate"]/@href').children()[0].text());
 */
 
-var A = {}, sys = require('sys');
+var sys = require('sys');
 
-sys.puts((A['asd'] ? A['asd'] : 'no'));
-
+sys.puts([1,2,3].join('/'));
