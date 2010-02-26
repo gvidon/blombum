@@ -1,5 +1,9 @@
 # -*- mode: python; coding: utf-8; -*-
-import json
+try:
+	from json import dumps
+except ImportError:
+	from json import write as dumps
+
 from datetime         import datetime
 
 from django.shortcuts import get_object_or_404
@@ -30,7 +34,7 @@ def catch(request, code):
 def urls(request, id):
 	#!!WARN!!: тут еще отправлять инфу о том - закончен
 	#кросспостинг поста или нет и когда
-	return HttpResponse(json.dumps([{
+	return HttpResponse(dumps([{
 		'service': C.service.name,
 		'error'  : C.error_code,
 		'date'   : C.finished_at and C.finished_at.strftime("%d %B %Y") or None,
