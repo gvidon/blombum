@@ -2,7 +2,6 @@ $(document).ready(function() {
 	//drop execution on entry add form
 	if(window.location.href.search('/admin/blog/post/add') != -1)
 		return false;
-		
 	
 	$('.form-row.crossposting_que').hide().after('<div class="form-row">\
 		Crosspost URLs <div class="ajaxloader">&nbsp;</div>\
