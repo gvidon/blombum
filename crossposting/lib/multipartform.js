@@ -1,4 +1,4 @@
-var posix = require('fs'),
+var fs = require('fs'),
     sys   = require('sys');
 
 exports.defaultBoundary = '48940923NODERESLTER3890457293';
@@ -16,7 +16,7 @@ File.prototype = {
   },
   load: function() {
     var p = new process.Promise(), self = this;
-    posix.cat(this.path, 'binary').addCallback(function(data) {
+    fs.cat(this.path, 'binary').addCallback(function(data) {
       self.data = data;
       p.emitSuccess();
     });
@@ -96,11 +96,11 @@ Request.prototype = {
     var sentCount = 0, self = this;
     this.eachPart(function(part) {
       part.encode(function(encoded) {
-        request.sendBody(self.boundary + '\r\n' + encoded, 'binary');
+        request.write(self.boundary + '\r\n' + encoded, 'binary');
         sentCount++;
         
         if (sentCount == self.fieldCount) {
-          request.sendBody(self.boundary + '--', self.encoding, 'binary');
+          request.write(self.boundary + '--', self.encoding, 'binary');
           callback.call(self);
         }
       });

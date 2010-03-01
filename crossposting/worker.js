@@ -5,6 +5,7 @@ var
 
 var
 	CATCHER_PATH = 'crossposting',
+	SERVER_HOST  = 'localhost',
 	SERVER_PORT  = 8001;
 
 var crawlers = {
@@ -26,24 +27,21 @@ function processParams(crawler, code, catcher, P) {
 		}
 		
 		//отправить блог движку полученные урлы
-		rest.post(
-			'http://' + [catcher, CATCHER_PATH, code].join('/'),
-			{ data: {'url': P['entry'], 'error': (P['error'] ? P['error'] : '')} }
-		).addListener('complete', function(data, response) {
-				sys.puts(P['entry']);
-				sys.puts(data);
-		});
+		rest.post('http://' + [catcher, CATCHER_PATH, code].join('/'), { data: {
+			'error': (P['error'] ? P['error'] : ''),
+			'url'  : P['entry']
+		}});
 	});
 }
 
 http.createServer(function (request, response) {
 	var data = '';
 	
-	request.addListener('body', function(chunk) {
+	request.addListener('data', function(chunk) {
 		data += chunk;
 	});
 	
-	request.addListener('complete', function() {
+	request.addListener('end', function() {
 		var input = JSON.parse(data);
 		
 		for(i in input)
@@ -54,6 +52,6 @@ http.createServer(function (request, response) {
 				crawlers[input[i]['crawler']].actions['auth']('', input[i]['params'])
 			);
 	});
-}).listen(SERVER_PORT, 'localhost');
+}).listen(SERVER_PORT, SERVER_HOST);
 
 sys.puts('Ready to serve, master!');

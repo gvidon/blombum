@@ -38,7 +38,6 @@ function Request(url, options) {
   
   if (this.options.multipart) this._createMultipartRequest();
   else this._createRequest();
-    
 }
 
 Request.prototype = new process.EventEmitter();
@@ -78,25 +77,28 @@ process.mixin(Request.prototype, {
     var self = this;
     
     if (this._isRedirect(response) && this.options.followRedirects == true) {
+      try {
       var location = uri.resolve(this.url, response.headers['location']);
       this.options.originalRequest = this;
-      request(location, this.options);
+        request(location, this.options);
+      } catch(e) {
+        self._respond('error', '', 'Failed to follow redirect');
+      }
     } else {
       var body = '';
       
-      response.addListener('body', function(chunk) {
-        body += chunk;
+      response.addListener('data', function(chunk) {
+       body += chunk;
       });
       
-      response.addListener('complete', function() {
-        if (self.options.parser) body = self.options.parser.call(response, body);
+      response.addListener('end', function() {
+         if (self.options.parser) body = self.options.parser.call(response, body);
         
         if (parseInt(response.statusCode) >= 400) self._respond('error', body, response);
         else self._respond('success', body, response);
         
         self._respond(response.statusCode.toString().replace(/\d{2}$/, 'XX'), body, response);
         self._respond(response.statusCode.toString(), body, response);
-        
         self._respond('complete', body, response);
       });
     }
@@ -106,14 +108,20 @@ process.mixin(Request.prototype, {
     else this.emit(type, data, response);
   },
   _makeRequest: function(method) {
+	var self = this;
     // Support new and old interface for making requests for now
+	var request;
     if (typeof this.client.request == 'function') {
-      return this.client.request(method, this._fullPath(), this.headers);
+	  request = this.client.request(method, this._fullPath(), this.headers);
     } else {
       method = method.toLowerCase();
       if (method == 'delete') method = 'del';
-      return this.client[method](this._fullPath(), this.headers);
+	  request = this.client[method](this._fullPath(), this.headers);
     }
+	request.addListener("response", function(response) {
+		self._responseHandler(response);
+	});
+	return request;
   },
   _createRequest: function() {
     if (typeof this.options.data == 'object') {
@@ -123,8 +131,7 @@ process.mixin(Request.prototype, {
     }
   
     this.request = this._makeRequest(this.options.method);
-  
-    if (this.options.data) this.request.sendBody(this.options.data.toString(), this.options.encoding || 'utf8');
+    if (this.options.data) this.request.write(this.options.data.toString(), this.options.encoding || 'utf8');
   },
   _createMultipartRequest: function() {
     this.headers['Content-Type'] = 'multipart/form-data; boundary=' + multipart.defaultBoundary;
@@ -134,19 +141,13 @@ process.mixin(Request.prototype, {
   },
   run: function() {
     var self = this;
-    
     if (this.options.multipart) {
       multipart.send(this.request, this.options.data, function() {
-        self.request.finish(function(response) {
-          self._responseHandler(response);
-        });
+        self.request.close();
       });
     } else {
-      this.request.finish(function(response) {
-        self._responseHandler(response);
-      });
+		this.request.close();
     }
-    
     return this;
   }
 }); 
@@ -159,11 +160,11 @@ function shortcutOptions(options, method) {
 }
     
 function request(url, options) {  
-  return (new Request(url, options)).run();
+  	return (new Request(url, options)).run();
 }
 
 function get(url, options) {
-  return request(url, shortcutOptions(options, 'GET'));
+ return request(url, shortcutOptions(options, 'GET'));;
 }
 
 function post(url, options) {
@@ -180,12 +181,19 @@ function del(url, options) {
 
 var parsers = {
   auto: function(data) {
-    if (this.headers['content-type'].indexOf('application/json') == 0) 
-      return parsers.json(data);
-    if (this.headers['content-type'].indexOf('application/xml') == 0) 
-      return parsers.xml(data);
-    if (this.headers['content-type'].indexOf('application/yaml') == 0) 
-      return parsers.yaml(data);
+    var contentType = this.headers['content-type'];
+    if (contentType) {
+      if (contentType.indexOf('application/') == 0) {
+        if (contentType.indexOf('json', 12) == 12)
+          return parsers.json(data);
+        if (contentType.indexOf('xml', 12) == 12)
+          return parsers.xml(data);
+        if (contentType.indexOf('yaml', 12) == 12)
+          return parsers.yaml(data);
+      }
+    }
+
+    // Data doesn't match any known application/* content types.
     return data;
   },
   xml: function(data) {
