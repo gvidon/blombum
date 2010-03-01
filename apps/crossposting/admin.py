@@ -24,7 +24,7 @@ class BFPostAdmin(BFAdmin):
     """
 
     def get_form(self, request, obj=None, **kwargs):
-        import hashlib, httplib, json, random, re, subprocess
+        import hashlib, httplib, json, random, re, subprocess, sys
         
         from django.forms import ValidationError
         from django.db    import IntegrityError
