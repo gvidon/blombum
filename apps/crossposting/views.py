@@ -32,8 +32,6 @@ def catch(request, code):
 
 #RETURN CROSSPOSTING URLS FOR ENTRY
 def urls(request, id):
-	#!!WARN!!: тут еще отправлять инфу о том - закончен
-	#кросспостинг поста или нет и когда
 	return HttpResponse(dumps([{
 		'service': C.service.name,
 		'error'  : C.error_code,

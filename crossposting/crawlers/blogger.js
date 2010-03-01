@@ -1,4 +1,4 @@
-var sys = require('sys'), libxml = require('../lib/libxmljs');
+var sys = require('sys'), libxml = require('../lib/libxmljs-0.2.0');
 
 exports.actions = {
 	'auth': function(data, params) {return {

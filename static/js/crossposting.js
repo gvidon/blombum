@@ -27,6 +27,10 @@ $(document).ready(function() {
 					$('#crossposts').append('<li><strong>'+data[i]['service']+'</strong>: Error "<i>'+
 						data[i]['error']+
 					'</i></i> '+data[i]['date']+'</li>');
+				
+				//paste wait message
+				else if(data[i]['error'])
+					$('#crossposts').append('<li>in progress...</li>');
 		
 		return true;
 	});
