@@ -24,7 +24,7 @@ class BFPostAdmin(BFAdmin):
     """
 
     def get_form(self, request, obj=None, **kwargs):
-        import hashlib, httplib, json, random, re, subprocess, sys
+        import hashlib, httplib, json, random, re, subprocess
         
         from django.forms import ValidationError
         from django.db    import IntegrityError
@@ -43,10 +43,10 @@ class BFPostAdmin(BFAdmin):
                 B.close()
                 
                 return self.cleaned_data['crossposting_que']
-            except:
+            except Exception as inst:
                 raise ValidationError(
                     u'Sorry but crossposting is not available now.'+
-                    'You can save your post and try later. (' + sys.exc_info()[0] + ')')
+                    'You can save your post and try later.' + str(inst))
         
         form = super(BFPostAdmin, self).get_form(request, obj, **kwargs)
         form.clean_crossposting_que = pingup_blogressor
