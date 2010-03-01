@@ -46,7 +46,7 @@ class BFPostAdmin(BFAdmin):
             except:
                 raise ValidationError(
                     u'Sorry but crossposting is not available now.'+
-                    'You can save your post and try later.')
+                    'You can save your post and try later.'+settings.BLOGRESSOR_HOST)
         
         form = super(BFPostAdmin, self).get_form(request, obj, **kwargs)
         form.clean_crossposting_que = pingup_blogressor
