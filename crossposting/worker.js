@@ -54,6 +54,6 @@ http.createServer(function (request, response) {
 				crawlers[input[i]['crawler']].actions['auth']('', input[i]['params'])
 			);
 	});
-}).listen(SERVER_PORT);
+}).listen(SERVER_PORT, 'localhost');
 
 sys.puts('Ready to serve, master!');
