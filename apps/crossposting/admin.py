@@ -92,7 +92,7 @@ class BFPostAdmin(BFAdmin):
             
             # отправить JSON блогрессору и очистить очередь
             try:
-                B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST, timeout=2)
+                B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST)
                 
                 B.request('POST', '/', re.sub('(\r\n|&nbsp;)', '', json.dumps(params)))
                 B.close()
