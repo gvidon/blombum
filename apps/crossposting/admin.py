@@ -99,17 +99,12 @@ class BFPostAdmin(BFAdmin):
             try:
                 B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST)
                 
-                B.request('POST', '/', re.sub('(\r\n|&nbsp;)', '', json_dump(params).encode('utf8')))
+                B.request('POST', '/', re.sub('(\r\n|&nbsp;)', '', json_dump(params).decode('utf8')))
                 B.close()
                 
                 self.cleaned_data['crossposting_que'] = []
                 
             except:
-                B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST)
-                
-                B.request('POST', '/', str(sys.exc_info()[0]))
-                B.close()
-                
                 Crosspost.objects.filter(code__in=[P['security'] for P in params]).delete()
             
             return post
