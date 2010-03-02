@@ -42,7 +42,6 @@ http.createServer(function (request, response) {
 	
 	request.addListener('data', function(chunk) {
 		data += chunk;
-		sys.puts(data);
 	});
 	
 	request.addListener('end', function() {
