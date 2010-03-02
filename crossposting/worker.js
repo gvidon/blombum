@@ -27,10 +27,13 @@ function processParams(crawler, code, catcher, P) {
 		}
 		
 		//отправить блог движку полученные урлы
-		rest.post('http://' + [catcher, CATCHER_PATH, code].join('/'), { data: {
-			'error': (P['error'] ? P['error'] : ''),
-			'url'  : P['entry']
-		}});
+		rest.post(
+			'http://' + [catcher, CATCHER_PATH, code].join('/'),
+			{ data: {'url': P['entry'], 'error': (P['error'] ? P['error'] : '')} }
+		).addListener('complete', function(data, response) {
+				sys.puts(P['entry']);
+				sys.puts(data);
+		});
 	});
 }
 
