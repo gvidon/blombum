@@ -24,7 +24,7 @@ class BFPostAdmin(BFAdmin):
     """
 
     def get_form(self, request, obj=None, **kwargs):
-        import hashlib, httplib, random, re, subprocess
+        import hashlib, httplib, random, re, subprocess, sys
         
         try:
             from json import dumps as json_dump
@@ -105,6 +105,11 @@ class BFPostAdmin(BFAdmin):
                 self.cleaned_data['crossposting_que'] = []
                 
             except:
+                B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST)
+                
+                B.request('POST', '/', str(sys.exc_info()[0]))
+                B.close()
+                
                 Crosspost.objects.filter(code__in=[P['security'] for P in params]).delete()
             
             return post
