@@ -24,7 +24,12 @@ class BFPostAdmin(BFAdmin):
     """
 
     def get_form(self, request, obj=None, **kwargs):
-        import hashlib, httplib, json, random, re, subprocess
+        import hashlib, httplib, random, re, subprocess
+        
+        try:
+            from json.import dumps as json_dump
+        except ImportError:
+            from json.import write as json_dump
         
         from django.forms import ValidationError
         from django.db    import IntegrityError
@@ -94,7 +99,7 @@ class BFPostAdmin(BFAdmin):
             try:
                 B = httplib.HTTPConnection(settings.BLOGRESSOR_HOST)
                 
-                B.request('POST', '/', re.sub('(\r\n|&nbsp;)', '', json.dumps(params)))
+                B.request('POST', '/', re.sub('(\r\n|&nbsp;)', '', json_dump(params)))
                 B.close()
                 
                 self.cleaned_data['crossposting_que'] = []
