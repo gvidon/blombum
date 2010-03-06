@@ -3,16 +3,20 @@ $(document).ready(function() {
 	if(window.location.href.search('/admin/blog/post/add') != -1)
 		return false;
 	
-	$('.form-row.crossposting_que').hide().after('<div class="form-row">\
-		Crosspost URLs <div class="ajaxloader">&nbsp;</div>\
-		<ul id="crossposts"></ul><br/>\
-	</div>').after('<div class="form-row"><a id="show-services" href="#">Make more crossposts</a></div>');
+	$('.form-row.crossposting_que').hide()
+		.after('<div class="form-row">\
+			Crosspost URLs <div class="ajaxloader">&nbsp;</div>\
+			<ul id="crossposts"></ul><br/>\
+		</div>')
+		.after('<div class="form-row"><a id="show-services" href="#">Make more crossposts</a></div>')
+		
+		.children('.errorlist').children('li').parent().parent().show();
 	
 	$.getJSON(window.location.href.replace('/admin/blog/post', '/crossposting/urls'), function(data) {
 		$('#crossposts').html('');
 		$('.ajaxloader').hide();
 		
-		if( ! data)
+		if( ! data.length)
 			$('#crossposts').append('<li>No crossposts made yet</li>');
 		else
 			for(var i in data)
