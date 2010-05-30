@@ -8,9 +8,9 @@
 		{% if not user.is_authenticated %}
 		<div class="b-login-bar">
 			<form id="login-form" action="{% url login %}" method="post">
+				<a href="#openid-form" tabindex="30"></a>
 				<ul>
 					<li>
-						<input type="hidden" tabindex="30" />
 						<label>{% trans 'E-Mail' %}: <input type="text" id="email" name="email" tabindex="11" /></label>
 						<span><a href="#openid-form" id="login-openid" tabindex="15">{% trans 'OpenID' %}</a></span>
 					</li>
@@ -29,7 +29,7 @@
 					</li>
 				</ul>
 				<input type="submit" value="{% trans 'Login' %}" tabindex="22" />
-				<input type="hidden" tabindex="20" />
+				<a href="#openid-form" tabindex="20"></a>
 			</form>
 		</div>
 		{% endif %}
