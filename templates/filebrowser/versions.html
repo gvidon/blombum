@@ -65,7 +65,7 @@
                 <th>{% trans 'Image Version' %}</th>
                 
                 <!-- Debug -->
-                {% if settings_var.DEBUG %}<th>{%Debug %}</th>{% endif %}
+                {% if settings_var.DEBUG %}<th>{% trans "Debug" %}</th>{% endif %}
                 
                 </tr>
             </thead>
@@ -114,8 +114,8 @@
                 <td>
                     {% version_setting version %}
                     <strong>{{ version_setting.verbose_name }}</strong><br />
-                    {% if version_setting.width %}{%Width %}: {{ version_setting.width }}px<br />{% endif %}
-                    {% if version_setting.height %}{%Height %}: {{ version_setting.height }}px{% endif %}
+                    {% if version_setting.width %}{% trans "Width" %}: {{ version_setting.width }}px<br />{% endif %}
+                    {% if version_setting.height %}{% trans "Height" %}: {{ version_setting.height }}px{% endif %}
                 </td>
                 
                 <!-- Version -->

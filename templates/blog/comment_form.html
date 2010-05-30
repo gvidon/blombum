@@ -11,9 +11,9 @@
 				{% include 'blog/forms/_anonymous-comment.html' %}
 			{% endif %}
 			<li class="form-button-row">
-				<input class="form-button form-submit" type="submit" value="{%Comment %}" />
-				<input class="form-button" type="button" value="{%Preview %}" onclick="return preview_comment('{% url comment_preview %}');" />
-				<input class="form-button" type="button" value="{%Cancel %}" onclick="return cancel_comment();" />
+				<input class="form-button form-submit" type="submit" value="{% trans "Comment" %}" />
+				<input class="form-button" type="button" value="{% trans "Preview" %}" onclick="return preview_comment('{% url comment_preview %}');" />
+				<input class="form-button" type="button" value="{% trans "Cancel" %}" onclick="return cancel_comment();" />
 				<input type="hidden" name="reply_to" id="id_reply_to" />
 			</li>
 		</ul>

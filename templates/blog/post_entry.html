@@ -33,7 +33,7 @@
 
 	<div class="content">
 		{% if not post_detail and object.shortable %}
-			{{ object.html_short|safe }}&nbsp;<span class="read-more"><a href="{{ object.get_absolute_url }}">{%continue&nbsp;reading %}</a></span>
+			{{ object.html_short|safe }}&nbsp;<span class="read-more"><a href="{{ object.get_absolute_url }}">{% trans "continue&nbsp;reading" %}</a></span>
 		{% else %}
 			{{ object.html|safe }}
 		{% endif %}

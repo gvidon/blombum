@@ -14,21 +14,21 @@
 
 {% block content %}
 <div id="content-main">
-	<p>{%You currently have %}
-	<strong><a href="/admin/blog/post">{% posts_count %} {%posts %}</a></strong>
-	{%with %}
-	<a href="/admin/discussion/commentnode/"><strong>{% comments_count %} {%comments %}</strong></a>.</p>
+	<p>{% trans "You currently have" %}
+	<strong><a href="/admin/blog/post">{% posts_count %} {% trans "posts" %}</a></strong>
+	{% trans "with" %}
+	<a href="/admin/discussion/commentnode/"><strong>{% comments_count %} {% trans "comments" %}</strong></a>.</p>
 	
 	<!-- COMMON BLOG ACTIONS -->
 	<div class="menu-icons">
-		<h2>{%Blog actions %}</h2>
+		<h2>{% trans "Blog actions" %}</h2>
 		
 		<div><a href="/admin/blog/post/add/">
 			<div class="icon">
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/newpost.png" />
 			</div><br/>
 			
-			<span>{%New message %}</span>
+			<span>{% trans "New message" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/blog/post">
@@ -36,7 +36,7 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/entries.png" />
 			</div><br/>
 			
-			<span>{%Entries %}</span>
+			<span>{% trans "Entries" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/discussion/commentnode/">
@@ -44,20 +44,20 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/comments.png" />
 			</div><br/>
 			
-			<span>{%Comments %}</span>
+			<span>{% trans "Comments" %}</span>
 		</a></div>
 	</div>
 	
 	<!-- SETTINGS -->
 	<div class="menu-icons">
-		<h2>{%Settings %}</h2>
+		<h2>{% trans "Settings" %}</h2>
 		
 		<div><a href="/admin/settingsDB/settings/add">
 			<div class="icon">
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/newconfig.png" />
 			</div><br/>
 			
-			<span>{%New config set %}</span>
+			<span>{% trans "New config set" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/settingsDB/settings/">
@@ -65,20 +65,20 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/configs.png" />
 			</div><br/>
 			
-			<span>{%Edit config set %}</span>
+			<span>{% trans "Edit config set" %}</span>
 		</a></div><br/>
 	</div>
 	
 	<!-- SOCIAL SERVICES -->
 	<div class="menu-icons">
-		<h2>{%Social services %}</h2>
+		<h2>{% trans "Social services" %}</h2>
 		
 		<div><a href="/admin/crossposting/sideservice/add">
 			<div class="icon">
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/newaccount.png" />
 			</div><br/>
 			
-			<span>{%New account %}</span>
+			<span>{% trans "New account" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/crossposting/sideservice">
@@ -86,7 +86,7 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/accounts.png" />
 			</div><br/>
 			
-			<span>{%Edit accounts %}</span>
+			<span>{% trans "Edit accounts" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/crossposting/crosspost">
@@ -94,20 +94,20 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/crossposts.png" />
 			</div><br/>
 			
-			<span>{%Published posts %}</span>
+			<span>{% trans "Published posts" %}</span>
 		</a></div><br/>
 	</div>
 	
 	<!-- USER ACCOUNTS -->
 	<div class="menu-icons">
-		<h2>{%User's accounts %}</h2>
+		<h2>{% trans "User's accounts" %}</h2>
 		
 		<div><a href="/admin/auth/user/add">
 			<div class="icon">
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/newuser.png" />
 			</div><br/>
 			
-			<span>{%New user %}</span>
+			<span>{% trans "New user" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/auth/user">
@@ -115,7 +115,7 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/users.png" />
 			</div><br/>
 			
-			<span>{%Edit users %}</span>
+			<span>{% trans "Edit users" %}</span>
 		</a></div>
 		
 		<div><a href="/admin/auth/group">
@@ -123,7 +123,7 @@
 				<img src="{% load adminmedia %}{% admin_media_prefix %}img/admin/groups.png" />
 			</div><br/>
 			
-			<span>{%Groups %}</span>
+			<span>{% trans "Groups" %}</span>
 		</a></div><br/>
 	</div>
 </div>
@@ -132,7 +132,7 @@
 {% block sidebar %}
 <div id="content-related">
 	<div class="module">
-		<h2>{%New comments %}</h2>
+		<h2>{% trans "New comments" %}</h2>
 		{% new_comments %}
 	</div><br/>
 	

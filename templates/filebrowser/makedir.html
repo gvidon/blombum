@@ -30,7 +30,7 @@
             {{ form.dir_name }}
             <p class="help">
                 {{ form.dir_name.help_text|safe }}
-                {% if settings_var.CONVERT_FILENAME %}<br />{%The Name will be converted to lowercase. Spaces will be replaced with underscores. %}{% endif %}
+                {% if settings_var.CONVERT_FILENAME %}<br />{% trans "The Name will be converted to lowercase. Spaces will be replaced with underscores." %}{% endif %}
             </p>
         </div>
         </fieldset>

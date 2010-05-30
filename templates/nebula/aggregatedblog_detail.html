@@ -2,11 +2,11 @@
 {% load i18n %}
 {% load theme %}
 
-{% block title %}{%Nebula Planet %} - {{ blog.name }}{% endblock %}
+{% block title %}{% trans "Nebula Planet" %} - {{ blog.name }}{% endblock %}
 
 
 {% block content %}
-<h2><a href="{% url nebula_index %}">{%Latest entries %}</a> - <a href="{{ blog.link }}">{{ blog.name }}</a>
+<h2><a href="{% url nebula_index %}">{% trans "Latest entries" %}</a> - <a href="{{ blog.link }}">{{ blog.name }}</a>
 <a href="{{ blog.feed }}"><img src="{% global_staticfile "img/feed-icon-14x14.png" %}" alt="feed" /> </a></h2>
 
 <div class="post_list">

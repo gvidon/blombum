@@ -9,8 +9,8 @@ Total count: {{ hits }}
   <li><a href="{{ object.get_absolute_url }}">{{ object }}</a> - {{ object.date|date }}</li>
   {% endfor %}
 </ul>
-{% if has_next %}<a href="?page={{ next }}">{%Older posts %}</a>{% endif %}
+{% if has_next %}<a href="?page={{ next }}">{% trans "Older posts" %}</a>{% endif %}
 {% if has_previous %}
-<a href="{% ifequal previous 1 %}.{% else %}?page={{ previous }}{% endifequal %}">{%Newer posts %}</a>
+<a href="{% ifequal previous 1 %}.{% else %}?page={{ previous }}{% endifequal %}">{% trans "Newer posts" %}</a>
 {% endif %}
 {% endblock %}
