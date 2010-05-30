@@ -3,18 +3,18 @@
 {% load i18n %}
 {% load watchlist_tags %}
 
-{% block title %}{% trans "Subscriptions list" %}{% endblock %}
+{% block title %}{%Subscriptions list %}{% endblock %}
 
 {% block content %}
-<h1>{% trans "Subscriptions list" %}.</h1>
+<h1>{%Subscriptions list %}.</h1>
 
 <ul>
   {% for subscription in object_list %}
-  <li><a href="{{ subscription.object.get_absolute_url }}">{{ subscription.object }}</a> (<a href="{% unsubscribe_url subscription.object %}">{% trans "unsubscribe" %}</a>)</li>
+  <li><a href="{{ subscription.object.get_absolute_url }}">{{ subscription.object }}</a> (<a href="{% unsubscribe_url subscription.object %}">{%unsubscribe %}</a>)</li>
   {% endfor %}
 </ul>
 
-<h2>{% trans "Unsubscribe from subscription type" %}.</h2>
+<h2>{%Unsubscribe from subscription type %}.</h2>
 <ul>
   {% for subscription in object_list %}
   {% ifchanged subscription.content_type %}

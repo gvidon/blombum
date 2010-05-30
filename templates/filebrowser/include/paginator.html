@@ -2,7 +2,7 @@
 
 {% if results_var.results_total and not results_var.results_current %}
 <p class="paginator">
-    <strong>{% trans "No Items Found" %}</strong>
+    <strong>{%No Items Found %}</strong>
 </p>
 {% endif %}
 
@@ -23,6 +23,6 @@
         {% endfor %}
     {% endif %}
 {% else %}
-    <strong>{% trans "No Items" %}</strong>
+    <strong>{%No Items %}</strong>
 {% endif %}
 </p>

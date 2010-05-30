@@ -2,16 +2,16 @@
 
 {% load i18n %}
 
-{% block title %}{% trans "Posts year archive" %}{% endblock %}
+{% block title %}{%Posts year archive %}{% endblock %}
 
 {% block content %}
 
 {% filter typogrify %}
-  {% if year %}<h1>{% trans "Archive for" %} {{ year }}</h1>{% endif %}
+  {% if year %}<h1>{%Archive for %} {{ year }}</h1>{% endif %}
 {% endfilter %}
 
 {% for month in date_list %}
-<a href="{% url month_archive year=year,month=month|get_month %}">{% trans "Archive for" %} {{ month|date:"F, Y" }}</a>
+<a href="{% url month_archive year=year,month=month|get_month %}">{%Archive for %} {{ month|date:"F, Y" }}</a>
 <br/>
 {% endfor %}
 
