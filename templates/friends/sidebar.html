@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load theme %}
 
-<h2>{% trans "Blogroll" %}
+<h2>{% trans 'Blogroll' %}
     <a href="{% url friends_opml %}"><img src="{{ STATIC_URL }}/img/opml-icon-16x16.png" alt="opml" /></a>
     <a href="{% url feed "friends" %}"><img src="{{ STATIC_URL }}/img/feed-icon-16x16.png" alt="feed" /></a>
 </h2>
@@ -12,5 +12,5 @@
     {% endfor %}
     </ul>
     {% else %}
-    <p>{% trans "Have no friends yet" %}</p>
+    <p>{% trans 'Have no friends yet' %}</p>
     {% endif %}

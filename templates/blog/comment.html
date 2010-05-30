@@ -20,11 +20,11 @@
 			<a class="edit-comment"
 			   id="edit-comment-{{ comment.id }}"
 			   onclick="return edit_comment({{ comment.id }}, '{% url comment_edit comment.id %}');"
-			   href="#">{% trans "edit" %}</a>
-			<input type="submit" value="{% trans "cancel" %}" class="cancel-edit" style="display: none;"
+			   href="#">{% trans 'edit' %}</a>
+			<input type="submit" value="{% trans 'cancel' %}" class="cancel-edit" style="display: none;"
 				   id="cancel-edit-{{ comment.id }}"
 				   onclick="return cancel_edit({{ comment.id }});">
-			<input type="submit" value="{% trans "submit" %}" class="edit-submit" style="display: none;"
+			<input type="submit" value="{% trans 'submit' %}" class="edit-submit" style="display: none;"
 				   id="edit-submit-{{ comment.id }}"
 				   onclick="return submit_edit({{ comment.id }}, '{% url comment_edit comment.id %}');" />
 		</li>
@@ -35,7 +35,7 @@
 			<a class="reply-link"
 			   id="reply-link-{{ comment.id }}"
 			   onclick="return replyto({{ comment.id }})"
-			   href="?reply_to={{ comment.id }}">{% trans "reply" %}</a>
+			   href="?reply_to={{ comment.id }}">{% trans 'reply' %}</a>
 		</li>
 		{% endif %}
 		
@@ -44,7 +44,7 @@
 			<a class="delete-comment"
 			   id="delete-comment-{{ comment.id }}"
 			   onclick="return delete_comment({{ comment.id }}, '{% url comment_delete comment.id %}');"
-			   href="#">{% trans "delete" %}</a>
+			   href="#">{% trans 'delete' %}</a>
 		</li>
 		{% endif %}
 	</ul>

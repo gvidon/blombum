@@ -1,9 +1,9 @@
 {% load i18n %}
 {% load tagging_tags %}
-	<h2>{% trans "Blog information" %}</h2>
+	<h2>{% trans 'Blog information' %}</h2>
 	<ul>
 		<li class="b-block">
-			<h3>{% trans "Last comments" %}
+			<h3>{% trans 'Last comments' %}
 				<a href="{% url feed "comments" %}"><img alt="Last comments feed" src="{{ STATIC_URL }}img/feed-icon-14x14.png"/></a>
 			</h3>
 
@@ -14,12 +14,12 @@
 					{% endfor %}
 				</ul>
 			{% else %}
-				<div>{% trans "No comments on blog" %}</div>
+				<div>{% trans 'No comments on blog' %}</div>
 			{% endif %}
 		</li>
 
 		<li class="b-block">
-			<h3>{% trans "Last posts" %}
+			<h3>{% trans 'Last posts' %}
 				<a href="{% url feed "blog" %}"><img alt="Last posts feed" src="{{ STATIC_URL }}img/feed-icon-14x14.png"/></a>
 			</h3>
 			{% if last_posts %}
@@ -29,14 +29,14 @@
 					{% endfor %}
 				</ul>
 			{% else %}
-				<div>{% trans "No posts on blog" %}</div>
+				<div>{% trans 'No posts on blog' %}</div>
 			{% endif %}
 		</li>
 
 		
 	<!--<li class="b-block">
-			<h3>{% trans "Popular posts" %}</h3>
-			{% trans "Feature not ready yet" %}
+			<h3>{% trans 'Popular posts' %}</h3>
+			{% trans 'Feature not ready yet' %}
 			{% comment %}
 			{% if popular_posts %}
 			<ul>
@@ -45,14 +45,14 @@
 			{% endfor %}
 			</ul>
 			{% else %}
-			<div>{% trans "No posts on blog" %}</div>
+			<div>{% trans 'No posts on blog' %}</div>
 			{% endif %}
 			{% endcomment %}
 		</li>-->
 
 		{% if tags %}
 		<li class="b-block">
-			<h3>{% trans "Tags" %}</h3>
+			<h3>{% trans 'Tags' %}</h3>
 			<div class="tag-cloud content">
 				{% tag_cloud_for_model blog.post as tags %}
 				{% render_tag_cloud tags %}
@@ -63,7 +63,7 @@
 		{% ifapp friends %}
 		{% load friends_sidebar %}
 		<li class="b-block">
-			<h3>{% trans "Friends" %}</h3>
+			<h3>{% trans 'Friends' %}</h3>
 			{% friends_sidebar %}
 		</li>
 		{% endifapp %}
@@ -71,7 +71,7 @@
 		{% ifapp life %}
 		{% load life_sidebar %}
 		<li class="b-block">
-			<h3>{% trans "Life" %} <a href="{% url feed "life" %}"><img alt="Life feed" src="{{ STATIC_URL }}img/feed-icon-14x14.png"/></a></h3>
+			<h3>{% trans 'Life' %} <a href="{% url feed "life" %}"><img alt="Life feed" src="{{ STATIC_URL }}img/feed-icon-14x14.png"/></a></h3>
 			{% life_sidebar_events %}
 		</li>
 		{% endifapp %}
@@ -79,7 +79,7 @@
 		{% ifapp sape %}
 		{% load sape_extras %}
 		<li class="b-block advertize">
-			<h3>{% trans "Advertize" %}</h3>
+			<h3>{% trans 'Advertize' %}</h3>
 			<ul>
 				{% sape_links_list %}
 			</ul>

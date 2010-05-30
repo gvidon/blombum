@@ -31,18 +31,18 @@
 		{% ifapp watchlist %}
 			{% load watchlist_tags %}
 			{% if form.subscribe %} {# using CommentForm feature for detection if user is already subscribed to object #}
-				<a class="subscribe-link" href="{% subscribe_url object %}">{% trans "Subscribe" %}</a>
+				<a class="subscribe-link" href="{% subscribe_url object %}">{% trans 'Subscribe' %}</a>
 			{% else %}
-				<a class="subscribe-link" href="{% unsubscribe_url object %}">{% trans "Unsubscribe" %}</a>
+				<a class="subscribe-link" href="{% unsubscribe_url object %}">{% trans 'Unsubscribe' %}</a>
 			{% endif %}
-			({% trans "already" %}: {{ object.watchlist_count }})
+			({% trans 'already' %}: {{ object.watchlist_count }})
 		{% endifapp %}
-		<a class="comment-link" onclick="return comment();" href="#comment-form">{% trans "Comment post" %}</a>
+		<a class="comment-link" onclick="return comment();" href="#comment-form">{% trans 'Comment post' %}</a>
 	</span>
 
 	{% block pingbacks %}
 		{% if object.pingback_count %}
-		<div id="pingbacks"><h3>{% trans "Pingbacks" %}</h3>
+		<div id="pingbacks"><h3>{% trans 'Pingbacks' %}</h3>
 			{% for pingback in object.pingbacks.all %}
 				{% include "blog/pingback.html" %}
 			{% endfor %}
@@ -53,10 +53,10 @@
 	{% comment_tree_for_object object as comments %}
 	{% block comments %}
 		<div class="b-comments">
-			<h3>{% trans "Comments" %}</h3>
+			<h3>{% trans 'Comments' %}</h3>
 			<ul id="comments">
 			{% if not comments %}
-				<li>{% trans "No comments for this post" %}</li>
+				<li>{% trans 'No comments for this post' %}</li>
 			{% endif %}
 
 			{% for comment in comments %}
@@ -73,12 +73,12 @@
 		<span>
 			{% ifapp watchlist %}
 				{% if form.subscribe %} {# using CommentForm feature for detection if user is already subscribed to object #}
-					<a class="subscribe-link" href="{% subscribe_url object %}">{% trans "Subscribe" %}</a>
+					<a class="subscribe-link" href="{% subscribe_url object %}">{% trans 'Subscribe' %}</a>
 				{% else %}
-					<a class="subscribe-link" href="{% unsubscribe_url object %}">{% trans "Unsubscribe" %}</a>
+					<a class="subscribe-link" href="{% unsubscribe_url object %}">{% trans 'Unsubscribe' %}</a>
 				{% endif %}
 			{% endifapp %}
-			<a class="comment-link" onclick="return comment();" href="#comment-form">{% trans "Comment post" %}</a>
+			<a class="comment-link" onclick="return comment();" href="#comment-form">{% trans 'Comment post' %}</a>
 		</span>
 		{% endif %}
 	{% endblock %}

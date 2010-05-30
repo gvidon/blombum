@@ -1,17 +1,17 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load theme %}
-{% block title %}{% trans "Life" %}{% endblock %}
+{% block title %}{% trans 'Life' %}{% endblock %}
 {% block extrahead %}
 <link rel="alternate" type="application/atom+xml" title="{{ site.name }}: life feed" href="{% absolute_url feed "life" %}" />
 {% endblock %}
 
 {% block content %}
-  <h1>{% trans "Life" %}<a href="{% url feed "life" %}"><img src="{{ STATIC_URL }}/img/feed-icon-16x16.png" alt="feed" /></a></h1>
+  <h1>{% trans 'Life' %}<a href="{% url feed "life" %}"><img src="{{ STATIC_URL }}/img/feed-icon-16x16.png" alt="feed" /></a></h1>
 
 {% if user.is_superuser %}
 <div class="admin-links">
-<a href="{% url life_fetch_feeds %}">{% trans "Manual refresh all feeds" %}</a>
+<a href="{% url life_fetch_feeds %}">{% trans 'Manual refresh all feeds' %}</a>
 </div>
 {% endif %}
 

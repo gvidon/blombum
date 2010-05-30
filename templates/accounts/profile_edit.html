@@ -2,16 +2,16 @@
 
 {% load i18n %}
 
-{% block title %}{% trans "Profile editing" %}{% endblock %}
+{% block title %}{% trans 'Profile editing' %}{% endblock %}
 
 {% block content %}
-<p><a href="{% url openid_list %}">{% trans "Associated OpenIDs" %}</a></p>
-<p><a href="{% url merge %}">{% trans "Merge with another account" %}</a></p>
-<p><a href="{% url wl_list %}">{% trans "Subscriptions list" %}</a></p>
+<p><a href="{% url openid_list %}">{% trans 'Associated OpenIDs' %}</a></p>
+<p><a href="{% url merge %}">{% trans 'Merge with another account' %}</a></p>
+<p><a href="{% url wl_list %}">{% trans 'Subscriptions list' %}</a></p>
 <form action="." method="post">
     <table>
         {{ form }}
     </table>
-    <input type="submit" name="Submit" value="{% trans "Submit" %}" />
+    <input type="submit" name="Submit" value="{% trans 'Submit' %}" />
 </form>
 {% endblock %}
