@@ -128,3 +128,8 @@ label {
 	#login-form #password {
 		width: 5em;
 	}
+
+#login-form-marker {
+	position: absolute;
+	width: 0px; height: 0px;
+}
