@@ -19,6 +19,6 @@ exports.actions = {
 	},
 
 	'grab': function(data, params) {
-		return {'entry': data.status.id};
+		return {'entry': 'http://twitter.com/ixth/status/' + data.status.id};
 	}
 };
