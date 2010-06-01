@@ -23,10 +23,10 @@
 			<form id="openid-form" action="{% url openid_signin %}" method="post">
 				<ul>
 					<li><label>{% trans "OpenID" %}: <input type="text" id="openid_url" name="openid_url" tabindex="22" /></label>
-						<span><a href="#login-form" id="login-email" tabindex="23">{% trans "E-Mail" %}</a></span>
+						<span><a href="#login-form" id="login-email" tabindex="21">{% trans "E-Mail" %}</a></span>
 					</li>
 				</ul>
-				<input type="submit" value="{% trans 'Login' %}" tabindex="21" />
+				<input type="submit" value="{% trans 'Login' %}" tabindex="23" />
 			</form>
 		</div>
 		{% endif %}
