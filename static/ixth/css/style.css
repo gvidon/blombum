@@ -1,0 +1,139 @@
+body {
+	background: #c0c0ca;
+	margin: 0;
+	padding: 0 10px;
+}
+
+/*
+*****************************************************************************/
+h1 {
+	position: absolute;
+ 	top: 0; left: .10em;
+
+	max-height: 100%;
+	margin: 0;
+
+	overflow: hidden;
+
+	color: #40413f;
+	font: normal 46em/1 'URW Palladio L', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+
+	opacity: .5;
+	z-index: 0;
+}
+
+/*
+*****************************************************************************/
+.l-content {
+	margin: 0 330px 0 0;
+
+	z-index: 100;
+}
+
+
+	.b-post {
+		background: white;
+		margin-bottom: 1.4em;
+	}
+
+/*
+*****************************************************************************/
+.l-sidebar {
+	float: right;
+	width: 300px;
+
+	background: white;
+}
+
+	.tag-apple {
+		width: 250px; height: 300px;
+		margin: 1.4em auto;
+		background: url(../img/apple-final.jpg) -250px 0;
+	}
+
+	.tag-apple img {
+		border: none;
+	}
+
+/*
+*****************************************************************************/
+.l-sidebar,
+.b-post {
+	padding: 10px;
+	-moz-border-radius: 10px;
+	border-radius: 10px;
+
+	opacity: .9;
+}
+
+	.l-sidebar h3,
+	.b-post h3 {
+		margin: 0 -10px;
+		padding: 0 10px;
+		border-bottom: 4px solid #40413f;
+	}
+
+/*
+*****************************************************************************/
+.l-top {
+	height: 2.8em;
+
+	margin-bottom: 1.4em;
+	padding: .7em 10px;
+
+	-moz-border-radius: 0 0 10px 10px;
+	border-radius: 0 0 10px 10px;
+	background: white;
+
+	opacity: .9;
+}
+
+.l-nav {
+ 	margin: 0; padding: 0;
+	display: inline-block;
+}
+	.l-nav li {
+		margin: 0; padding: 0;
+		margin-right: 1em;
+		list-style: inside none;
+
+		display: inline-block;
+	}
+
+		.l-nav li a {
+			font: normal 1.75em 'URW Palladio L', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+			color: #222;
+		}
+
+		.l-nav li a:hover {
+			text-decoration: none;
+		}
+/*
+*****************************************************************************/
+.l-footer {
+	color: #666;
+
+	margin-top: 1.4em;
+	padding: 1px 10px;
+
+	-moz-border-radius: 10px 10px 0 0;
+	border-radius: 10px 10px 0 0;
+	background: white;
+
+	opacity: .9;
+}
+
+/*
+*****************************************************************************/
+.p-portfolio h1 {
+	top: 0; 
+	left: auto; right: .10em;
+}
+
+.p-portfolio .l-content {
+	margin: 0 0 0 330px;
+}
+
+.p-portfolio .l-sidebar {
+	float: left;
+}

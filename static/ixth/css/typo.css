@@ -1,0 +1,48 @@
+body {
+	font: normal .8125em/1.4 Verdana;
+}
+
+h1, h2, h3,
+h4, h5, h6 {
+	color: #40413f;
+	font-family: 'URW Palladio L', 'Palatino Linotype', 'Book Antiqua', Palatino, serif;
+}
+
+h2 {font-size: 3em;	}
+h3 {font-size: 2em;}
+h4 {font-size: 1.75em;}
+h5 {font-size: 1.5em;}
+h6 {font-size: 1.34em;}
+
+a[href='#'] {
+	text-decoration: none;
+	border-bottom: 1px dashed;
+}
+
+a:link {
+	color: #40413f;
+}
+
+ol, ul {
+	margin: .7em 0; 
+	padding: 0 0 0 2.8em;
+}
+
+ol {
+	padding-left: 3.2em;
+}
+	ol li {
+		list-style-position: outside;
+	}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+	margin: 0; 
+	padding: 0 0 0 1.4em;
+}
+
+img {
+	max-width: 100%;
+}
