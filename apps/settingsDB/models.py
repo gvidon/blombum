@@ -40,6 +40,7 @@ class Settings(models.Model):
 		blank        = True,
 		default      = 'orange',
 		choices      = sorted([
+			('ixth'    , 'IXth'),
 			('orange'    , 'Orange'),
 			('andreas08' , 'Andreas08'),
 			('buriy'     , 'Buriy'),
